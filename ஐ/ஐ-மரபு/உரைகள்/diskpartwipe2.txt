@@ -1,0 +1,13 @@
+﻿
+select disk DISKNUM
+clean
+convert mbr
+rescan
+create partition primary
+select partition 1
+active
+format fs=NTFS quick label=TA override
+assign letter DSK
+rescan
+list volume
+exit
