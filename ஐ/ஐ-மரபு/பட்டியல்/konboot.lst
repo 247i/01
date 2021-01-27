@@ -1,3 +1,4 @@
+﻿
 title Kon-Boot (CURRENT VERSION)
 map --mem /!/SLUG/konboot.img (fd0)
 map --hook

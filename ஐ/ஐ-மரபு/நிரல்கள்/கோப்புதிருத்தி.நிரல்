@@ -71,19 +71,10 @@ Function கோப்பில்எழுது ; modified to populate *.cfg fi
  Exch $R0 ;file to write to
  Exch
  Exch $1 ;text to write
-
-											  
-																	   
-								   
- FileOpen $R0 '$BDir\!\menu\$DistroPath' a 
+ FileOpen $R0 '$BDir\அகர\பகவன்\$DistroPath' a 
  FileSeek $R0 0 END
-																																
  FileWrite $R0 '$\r$\n$1' ; புதிய வரி மற்றும் தரவைச் சேர்க்கவும்
  FileClose $R0
-							
-																	
-							   
- 
  Pop $1
  Pop $R0
 FunctionEnd
@@ -92,7 +83,7 @@ FunctionEnd
  Push "${String}"
  Push "${File}"
  Call கோப்பில்எழுது
- ${LineFind} "$BDir\!\menu\$DistroPath" "$BDir\!\menu\$DistroPath" "1:-1" "வெற்றுவரியைநீக்கு" ; Remove any left over empty lines
+ ${LineFind} "$BDir\அகர\பகவன்\$DistroPath" "$BDir\அகர\பகவன்\$DistroPath" "1:-1" "வெற்றுவரியைநீக்கு" ; Remove any left over empty lines
 !macroend  
 !define கோப்பில்எழுது "!insertmacro கோப்பில்எழுது"
 
@@ -101,17 +92,10 @@ Function கணினிகோப்பில்எழுது ; Write entry to
  Exch $R0 ;file to write to
  Exch
  Exch $1 ;text to write
-											  
-																							  
-								   
  FileOpen $R0 '$BDir\!\syslinux.cfg' a 
  FileSeek $R0 0 END
  FileWrite $R0 '$\r$\n$1$\r$\n'
-									  
  FileClose $R0
-							
-																						   
-							   
  Pop $1
  Pop $R0
 FunctionEnd

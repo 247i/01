@@ -1,3 +1,4 @@
+﻿#Https://Tamilneram.github.io
 default 0
 timeout=0
 
@@ -10,7 +11,7 @@ find --set-root %ISO%
 parttype (hd0,3) | set check=
 set check=%check:~-5,4%
 if "%check%"=="0x00" partnew (hd0,3) 0 0 0
-if NOT "%check%"=="0x00" echo ERROR: Fourth partion table is not empty, please delete it if you wish to use this method && pause --wait=5 && configfile /!/menu/bitdefender.lst
+if NOT "%check%"=="0x00" echo ERROR: Fourth partion table is not empty, please delete it if you wish to use this method && pause --wait=5 && configfile /அகர/பகவன்/bitdefender.lst
 partnew (hd0,3) 0x00 %ISO%
 
 map  %ISO% (0xff)

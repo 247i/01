@@ -756,8 +756,7 @@ Function இடமிருக்கு ; Check space required
 FunctionEnd
 
 ; Custom Distros Installer - Uninstaller Include
-!include "ஐ-நி.கோ.ஒ.அ\நிரல்கள்\விநியோகநிறுவல்.நிரல்" ; ## ADD NEW DISTRO ##
-!include "ஐ-நி.கோ.ஒ.அ\நிரல்கள்\விநியோகநீக்கம்.நிரல்" ; ## ADD NEW DISTRO ##
+!include "ஐ-நி.கோ.ஒ.அ\நிரல்கள்\விநியோகநிறுவல்நீக்கம்.நிரல்" ; ## ADD NEW DISTRO ##
 
 Function DoMBR ; Install MBR and Boot files on Fat Boot Partition
   
