@@ -3,7 +3,7 @@
 !define பெயர் "ஒருங்குறிஉதாரணம்"
 !define MUI_ICON "..\அகர\ஐ-காண்\பூச்சி.ico"
 
-OutFile "..\${பெயர்}.exe"
+OutFile "${பெயர்}.exe"
 Section ""
 ;wrapper before write. Assumption UTF-8 file. 
 ;${FileRecode} "$EXEDIR\உதாரணம்.ini" "ToUTF16LE"

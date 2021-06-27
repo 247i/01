@@ -1,7 +1,7 @@
 ﻿Unicode True ; தமிழ் எழுத்து அதரவு 
 !define MUI_ICON "..\அகர\ஐ-காண்\வண்ணத்துப்பூச்சி.ico"
 Name "${பெயர்} ${பதிப்பு}"
-OutFile "..\${பெயர்}-${பதிப்பு}.exe"
+OutFile "${பெயர்}-${பதிப்பு}.exe"
 RequestExecutionLevel admin ;highest
 SetCompressor /SOLID lzma
 CRCCheck On
