@@ -8,7 +8,7 @@ Loop:
 	StrCmp "$R2" "$\r" TrimLeft
 	StrCmp "$R2" "$\n" TrimLeft
 	StrCmp "$R2" "$\t" TrimLeft
-	Goto Loop2
+	GoTo Loop2
 TrimLeft:	
 	StrCpy $R1 "$R1" "" 1
 	Goto Loop
@@ -18,7 +18,7 @@ Loop2:
 	StrCmp "$R2" "$\r" TrimRight
 	StrCmp "$R2" "$\n" TrimRight
 	StrCmp "$R2" "$\t" TrimRight
-	Goto Done
+	GoTo Done
 TrimRight:	
 	StrCpy $R1 "$R1" -1
 	Goto Loop2

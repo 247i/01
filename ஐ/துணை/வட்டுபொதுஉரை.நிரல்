@@ -1,4 +1,4 @@
-﻿; ..வட்டு இயக்கி பொருள்
+﻿; வட்டு இயக்கி பொருள்
 
 Function வட்டிடம்
 ${DriveSpace} "$9" "/D=T /S=G" $1 ; used to find total space of each drive

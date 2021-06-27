@@ -73,7 +73,7 @@ StrCpy $ConfigFile "NULL"
 ${EndIf}
 ;MessageBox MB_OK "$ConfigPath/$ConfigFile"
 FunctionEnd
-!insertmacro locate
+!insertmacro Locate
 Function மாதுஏகட்டமைப்பைக்கண்டறி ; தீனி கட்டமைப்பு பாதை ($GrubConfigPath, $GrubCopyPath)மற்றும் கோப்பை $GrubConfigFile அமைக்கவும் .
 ${If} ${FileExists} "$BDir\!\$JustISOName\liberte\boot\grub\grub.cfg" ; Liberte
 StrCpy $GrubConfigPath "liberte/boot/grub"
@@ -88,7 +88,7 @@ StrCpy $GrubConfigPath "boot/grub"
 StrCpy $GrubCopyPath "boot\grub"
 StrCpy $GrubConfigFile "grub.cfg"
 ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\boot\grub\grub*.cfg" ; System Rescue CD...
-${locate} "$BDir\!\$JustISOName\boot\grub" "/L=F /M=*.cfg" "மாதுஏகட்டமைப்புகிடைத்தது" ; இருப்பிடத்தைப் பயன்படுத்தி மாற்ற முடியும்..
+${Locate} "$BDir\!\$JustISOName\boot\grub" "/L=F /M=*.cfg" "மாதுஏகட்டமைப்புகிடைத்தது" ; இருப்பிடத்தைப் பயன்படுத்தி மாற்ற முடியும்..
 StrCpy $GrubConfigPath "boot/grub"
 StrCpy $GrubCopyPath "boot\grub"
 StrCpy $GrubConfigFile "grubsys.cfg"
@@ -553,7 +553,7 @@ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -xr!bootx64.efi -o"$BDir\" -y'
 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!bootx64.efi -aou -o"$BDir\" -y'
 ReadEnvStr $R0 COMSPEC ; grab commandline
 nsExec::Exec "$R0 /C Rename $BDir\!\வி_நி_இ\bootx64_1.efi HBCDPE.efi" ; rename efi file
-${கோப்பில்எழுது} "#[ $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\necho $\"https://TamilNeram.github.io...$\"$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then ntldr /bootmgr; fi$\r$\nif [ $${grub_platform} == $\"efi$\" ]; then chainloader /boot/வி_நி_இ/HBCDPE.efi; fi$\r$\n}$\r$\n#] $JustISOName" $R0
+${கோப்பில்எழுது} "#[ $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\necho $\"https://TamilNeram.github.io...$\"$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then ntldr /bootmgr; fi$\r$\nif [ $${grub_platform} == $\"efi$\" ]; then chainloader /!/வி_நி_இ/HBCDPE.efi; fi$\r$\n}$\r$\n#] $JustISOName" $R0
 ; RemixOS
 ${ElseIf} $DistroName == "RemixOS"
 CreateDirectory "$EXEDIR\TEMPI" ; உருவாக்கு the TEMPI directory

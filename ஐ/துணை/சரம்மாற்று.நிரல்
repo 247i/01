@@ -1,7 +1,5 @@
 ﻿;பொதுவாக பயன்படுத்தும் நிரல்களில் ஒன்று - சரம்மாற்று
-
 !define சரம்மாற்று "!insertmacro சரம்மாற்று"
- 
 !macro சரம்மாற்று ResultVar String SubString RepString
   Push "${String}"
   Push "${SubString}"
