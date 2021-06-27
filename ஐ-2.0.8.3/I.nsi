@@ -1,33 +1,16 @@
-/*   
-  This file is part of YUMI
- 
-  YUMI is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 2 of the License, or
-  any later version.
- 
-  YUMI is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-  GNU General Public License for more details.
- 
-  You should have received a copy of the GNU General Public License
-  along with YUMI.  If not, see <http://www.gnu.org/licenses/>.
-  
-  YUMI Copyright � https://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, and additional Credits)
- */
- 
-!define NAME "YUMI"
-!define FILENAME "YUMI"
+﻿
+Unicode True
+!define NAME "ஐ"
+!define FILENAME "ஐ"
 !define VERSION "2.0.8.3"
 !define MUI_ICON "images\usbicon.ico" ; "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
 VIProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "pendrivelinux.com"
-VIAddVersionKey LegalCopyright "Copyright �2021 Pendrivelinux.com"
+VIAddVersionKey LegalCopyright "Copyright 2021"
 VIAddVersionKey FileVersion "${VERSION}"
-VIAddVersionKey FileDescription "YUMI"
+VIAddVersionKey FileDescription "ஐ"
 VIAddVersionKey License "GPL Version 2"
 
 Name "${NAME} ${VERSION}"
@@ -40,7 +23,7 @@ ShowInstDetails show
 BrandingText "${NAME} ${VERSION}"
 CompletedText "All Finished, Process is Complete!"
 InstallButtonText "Create"
-Unicode True
+
 
 !include WordFunc.nsh
 !include nsDialogs.nsh
@@ -159,7 +142,7 @@ Var WipeMe
 !define MUI_LICENSEPAGE_TEXT_TOP $(License_Text_Top)
 !define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Text_Bottom)
 !define MUI_PAGE_CUSTOMFUNCTION_PRE License_PreFunction
-!insertmacro MUI_PAGE_LICENSE "YUMI-Copying.txt"
+!insertmacro MUI_PAGE_LICENSE "I-Copying.txt"
 
 ; Distro Selection Page
 Page custom SelectionsPage
@@ -177,7 +160,7 @@ Page custom SelectionsPage
 !define MUI_FINISHPAGE_TITLE $(Finish_Title)
 !define MUI_FINISHPAGE_TEXT $(Finish_Text)
 !define MUI_FINISHPAGE_LINK $(Finish_Link)
-!define MUI_FINISHPAGE_LINK_LOCATION "https://www.pendrivelinux.com/yumi-multiboot-usb-creator/"
+!define MUI_FINISHPAGE_LINK_LOCATION "https://www.pendrivelinux.com/I-multiboot-usb-creator/"
 !define MUI_WELCOMEFINISHPAGE_BITMAP "images\finish.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_PRE Finish_PreFunction
 !insertmacro MUI_PAGE_FINISH
@@ -200,14 +183,14 @@ LangString CreateSysConfig ${LANG_ENGLISH} "Creating configuration files for $De
 LangString ExecuteSyslinux ${LANG_ENGLISH} "Executing syslinux on $BootDir"
 LangString SkipSyslinux ${LANG_ENGLISH} "Good Syslinux Exists..."
 LangString WarningSyslinux ${LANG_ENGLISH} "An error ($R8) occurred while executing syslinux.$\r$\nYour USB drive won't be bootable...$\r$\n$\r$\n$FSType filesystem detected. Your drive must be formatted as Fat32 or NTFS."
-LangString WarningSyslinuxOLD ${LANG_ENGLISH} "This YUMI revision uses a newer Syslinux version that is not compatible with earlier revisions.$\r$\nPlease ensure your USB drive doesn't contain earlier revision installs."
+LangString WarningSyslinuxOLD ${LANG_ENGLISH} "This ஐ revision uses a newer Syslinux version that is not compatible with earlier revisions.$\r$\nPlease ensure your USB drive doesn't contain earlier revision installs."
 LangString Install_Title ${LANG_ENGLISH} "$InUnStalling $InUnName"
 LangString Install_SubTitle ${LANG_ENGLISH} "Please wait while we $InUnStall $InUnName $OnFrom $JustDrive"
 LangString Install_Finish_Sucess ${LANG_ENGLISH} "${NAME} $InUnStalled $InUnName $OnFrom $JustDrive"
 LangString Finish_Install ${LANG_ENGLISH} "Process Complete."
 LangString Finish_Title ${LANG_ENGLISH} "Thanks for using ${NAME}"
-LangString Finish_Text ${LANG_ENGLISH} "Your Selections have been $InUnStalled on your USB drive.$\r$\n$\r$\nFeel Free to run this tool again to $InUnStall more Distros.$\r$\n$\r$\nYUMI will keep track of selections you have already $InUnStalled."
-LangString Finish_Link ${LANG_ENGLISH} "Visit the YUMI Home Page"
+LangString Finish_Text ${LANG_ENGLISH} "Your Selections have been $InUnStalled on your USB drive.$\r$\n$\r$\nFeel Free to run this tool again to $InUnStall more Distros.$\r$\n$\r$\nஐ will keep track of selections you have already $InUnStalled."
+LangString Finish_Link ${LANG_ENGLISH} "Visit the ஐ Home Page"
 
 !include FileManipulation.nsh ; Text File Manipulation
 !include FileNames.nsh ; Macro for FileNames
@@ -288,7 +271,7 @@ Function SelectionsPage
 ; Drive Pre-Selection  
   ${NSD_CreateLabel} 0 0 58% 15 ""
   Pop $LabelDrivePage 
-  ${NSD_SetText} $LabelDrivePage "Step 1: YUMI Summoned $DestDisk as your USB Device"  
+  ${NSD_SetText} $LabelDrivePage "Step 1: ஐ Summoned $DestDisk as your USB Device"  
 ; Droplist for Drive Selection  
   ${NSD_CreateDropList} 0 20 42% 15 "" ; was 0 20 55% 15
   Pop $DestDriveTxt 
@@ -509,12 +492,12 @@ FunctionEnd
 
 Function onClickMyLink
   Pop $Links ; pop something to prevent corruption
-  ExecShell "open" "https://www.pendrivelinux.com/yumi-multiboot-usb-creator/"
+  ExecShell "open" "https://www.pendrivelinux.com/ஐ-multiboot-usb-creator/"
 FunctionEnd
 
 Function onClickMyLinkFAQ
   Pop $Links1 ; pop something to prevent corruption
-  ExecShell "open" "https://www.pendrivelinux.com/yumi-multiboot-usb-creator/#FAQ"
+  ExecShell "open" "https://www.pendrivelinux.com/ஐ-multiboot-usb-creator/#FAQ"
 FunctionEnd
 
 Function onClickMyLinkUSB
@@ -829,7 +812,7 @@ Function ISOBrowse
  ${AndIf} $JustISOName != ""
  ${AndIf} $FormatMe != "Yes"
  ${AndIf} $FormatMeFat != "Yes"
- MessageBox MB_OK "$JustISOName is already on $DestDisk$\r$\nPlease Remove it first!$\r$\n$\r$\nNOTE: If you have already removed it using YUMI,$\r$\nmanually delete the $BootDir\multiboot\$JustISOName\ folder."
+ MessageBox MB_OK "$JustISOName is already on $DestDisk$\r$\nPlease Remove it first!$\r$\n$\r$\nNOTE: If you have already removed it using ஐ,$\r$\nmanually delete the $BootDir\multiboot\$JustISOName\ folder."
  ${Else}
  ${EndIf}
  Call EnableNext
@@ -971,11 +954,11 @@ Function OnSelectDrive
   MessageBox MB_ICONSTOP|MB_OK "WARNING! Syslinux won't work on exFAT formatted devices. Please format $DestDisk Fat32 or NTFS."
   ${EndIf} 
   
-  ${If} ${FileExists} "$BootDir\boot\grub\yumi.png"  
+  ${If} ${FileExists} "$BootDir\boot\grub\I.png"  
    ${AndIf} ${FileExists} "$BootDir\boot\grub\lnxboot.img"
     ${AndIf} ${FileExists} "$BootDir\boot\grub\core.img" 
      ${AndIf} ${FileExists} "$BootDir\boot\grub\grub.cfg"  
-     MessageBox MB_ICONSTOP|MB_OK "WARNING! ($DestDisk) contains a UEFI YUMI or GRUB2 based Installation which is not compatible with this version.$\r$\n$\r$\nYou'll need to format this drive if you plan to use this version of YUMI."
+     MessageBox MB_ICONSTOP|MB_OK "WARNING! ($DestDisk) contains a UEFI ஐ or GRUB2 based Installation which is not compatible with this version.$\r$\n$\r$\nYou'll need to format this drive if you plan to use this version of ஐ."
   ${EndIf} 
 FunctionEnd
 
@@ -1241,7 +1224,7 @@ Function HaveSpace ; Check space required
   System::Int64Op $1 > $SizeOfCasper ; Compare the space available > space required
   Pop $3 ; Get the result ...
   IntCmp $3 1 okay ; ... and compare it
-  MessageBox MB_ICONSTOP|MB_OK "Not enough free space remains. Closing YUMI!"
+  MessageBox MB_ICONSTOP|MB_OK "Not enough free space remains. Closing ஐ!"
   quit ; Close the program if the disk space was too small...
   okay: ; Proceed to execute...
   ;MessageBox MB_OK "ISO + Persistence will use $SizeOfCasper MB of the $1 MB Free disk space on $JustDrive Drive."  
@@ -1340,9 +1323,9 @@ Function DoSyslinux ; Install Syslinux on USB
     CopyFiles "$PLUGINSDIR\linux.c32" "$BootDir\multiboot\linux.c32"  
    ${EndIf}     
 
-   ${IfNot} ${FileExists} $BootDir\multiboot\legacy-yumi ; legacy-yumi test file.  
-    DetailPrint "Adding legacy-yumi test file."   
-    CopyFiles "$PLUGINSDIR\legacy-yumi" "$BootDir\multiboot\legacy-yumi"  
+   ${IfNot} ${FileExists} $BootDir\multiboot\legacy-I ; legacy-ஐ test file.  
+    DetailPrint "Adding legacy-I test file."   
+    CopyFiles "$PLUGINSDIR\legacy-I" "$BootDir\multiboot\legacy-I"  
    ${EndIf}
   
   ${If} ${FileExists} $BootDir\multiboot\syslinux.cfg    
@@ -1352,9 +1335,9 @@ Function DoSyslinux ; Install Syslinux on USB
 ; Create and Copy files to your destination
   DetailPrint "Adding required files to the $BootDir\multiboot directory..." 
   CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BootDir\multiboot\syslinux.cfg"
-  CopyFiles "$PLUGINSDIR\yumi.png" "$BootDir\multiboot\yumi.png"
-  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BootDir\multiboot\YUMI-Copying.txt" 
-  CopyFiles "$PLUGINSDIR\YUMI-Readme.txt" "$BootDir\multiboot\YUMI-Readme.txt" 
+  CopyFiles "$PLUGINSDIR\I.png" "$BootDir\multiboot\I.png"
+  CopyFiles "$PLUGINSDIR\I-Copying.txt" "$BootDir\multiboot\I-Copying.txt" 
+  CopyFiles "$PLUGINSDIR\I-Readme.txt" "$BootDir\multiboot\I-Readme.txt" 
   CopyFiles "$PLUGINSDIR\license.txt" "$BootDir\multiboot\license.txt"   
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32"  
@@ -1367,9 +1350,9 @@ Function DoSyslinux ; Install Syslinux on USB
   
   ${IfNot} ${FileExists} $BootDir\multiboot\libutil.c32 ; Old Syslinux files need to be replaced
   DetailPrint "Adding required files to the $BootDir\multiboot directory..." 
-  CopyFiles "$PLUGINSDIR\yumi.png" "$BootDir\multiboot\yumi.png"
-  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BootDir\multiboot\YUMI-Copying.txt" 
-  CopyFiles "$PLUGINSDIR\YUMI-Readme.txt" "$BootDir\multiboot\YUMI-Readme.txt" 
+  CopyFiles "$PLUGINSDIR\I.png" "$BootDir\multiboot\I.png"
+  CopyFiles "$PLUGINSDIR\I-Copying.txt" "$BootDir\multiboot\I-Copying.txt" 
+  CopyFiles "$PLUGINSDIR\I-Readme.txt" "$BootDir\multiboot\I-Readme.txt" 
   CopyFiles "$PLUGINSDIR\license.txt" "$BootDir\multiboot\license.txt"   
   CopyFiles "$PLUGINSDIR\vesamenu.c32" "$BootDir\multiboot\vesamenu.c32"
   CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32"  
@@ -1379,14 +1362,14 @@ Function DoSyslinux ; Install Syslinux on USB
   CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\memdisk"
  ${EndIf}    
 
-; Check to ensure menu.c32 exists... now required for YUMI V2
+; Check to ensure menu.c32 exists... now required for ஐ V2
   ${IfNot} ${FileExists} $BootDir\multiboot\menu.c32
-   DetailPrint "Adding menu.c32. Required for YUMI V2"
+   DetailPrint "Adding menu.c32. Required for ஐ V2"
    CopyFiles "$PLUGINSDIR\menu.c32" "$BootDir\multiboot\menu.c32" 
   ${EndIf}	   
 FunctionEnd
 
-Function AddDir ; changes to check if user had a version prior to 0.0.0.3. Newer YUMI includes grub.exe 
+Function AddDir ; changes to check if user had a version prior to 0.0.0.3. Newer ஐ includes grub.exe 
  ${IfNotThen} ${FileExists} "$BootDir\multiboot\grub.exe" 'CopyFiles "$PLUGINSDIR\grub.exe" "$BootDir\multiboot\grub.exe"' 
 FunctionEnd
 
@@ -1456,37 +1439,37 @@ removeonly:
 SectionEnd
 
 Function ConfigRemove ; Find and Set Removal Configuration file
-  ${If} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\linux.cfg"
+  ${If} ${FileExists} "$BootDir\multiboot\$DistroName\I\linux.cfg"
   StrCpy $Config2Use "linux.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\anon.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\anon.cfg"
   StrCpy $Config2Use "anon.cfg"  
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\system.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\system.cfg"
   StrCpy $Config2Use "system.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\antivirus.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\antivirus.cfg"
   StrCpy $Config2Use "antivirus.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\netbook.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\netbook.cfg"
   StrCpy $Config2Use "netbook.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\other.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\other.cfg"
   StrCpy $Config2Use "other.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\pe.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\pe.cfg"
   StrCpy $Config2Use "pe.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\unlisted.cfg"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\unlisted.cfg"
   StrCpy $Config2Use "unlisted.cfg"  
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\menu.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\menu.lst"
   StrCpy $Config2Use "menu.lst"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\vhd.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\vhd.lst"
   StrCpy $Config2Use "vhd.lst"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\grubpart4.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\grubpart4.lst"
   StrCpy $Config2Use "grubpart4.lst"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\grubram.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\grubram.lst"
   StrCpy $Config2Use "grubram.lst"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\win.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\win.lst"
   StrCpy $Config2Use "win.lst"  
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\win2go.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\win2go.lst"
   StrCpy $Config2Use "win2go.lst"   
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\pe.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\pe.lst"
   StrCpy $Config2Use "pe.lst"  
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\hirens.lst"
+  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\I\hirens.lst"
   StrCpy $Config2Use "hirens.lst"    
   ${EndIf}
   ; MessageBox MB_OK "$Config2Use"
@@ -1592,7 +1575,7 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\autounattend.xml "autounattend.xml"   
   File /oname=$PLUGINSDIR\syslinux.exe "syslinux.exe"  
   File /oname=$PLUGINSDIR\syslinux.cfg "syslinux.cfg"
-  File /oname=$PLUGINSDIR\legacy-yumi "menu\legacy-yumi"  
+  File /oname=$PLUGINSDIR\legacy-I "menu\legacy-I"  
   File /oname=$PLUGINSDIR\menu.lst "menu\menu.lst"  
   File /oname=$PLUGINSDIR\vhd.lst "menu\vhd.lst" 
   File /oname=$PLUGINSDIR\grubpart4.lst "menu\grubpart4.lst"  
@@ -1613,9 +1596,9 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\liveusb "liveusb"   
   File /oname=$PLUGINSDIR\7zG.exe "7zG.exe"
   File /oname=$PLUGINSDIR\7z.dll "7z.dll"  
-  File /oname=$PLUGINSDIR\yumi.png "images\yumi.png"
-  File /oname=$PLUGINSDIR\YUMI-Copying.txt "YUMI-Copying.txt" 
-  File /oname=$PLUGINSDIR\YUMI-Readme.txt "YUMI-Readme.txt" 
+  File /oname=$PLUGINSDIR\I.png "images\I.png"
+  File /oname=$PLUGINSDIR\I-Copying.txt "I-Copying.txt" 
+  File /oname=$PLUGINSDIR\I-Readme.txt "I-Readme.txt" 
   File /oname=$PLUGINSDIR\license.txt "license.txt"   
   File /oname=$PLUGINSDIR\vesamenu.c32 "vesamenu.c32" 
   File /oname=$PLUGINSDIR\menu.c32 "menu.c32"    
