@@ -144,7 +144,7 @@ FunctionEnd
 
 Function WriteStuff
  ; Now done before this function is called (see line 122) CreateDirectory "$BootDir\multiboot\$JustISOName\YUMI\" ; Create the YUMI Directory.. so we can copy the following config file to it.
- CopyFiles "$PLUGINSDIR\$Config2Use" "$BootDir\multiboot\$JustISOName\YUMI\$Config2Use" ; Copy the $Config2Use file to $JustISOName\YUMI folder for the distro (so we know where to remove entry) 
+ CopyFiles "$PLUGINSDIR\$DistroPath" "$BootDir\multiboot\$JustISOName\YUMI\$DistroPath" ; Copy the $DistroPath file to $JustISOName\YUMI folder for the distro (so we know where to remove entry) 
  DetailPrint "$DistroName ($JustISOName) and its menu entry were added!"
  	
 FunctionEnd
@@ -157,7 +157,7 @@ FunctionEnd
 
 ; If distro is already installed, delete the entry, so we don't make a mess.
  ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\*.*"
- ${DeleteMenuEntry} "$BootDir\multiboot\menu\$Config2Use" "#start $DistroName" "#end $DistroName" ; Remove entry from config file... I.E. linux.cfg, system.cfg, etc
+ ${DeleteMenuEntry} "$BootDir\multiboot\menu\$DistroPath" "#start $DistroName" "#end $DistroName" ; Remove entry from config file... I.E. linux.cfg, system.cfg, etc
  ${EndIf}
  
 ; Write $JustISOName to Installed.txt 

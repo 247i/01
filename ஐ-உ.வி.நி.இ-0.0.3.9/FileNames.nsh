@@ -21,7 +21,7 @@
  StrCpy $ISOFileName "${ISO2Check2}"
  StrCpy $DownLink "${Download2Get}"   
  StrCpy $Persistence "${Persistent}"
- StrCpy $Config2Use "${Write2File}"
+ StrCpy $DistroPath "${Write2File}"
  StrCpy $Homepage "${Homepage}" ; Linux Distro Homepage
  StrCpy $OfficialName "${OfficialName}" ; Linux Distro Name for Home Page Anchor
 

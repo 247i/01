@@ -1,4 +1,4 @@
-/*   
+﻿/*   
   This file is part of YUMI
  
   YUMI is free software: you can redistribute it and/or modify
@@ -14,18 +14,18 @@
   You should have received a copy of the GNU General Public License
   along with YUMI.  If not, see <http://www.gnu.org/licenses/>.
   
-  YUMI Copyright � https://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, and additional Credits)
+  YUMI Copyright � https://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, and additional Credits)
  */
  
 !define NAME "YUMI"
 !define FILENAME "YUMI"
 !define VERSION "2.0.8.8"
 !define MUI_ICON "images\usbicon.ico" ; "${NSISDIR}\Contrib\Graphics\Icons\nsis1-install.ico"
-
+Unicode True ; தமிழ் எழுத்து அதரவு 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
 VIProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "pendrivelinux.com"
-VIAddVersionKey LegalCopyright "Copyright � Pendrivelinux.com"
+VIAddVersionKey LegalCopyright "Copyright � Pendrivelinux.com"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey FileDescription "YUMI"
 VIAddVersionKey License "GPL Version 2"

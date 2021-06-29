@@ -65,7 +65,7 @@ Function Write2mbrid
  Exch $R0 ;file to write to
  Exch
  Exch $1 ;text to write
- FileOpen $R0 '$BootDir\multiboot\$SUSEDIR\boot\grub\mbrid' a  ;FileOpen $R0 '$BootDir\multiboot\menu\$Config2Use' a 
+ FileOpen $R0 '$BootDir\multiboot\$SUSEDIR\boot\grub\mbrid' a  ;FileOpen $R0 '$BootDir\multiboot\menu\$DistroPath' a 
  FileSeek $R0 0 END
  FileWrite $R0 '$1'
  FileClose $R0

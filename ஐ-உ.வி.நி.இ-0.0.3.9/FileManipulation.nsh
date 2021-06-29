@@ -21,7 +21,7 @@ Function WriteToFile ; <- WriteToFile Function originally written by Afrow UK ht
  Exch $R0 ;file to write to
  Exch
  Exch $1 ;text to write
- FileOpen $R0 '$BootDir\multiboot\menu\$Config2Use' a 
+ FileOpen $R0 '$BootDir\multiboot\menu\$DistroPath' a 
  FileSeek $R0 0 END
  FileWrite $R0 '$\r$\n$1' ; was $\r$\n$1$\r$\n
  FileClose $R0
@@ -33,7 +33,7 @@ FunctionEnd
  Push "${String}"
  Push "${File}"
  Call WriteToFile
- ${LineFind} "$BootDir\multiboot\menu\$Config2Use" "$BootDir\multiboot\menu\$Config2Use" "1:-1" "DeleteEmptyLine" ; Remove any left over empty lines
+ ${LineFind} "$BootDir\multiboot\menu\$DistroPath" "$BootDir\multiboot\menu\$DistroPath" "1:-1" "DeleteEmptyLine" ; Remove any left over empty lines
 !macroend  
 !define WriteToFile "!insertmacro WriteToFile"
 

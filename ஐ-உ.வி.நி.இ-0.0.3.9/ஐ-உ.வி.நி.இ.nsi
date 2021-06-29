@@ -11,10 +11,8 @@
 
 ;!include TextFunc.nsh
 
-; var bdir
-Var Config2Use
-
-!include ReplaceInFile.nsh
+;!include ReplaceInFile.nsh
+!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include DiskVoodoo.nsh 
 
 !include FileManipulation.nsh ; Text File Manipulation
@@ -897,8 +895,8 @@ proceed:
  Call உள்உதநிகண்டறியப்பட்டது
  
 ; Copy the config file if it doesn't exist and create the entry in syslinux.cfg 
- ${IfNot} ${FileExists} "$BDir\multiboot\menu\$Config2Use" 
- CopyFiles "$PLUGINSDIR\$Config2Use" "$BDir\multiboot\menu\$Config2Use"
+ ${IfNot} ${FileExists} "$BDir\multiboot\menu\$DistroPath" 
+ CopyFiles "$PLUGINSDIR\$DistroPath" "$BDir\multiboot\menu\$DistroPath"
  Call Config2Write
  ${EndIf} 
  
@@ -914,41 +912,41 @@ SectionEnd
 
 Function ConfigRemove ; Find and Set Removal Configuration file
   ${If} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\linux.cfg"
-  StrCpy $Config2Use "linux.cfg"
+  StrCpy $DistroPath "linux.cfg"
   ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\anon.cfg"
-  StrCpy $Config2Use "anon.cfg"  
+  StrCpy $DistroPath "anon.cfg"  
   ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\system.cfg"
-  StrCpy $Config2Use "system.cfg"
+  StrCpy $DistroPath "system.cfg"
   ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\antivirus.cfg"
-  StrCpy $Config2Use "antivirus.cfg"
+  StrCpy $DistroPath "antivirus.cfg"
   ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\netbook.cfg"
-  StrCpy $Config2Use "netbook.cfg"
+  StrCpy $DistroPath "netbook.cfg"
   ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\other.cfg"
-  StrCpy $Config2Use "other.cfg"
+  StrCpy $DistroPath "other.cfg"
   ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\unlisted.cfg"
-  StrCpy $Config2Use "unlisted.cfg"  
+  StrCpy $DistroPath "unlisted.cfg"  
 ;  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\menu.lst"
-;  StrCpy $Config2Use "menu.lst"
+;  StrCpy $DistroPath "menu.lst"
   ${EndIf}
-  ; MessageBox MB_OK "$Config2Use"
+  ; MessageBox MB_OK "$DistroPath"
 FunctionEnd
 
 Function Config2Write
- ${If} $Config2Use == "linux.cfg"
+ ${If} $DistroPath == "linux.cfg"
   ${WriteToSysFile} "menuentry $\">Linux Distributions$\"{configfile /multiboot/menu/linux.cfg}" $R0 
- ${ElseIf} $Config2Use == "anon.cfg"
+ ${ElseIf} $DistroPath == "anon.cfg"
   ${WriteToSysFile} "menuentry $\">Anonymous Browsers$\"{configfile /multiboot/menu/anon.cfg}" $R0  
- ${ElseIf} $Config2Use == "system.cfg"
+ ${ElseIf} $DistroPath == "system.cfg"
   ${WriteToSysFile} "menuentry $\">System Tools$\"{configfile /multiboot/menu/system.cfg}" $R0
- ${ElseIf} $Config2Use == "antivirus.cfg"
+ ${ElseIf} $DistroPath == "antivirus.cfg"
   ${WriteToSysFile} "menuentry $\">Antivirus Tools$\"{configfile /multiboot/menu/antivirus.cfg}" $R0 
- ${ElseIf} $Config2Use == "netbook.cfg"
+ ${ElseIf} $DistroPath == "netbook.cfg"
   ${WriteToSysFile} "menuentry $\">Netbook Distributions$\"{configfile /multiboot/menu/netbook.cfg}" $R0 
- ${ElseIf} $Config2Use == "other.cfg"
+ ${ElseIf} $DistroPath == "other.cfg"
   ${WriteToSysFile} "menuentry $\">Other OS and Tools$\"{configfile /multiboot/menu/other.cfg}" $R0 
- ${ElseIf} $Config2Use == "unlisted.cfg"
+ ${ElseIf} $DistroPath == "unlisted.cfg"
   ${WriteToSysFile} "menuentry $\">Unlisted ISOs$\"{configfile /multiboot/menu/unlisted.cfg}" $R0  
-; ${ElseIf} $Config2Use == "menu.lst"
+; ${ElseIf} $DistroPath == "menu.lst"
 ;  ${WriteToSysFile} "label GRUB Bootable ISOs$\r$\nmenu label GRUB Bootable ISOs and Windows XP/7/8 ->$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/grub.exe$\r$\nAPPEND --config-file=/multiboot/menu/menu.lst" $R0 
  ${EndIf} 
 FunctionEnd
@@ -967,7 +965,7 @@ StrCpy $ISOFile "" ; Reset
 StrCpy $Removal "" ; Reset
 StrCpy $Persistence "NULL" ; Reset
 StrCpy $NameThatISO "" ; Reset NameThatISO ISO Name
-StrCpy $Config2Use "" ; Clear Config File to create and write to
+StrCpy $DistroPath "" ; Clear Config File to create and write to
 StrCpy $DistroName "" ; Clear Distro Name
 StrCpy $ISOFileName "" ; Clear ISO Selection
 StrCpy $FileFormat "" ; Clear File Format
