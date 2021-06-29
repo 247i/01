@@ -2,7 +2,7 @@
 !define பதிப்பு "0.0.0.5"
 !define DISTRO "persistent file"
 !define PTYPE "$CasperName"
-!include ..\துணை\தலைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
 
 !include "Sections.nsh"
 
@@ -10,7 +10,7 @@
 ; Interface settings
 !define MUI_FINISHPAGE_NOAUTOCLOSE
 !define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "..\..\அகர\அணிகலன்\யாதும் ஊரே-தலைப்பு.bmp" 
+!define MUI_HEADERIMAGE_BITMAP "..\அகர\அணிகலன்\யாதும் ஊரே-தலைப்பு.bmp" 
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
 !define MUI_HEADERIMAGE_RIGHT
 
@@ -18,7 +18,7 @@
 !define MUI_TEXT_LICENSE_SUBTITLE $(License_Subtitle)
 !define MUI_LICENSEPAGE_TEXT_TOP $(License_Top)
 !define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Bottom)
-!insertmacro MUI_PAGE_LICENSE "..\..\அகர\பகவன்\உரிமை.உரை"
+!insertmacro MUI_PAGE_LICENSE "..\அகர\பகவன்\உரிமை.உரை"
 
 ; Variables
 Var PageDescr
@@ -75,7 +75,7 @@ LangString Install_Title ${LANG_TAMIL} "Installing a ${PTYPE} ${DISTRO}"
 LangString Install_SubTitle ${LANG_TAMIL} "Please wait while ${பெயர்} creates and installs a ${PTYPE} ${DISTRO} on $DestDrive"
 LangString Install_Finish_Sucess ${LANG_TAMIL} "${பெயர்} sucessfully created and installed a ${PTYPE} ${DISTRO} on $DestDrive"
 
-!include ..\துணை\தகவல்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
 
 Function SelectionsPage
   !insertmacro MUI_HEADER_TEXT $(DrivePage_Title) $(DrivePage_Title2)
@@ -238,8 +238,8 @@ Function FreeDiskSpace
 ${DriveSpace} "$JustDrive" "/D=F /S=M" $1
 FunctionEnd
 
-!include ..\துணை\தவமுன்னேற்றம்.நிரல்
-!include ..\துணை\புதையல்பொதுஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தவமுன்னேற்றம்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\புதையல்பொதுஉரை.நிரல்
 Function CasperScript
 ${If} $Casper != "0"
 Call புதைகருவிகளைப்பெறு
@@ -282,5 +282,5 @@ Function .onInit
 StrCpy $CasperName "casper-rw" ; default to newer persistence label
 StrCpy $JustISOName ".."
 Call புதைகருவிகளைப்பெறு
-File /oname=$PLUGINSDIR\உரிமை.உரை "..\..\அகர\பகவன்\உரிமை.உரை"
+File /oname=$PLUGINSDIR\உரிமை.உரை "..\அகர\பகவன்\உரிமை.உரை"
 FunctionEnd 

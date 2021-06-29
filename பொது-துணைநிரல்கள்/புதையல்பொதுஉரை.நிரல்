@@ -30,6 +30,6 @@ FunctionEnd
 Function புதைகருவிகளைப்பெறு
 SetShellVarContext all
 InitPluginsDir
-File /oname=$PLUGINSDIR\dd.exe "..\இருமங்கள்\தரவுவரையறை.exe"
-File /oname=$PLUGINSDIR\mke2fs.exe "..\இருமங்கள்\நீட்2கோமுவடிவஉரு.exe"
+File /oname=$PLUGINSDIR\dd.exe "..\பொது-இருமங்கள்\தரவுவரையறை.exe"
+File /oname=$PLUGINSDIR\mke2fs.exe "..\பொது-இருமங்கள்\நீட்2கோமுவடிவஉரு.exe"
 FunctionEnd
