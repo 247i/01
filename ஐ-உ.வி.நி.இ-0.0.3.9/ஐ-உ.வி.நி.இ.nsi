@@ -1,9 +1,10 @@
-﻿Unicode True ; தமிழ் எழுத்து அதரவு 
-
-!define NAME "YUMI UEFI"
-!define FILENAME "YUMI-UEFI"
+﻿!define பெயர் "ஐ-உ.வி.நி.இ"
+!define பதிப்பு "0.0.3.9"
+; பொதுவாக பயன்படுத்தும் நிரல்கள்
+!include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
+!define NAME "ஐ-உ.வி.நி.இ"
+!define FILENAME "ஐ-உ.வி.நி.இ"
 !define VERSION "0.0.3.9"
-!define MUI_ICON "images\usbicon.ico"
 
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
 VIProductVersion "${VERSION}"
@@ -13,26 +14,11 @@ VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey FileDescription "YUMI - Your Universal MultiBoot Integrator"
 VIAddVersionKey License "GPL Version 2"
 
-Name "${NAME} ${VERSION}"
-OutFile "${FILENAME}-${VERSION}.exe"
-RequestExecutionLevel admin ;highest
-SetCompressor /SOLID lzma
-CRCCheck On
-XPStyle on
-ShowInstDetails show
-BrandingText "${NAME} ${VERSION}"
-CompletedText "All Finished, Process is Complete!"
-InstallButtonText "Create"
-Unicode True
 
 !include WinVer.nsh
-!include WordFunc.nsh
-!include nsDialogs.nsh
-!include MUI2.nsh
-!include FileFunc.nsh
-!include LogicLib.nsh
+
 ;!include TextFunc.nsh
-!AddPluginDir "plugins"
+
 
 ; Variables
 Var Capacity
