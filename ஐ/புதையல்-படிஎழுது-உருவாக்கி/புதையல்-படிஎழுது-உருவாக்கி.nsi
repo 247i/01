@@ -1,4 +1,4 @@
-﻿!define பெயர் "ஐ-புதையல்-படிஎழுது-உருவாக்கி"
+﻿!define பெயர் "புதையல்-படிஎழுது-உருவாக்கி"
 !define பதிப்பு "0.0.0.5"
 !define DISTRO "persistent file"
 !define PTYPE "$CasperName"
