@@ -28,7 +28,7 @@
  ${ElseIf} $Checker == "Yes"  
  ${AndIf} $Removal != "Yes" 
  ${AndIf} $FormatMe != "Yes"
- ;${AndIfNot} ${FileExists} $BootDir\${File2Check}  ; If Distro File exists, don't show Distro because it must already be installed.
+ ;${AndIfNot} ${FileExists} $BDir\${File2Check}  ; If Distro File exists, don't show Distro because it must already be installed.
  ${NSD_CB_AddString} $Distro "${Distro2Check}" ; was ${NSD_LB_AddString} $Distro "${Distro2Check}" ; Enable for Dropbox
   
  ${ElseIf} $Checker == "Yes"   

@@ -33,7 +33,7 @@ Function "MBRID" ; Let's Get the MBRID for OpenSUSE
  StrCpy $OnlyVal "$1" "" 16 ; = Get the Decimal Value only, remove preceeding Signature=
  IntFmt $OnlyVal "0x%08X" $OnlyVal ; Convert the value from Decimal to Hexadecimal - was 0x%X - fixed using 0x%08X for 10 character
  ${StrFilter} "$OnlyVal" "-" "" "" $OnlyVal ; Convert the Hexadecimal value to lower case
- Rename "$BootDir\multiboot\$SUSEDIR\boot\grub\mbrid" "$BootDir\multiboot\$SUSEDIR\boot\grub\old-mbrid"
+ Rename "$BDir\multiboot\$SUSEDIR\boot\grub\mbrid" "$BDir\multiboot\$SUSEDIR\boot\grub\old-mbrid"
  ${Write2mbrid} "$OnlyVal" $R0
 FunctionEnd
 
@@ -65,7 +65,7 @@ Function Write2mbrid
  Exch $R0 ;file to write to
  Exch
  Exch $1 ;text to write
- FileOpen $R0 '$BootDir\multiboot\$SUSEDIR\boot\grub\mbrid' a  ;FileOpen $R0 '$BootDir\multiboot\menu\$DistroPath' a 
+ FileOpen $R0 '$BDir\multiboot\$SUSEDIR\boot\grub\mbrid' a  ;FileOpen $R0 '$BDir\multiboot\menu\$DistroPath' a 
  FileSeek $R0 0 END
  FileWrite $R0 '$1'
  FileClose $R0

@@ -11,8 +11,9 @@
 
 ;!include TextFunc.nsh
 
-;!include ReplaceInFile.nsh
-!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
+!include ReplaceInFile.nsh
+;!include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
+;!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include DiskVoodoo.nsh 
 
 !include FileManipulation.nsh ; Text File Manipulation
@@ -982,6 +983,7 @@ FunctionEnd
 
 ; --- Stuff to do at startup of script ---
 Function .onInit
+StrCpy $TASupport "YES"
 StrCpy $R9 0 ; we start on page 0
 ;StrCpy $InstallButton ""
  StrCpy $FileFormat "ISO"

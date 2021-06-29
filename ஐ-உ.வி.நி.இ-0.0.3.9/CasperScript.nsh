@@ -20,11 +20,11 @@
 ${If} $Casper != "0"
  Call GetCaspTools
   ${If} $DistroName == "Debian Live"
-  nsExec::ExecToLog '"$PLUGINSDIR\dd.exe" if=/dev/zero of=$BootDir\multiboot\$JustISOName\persistence bs=1M count=$Casper --progress'
-  nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L live-rw $BootDir\multiboot\$JustISOName\persistence'	; was using -b 1024
+  nsExec::ExecToLog '"$PLUGINSDIR\dd.exe" if=/dev/zero of=$BDir\multiboot\$JustISOName\persistence bs=1M count=$Casper --progress'
+  nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L live-rw $BDir\multiboot\$JustISOName\persistence'	; was using -b 1024
   ${Else}
-  nsExec::ExecToLog '"$PLUGINSDIR\dd.exe" if=/dev/zero of=$BootDir\multiboot\$JustISOName\writable bs=1M count=$Casper --progress'
-  nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L casper-rw $BootDir\multiboot\$JustISOName\writable'	; was using -b 1024
+  nsExec::ExecToLog '"$PLUGINSDIR\dd.exe" if=/dev/zero of=$BDir\multiboot\$JustISOName\writable bs=1M count=$Casper --progress'
+  nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L casper-rw $BDir\multiboot\$JustISOName\writable'	; was using -b 1024
   ${EndIf}
 ${EndIf}
 FunctionEnd */
@@ -75,7 +75,7 @@ ${AndIf} $DistroName != "Windows to Go (Virtual Hard Disk)"
  Sleep 1000
  DetailPrint "Sleeping for 1 second..."
  ExpandEnvStrings $COMSPEC "%COMSPEC%"
- ExecShell "" '"$COMSPEC"' '/C if 1==1 "$PLUGINSDIR\dd.exe" if=/dev/zero of=$BootDir\multiboot\$JustISOName\$CasperName bs=1M count=$Casper --progress 2>$PLUGINSDIR\ddlog.txt' SW_HIDE
+ ExecShell "" '"$COMSPEC"' '/C if 1==1 "$PLUGINSDIR\dd.exe" if=/dev/zero of=$BDir\multiboot\$JustISOName\$CasperName bs=1M count=$Casper --progress 2>$PLUGINSDIR\ddlog.txt' SW_HIDE
  Banner::show /set 76 "Creating a $CasperName file."
  Banner::getWindow
  Pop $1  
@@ -88,7 +88,7 @@ ${AndIf} $DistroName != "Windows to Go (Virtual Hard Disk)"
  
  Sleep 3000 ; Give the dd.exe time to exit.
  DetailPrint "Sleeping for 3 seconds..."
- nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L $CasperName $BootDir\multiboot\$JustISOName\$CasperName'
+ nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L $CasperName $BDir\multiboot\$JustISOName\$CasperName'
 ${EndIf}
 FunctionEnd
 
@@ -117,7 +117,7 @@ FunctionEnd
   ${Else}
    nsExec::ExecToLog '"$PLUGINSDIR\mke2fs.exe" -L $CasperName $PLUGINSDIR\$CasperName'
   ${EndIf} 
- CopyFiles $PLUGINSDIR\$CasperName "$BootDir\multiboot\$JustISOName\$CasperName" ; Copy casper-rw to USB
+ CopyFiles $PLUGINSDIR\$CasperName "$BDir\multiboot\$JustISOName\$CasperName" ; Copy casper-rw to USB
  Delete "$PLUGINSDIR\$CasperName"
 ${EndIf}
 FunctionEnd */
