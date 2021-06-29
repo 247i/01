@@ -2,6 +2,7 @@
 !define பதிப்பு "0.0.3.9"
 ; பொதுவாக பயன்படுத்தும் நிரல்கள்
 !include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
 !define NAME "ஐ-உ.வி.நி.இ"
 !define FILENAME "ஐ-உ.வி.நி.இ"
 !define VERSION "0.0.3.9"
@@ -19,88 +20,9 @@ VIAddVersionKey License "GPL Version 2"
 
 ;!include TextFunc.nsh
 
-
-; Variables
-Var Capacity
-Var VolName
-Var Checker
-Var FileFormat
-Var Format 
-Var FormatMe
-Var BlockSize
-Var Dialog
-Var LabelDrivePage
-Var Distro
-Var DistroName
-Var ISOFileName
-Var DestDriveTxt
-Var JustDrive
-Var DestDrive
+; var bdir
 Var BootDir
-Var LinuxDistroSelection
-Var LabelISOSelection
-Var ISOFileTxt
-Var TheISO
-Var IsoFile
-Var ISOSelection
-Var ISOTest
-Var JustISO
-Var JustISOName
-Var JustISOPath
-Var ConfigFile
-Var ConfigPath
-Var CopyPath
-Var GrubConfigFile
-Var GrubConfigPath
-Var GrubCopyPath
-Var Initrd
-Var Vmlinuz
-Var ISONameDotLess
-Var DestDisk
-Var DownloadISO
-Var DownloadMe
-Var Link
-Var Link1
-Var Link2
-Var Links
-Var Links1
-Var Links2
-Var Auth
-Var DownLink
-Var LocalSelection
-Var Letters
 Var Config2Use
-Var SomeFileExt
-Var DistroLink
-Var Homepage
-Var OfficialSite
-Var OfficialName
-Var NameThatISO
-Var OnlyVal
-Var Uninstaller
-Var Removal
-Var InUnName
-Var InUnStall
-Var InUnStalling
-Var InUnStalled
-Var OnFrom
-Var SUSEDIR
-Var RepeatInstall
-Var ForceShowAll
-Var ShowingAll
-Var SizeOfCasper 
-Var Casper
-Var CasperSlider
-Var CasperSelection
-Var SlideSpot
-Var RemainingSpace
-Var MaxPersist
-Var Persistence
-Var CasperName
-Var COMSPEC
-Var PERCENT
-Var FSType
-Var DiskNum
 
 !include ReplaceInFile.nsh
 !include DiskVoodoo.nsh 
