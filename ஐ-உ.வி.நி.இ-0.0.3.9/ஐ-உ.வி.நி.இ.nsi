@@ -4,6 +4,8 @@
 !include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
 !include ..\பொது-துணைநிரல்கள்\பக்கங்கள்.நிரல்
+!include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
 ;!define NAME "ஐ-உ.வி.நி.இ"
 ;!define FILENAME "ஐ-உ.வி.நி.இ"
@@ -30,7 +32,7 @@ Function License_PreFunction
   StrCpy $R8 1 ;This is the 1st page
 FunctionEnd
 
-Function SelectionsPage
+Function தேர்வுகள்பக்கம்
   StrCpy $R8 2
  !insertmacro MUI_HEADER_TEXT $(SelectDist_Title) $(SelectDist_Subtitle) 
   nsDialogs::Create 1018
@@ -266,11 +268,6 @@ FunctionEnd
 
 Function InstFiles_PreFunction
   StrCpy $R8 3
-FunctionEnd
-
-Function Finish_PreFunction
-  StrCpy $R8 4
-  Call NoQuit
 FunctionEnd
 
 Function ListAllDrives ; Set to Display All Drives
@@ -1059,7 +1056,7 @@ Function Config2Write
  ${EndIf} 
 FunctionEnd
 
-Function NoQuit
+Function வெளியேறாதே
 MessageBox MB_YESNO "Would you like to add more ISOs/Distros Now on $DestDisk?" IDYES noskip
     StrCmp $R8 3 0 End ;Compare $R8 variable with current page #
     StrCpy $R9 1 ; Goes to finish page

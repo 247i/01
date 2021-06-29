@@ -4,9 +4,12 @@
 ;!execute '"$%WINDIR%\notepad.exe" /P "${NSISDIR}\COPYING"' ; Enable this to debug previous line.
 ; பொதுவாக பயன்படுத்தும் நிரல்கள்
 !include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
-!include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
 !include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
 !include ..\பொது-துணைநிரல்கள்\பக்கங்கள்.நிரல்
+!include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
+
 !include ..\பொது-துணைநிரல்கள்\ஒழுங்கமை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
@@ -16,7 +19,6 @@
 !include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
 !include ..\பொது-துணைநிரல்கள்\உதநிகோப்புபெயர்கள்அமை.நிரல் ; Macro for கோப்புபெயர்கள்
 !include ..\பொது-துணைநிரல்கள்\புதையல்பொதுஉரை.நிரல் ; For creation of Persistent Casper-rw files
-!include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
 
 !include நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
 !include நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
@@ -344,7 +346,7 @@ ShowWindow $CasperSlider 0
 ShowWindow $SlideSpot 0
 ${EndIf}
 FunctionEnd
-!include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
+
 ; On Selection of Linux Distro
 Function விநியோகதேர்வில்
 Pop $Distro
