@@ -7,10 +7,6 @@
 !include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
-;!define NAME "ஐ-உ.வி.நி.இ"
-;!define FILENAME "ஐ-உ.வி.நி.இ"
-!define VERSION "0.0.3.9"
-
 !include WinVer.nsh
 
 ;!include TextFunc.nsh
@@ -26,10 +22,6 @@ Var Config2Use
 !include DistroList.nsh ; List of Distributions
 !include StrContains.nsh ; Let's check if a * wildcard exists
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
-
-Function License_PreFunction
-  StrCpy $R8 1 ;This is the 1st page
-FunctionEnd
 
 Function தேர்வுகள்பக்கம்
   StrCpy $R8 2
@@ -62,12 +54,12 @@ Function தேர்வுகள்பக்கம்
 ; ISO Download Option
   ${NSD_CreateCheckBox} 60% 60 40% 15 "Download the ISO (Optional)."
   Pop $DownloadISO
-  ${NSD_OnClick} $DownloadISO DownloadIt  
+  ${NSD_OnClick} $DownloadISO இதைபதிவிறக்கு  
   
 ; Clickable Link to Distribution Homepage  
   ${NSD_CreateLink} 60% 80 40% 15 "Visit the $OfficialName HomePage"
   Pop $DistroLink
-  ${NSD_OnClick} $DistroLink onClickLinuxSite    
+  ${NSD_OnClick} $DistroLink லினக்சுதளசொடுக்த்தில்    
 
 ; ISO Selection Starts  
   ${NSD_CreateLabel} 0 100 100% 15 $(IsoPage_Text)
@@ -118,17 +110,17 @@ Function தேர்வுகள்பக்கம்
 ; Add Home Link
   ${NSD_CreateLink} 0 215 16% 15 "Home Page"
   Pop $Link
-  ${NSD_OnClick} $LINK onClickMyLink    
+  ${NSD_OnClick} $LINK என்தளசொடுக்த்தில்    
   
 ; Add Help Link
   ${NSD_CreateLink} 16% 215 9% 15 "FAQ"
   Pop $Link1
-  ${NSD_OnClick} $LINK1 onClickMyLinkFAQ 
+  ${NSD_OnClick} $LINK1 அகேகேதளசொடுக்த்தில் 
   
 ; Add Giveback Link
   ${NSD_CreateLink} 25% 215 30% 15 "Recommended Flash Drives"
   Pop $Link2
-  ${NSD_OnClick} $LINK2 onClickMyLinkUSB   
+  ${NSD_OnClick} $LINK2 என்உதொபேதளசொடுக்த்தில்   
  
 ; Disable Next Button until a selection is made for all 
   GetDlgItem $6 $HWNDPARENT 1
@@ -187,12 +179,12 @@ Function தேர்வுகள்பக்கம்
 ; ISO Download Option
   ${NSD_CreateCheckBox} 60% 60 40% 15 "Download the ISO (Optional)."
   Pop $DownloadISO
-  ${NSD_OnClick} $DownloadISO DownloadIt  
+  ${NSD_OnClick} $DownloadISO இதைபதிவிறக்கு  
   
 ; Clickable Link to Distribution Homepage  
   ${NSD_CreateLink} 60% 80 40% 15 "Visit the $OfficialName HomePage"
   Pop $DistroLink
-  ${NSD_OnClick} $DistroLink onClickLinuxSite    
+  ${NSD_OnClick} $DistroLink லினக்சுதளசொடுக்த்தில்    
 
 ; ISO Selection Starts  
   ${NSD_CreateLabel} 0 100 100% 15 $(IsoPage_Text)
@@ -220,17 +212,17 @@ Function தேர்வுகள்பக்கம்
 ; Add Home Link
   ${NSD_CreateLink} 0 215 16% 15 "Home Page"
   Pop $Link
-  ${NSD_OnClick} $LINK onClickMyLink    
+  ${NSD_OnClick} $LINK என்தளசொடுக்த்தில்    
   
 ; Add Help Link
   ${NSD_CreateLink} 16% 215 9% 15 "FAQ"
   Pop $Link1
-  ${NSD_OnClick} $LINK1 onClickMyLinkFAQ 
+  ${NSD_OnClick} $LINK1 அகேகேதளசொடுக்த்தில் 
   
 ; Add Giveback Link
   ${NSD_CreateLink} 25% 215 30% 15 "Recommended Flash Drives"
   Pop $Link2
-  ${NSD_OnClick} $LINK2 onClickMyLinkUSB 
+  ${NSD_OnClick} $LINK2 என்உதொபேதளசொடுக்த்தில் 
 
 ;; Add a custom donate button
 ;   ${NSD_CreateBitmap} 80% 125 20% 50 "PayPal Donation"
@@ -265,46 +257,12 @@ Function தேர்வுகள்பக்கம்
  ${EndIf}
 FunctionEnd
 
-Function InstFiles_PreFunction
-  StrCpy $R8 3
-FunctionEnd
-
 Function ListAllDrives ; Set to Display All Drives
   SendMessage $DestDriveTxt ${CB_RESETCONTENT} 0 0 
   ${GetDrives} "FDD+HDD" DrivesList
 FunctionEnd
 
-Function onClickMyLink
-  Pop $Links ; pop something to prevent corruption
-  ExecShell "open" "https://www.pendrivelinux.com/yumi-multiboot-usb-creator/"
-FunctionEnd
 
-Function onClickMyLinkFAQ
-  Pop $Links1 ; pop something to prevent corruption
-  ExecShell "open" "https://www.pendrivelinux.com/yumi-multiboot-usb-creator/#FAQ"
-FunctionEnd
-
-Function onClickMyLinkUSB
-  Pop $Links2 ; pop something to prevent corruption
-  ExecShell "open" "https://www.pendrivelinux.com/recommended-usb-flash-drives/"
-FunctionEnd
-
-Function onClickLinuxSite
-  Pop $OfficialSite 
-  ExecShell "open" "$Homepage"
-FunctionEnd
-
-Function DownloadIt ; Set Download Option
-  ${NSD_GetState} $DownloadISO $DownloadMe
-  ${If} $DownloadMe == ${BST_CHECKED}
-  ${NSD_Check} $DownloadISO
-  ${NSD_SetText} $DownloadISO "Opened Download Link"
-  Call DownloadLinks
-  ${ElseIf} $DownloadMe == ${BST_UNCHECKED}
-  ${NSD_Uncheck} $DownloadISO 
-  ${NSD_SetText} $DownloadISO "Download Link" 
-  ${EndIf}  
-FunctionEnd
 
 Function EnableNext ; Enable Install Button
   #${If} $Blocksize >= 4 
@@ -389,58 +347,6 @@ Function EnableNext ; Enable Install Button
   ShowWindow $SlideSpot 0
   ;${NSD_SetText} $Format "Format $JustDrive Drive (Erases Content)" 
   ${EndIf}    
-FunctionEnd
-
-Function DownloadLinks
-MessageBox MB_YESNO|MB_ICONQUESTION "Launch the Download Link?$\r$\nLet the download finish before moving to step 2." IDYES DownloadIt IDNO Skip
-  Skip: ; Reset Download Checkbox Options 
-  ${NSD_Uncheck} $DownloadISO 
-  ${NSD_SetText} $DownloadISO "Download Link"  
-  EnableWindow $DownloadISO 1
-  Goto end
-  DownloadIt:
-  ${NSD_SetText} $LabelISOSelection "Step 3: Once your download has finished, Browse and select the ISO."  
-  EnableWindow $DownloadISO 0
-  ExecShell "open" "$DownLink"    
-  end:
-FunctionEnd
-
-Function LocalISODetected ; The script autodetected the ISO, so let's do the following
- ${If} $DownloadMe != ${BST_CHECKED}
- ${AndIf} $LocalSelection != "Yes"
- StrCpy $ISOFile "$EXEDIR\$ISOFileName"
- ${EndIf}
-FunctionEnd
-
-; get only the filename
-Function GrabNameOnly
-  Exch $4 ; count to get part
-  Exch
-  Exch $0 ; input string
-  Push $1
-  Push $2
-  Push $3
-  StrCpy $1 0
-  StrCpy $3 1
-  loop:
-    IntOp $1 $1 - 1
-    StrCpy $2 $0 1 $1
-    StrCmp $2 "" exit2
-    StrCmp $2 "\" next ; grab text to the right of "\"
-    Goto loop
-  next:
-    StrCmp $3 $4 exit
-    IntOp $3 $3 + 1
-  Goto loop
-  exit2:
-    IntOp $1 $1 - 1
-  exit:
-    IntOp $1 $1 + 1
-    StrCpy $0 $0 "" $1
-    Pop $3
-    Pop $2
-    Pop $1
-    Exch $0 ; output string
 FunctionEnd
 
 ; !include StrContains.nsh ; Let's check if a * wildcard exists
@@ -571,14 +477,6 @@ Function ISOBrowse
  ; Uncomment for Testing --> MessageBox MB_ICONQUESTION|MB_OK 'Removal: "$Removal"  ISOFileName: "$ISOFileName" ISOFile "$ISOFile" BDir: "$BDir" DestDisk: "$DestDisk" DestDrive: "$DestDrive" ISOTest: "$ISOTest"'
  FunctionEnd
 
-Function ClearAll
-StrCpy $ISOTest ""
-StrCpy $DistroName "" ; Clear Distro Name
-StrCpy $ISOFileName "" ; Clear ISO Selection
-StrCpy $SomeFileExt ""
-StrCpy $FileFormat ""
-FunctionEnd
-
 Function InstallorRemove ; Populate DistroName based on Install/Removal option
   ${If} $Removal == "Yes" 
   Call RemovalList
@@ -594,7 +492,7 @@ Function Uninstall
   ${If} $Removal == ${BST_CHECKED}
   ShowWindow $Format 0
     ShowWindow $LabelISOSelection 0 
-	Call ClearAll	
+	Call அனைத்தும்அழி	
     EnableWindow $ISOFileTxt 0
 	ShowWindow $ISOFileTxt 0
 	ShowWindow $ISOSelection 0
@@ -622,7 +520,7 @@ Function Uninstall
     ShowWindow $LabelISOSelection 1 
     ShowWindow $ISOFileTxt 1
 	ShowWindow $ISOSelection 0
-	Call ClearAll
+	Call அனைத்தும்அழி
     ${NSD_SetText} $LabelISOSelection "Step 3: Select your $ISOFileName"
 	${NSD_SetText} $ISOFileTxt "Disabled until step 2 is complete"
      GetDlgItem $6 $HWNDPARENT 1 ; Get "Install" control handle
@@ -960,7 +858,7 @@ Section  ; This is the only section that exists
 ; Get just the name of the ISO file 
 Push "$ISOFile"
 Push 1
-Call GrabNameOnly
+Call பெயரைமட்டும்பெறு
 Pop $NameThatISO
 
  ${If} $DiskNum == "0" 
@@ -996,7 +894,7 @@ proceed:
  Call HaveSpace ; Got enough Space? Lets Check!
  Call FormatYes ; Format the Drive?
  Call DoSyslinux ; Run Syslinux on the Drive to make it bootable
- Call LocalISODetected
+ Call உள்உதநிகண்டறியப்பட்டது
  
 ; Copy the config file if it doesn't exist and create the entry in syslinux.cfg 
  ${IfNot} ${FileExists} "$BDir\multiboot\menu\$Config2Use" 
@@ -1059,7 +957,7 @@ Function வெளியேறாதே
 MessageBox MB_YESNO "Would you like to add more ISOs/Distros Now on $DestDisk?" IDYES noskip
     StrCmp $R8 3 0 End ;Compare $R8 variable with current page #
     StrCpy $R9 1 ; Goes to finish page
-    Call RelGotoPage
+    Call உறவுபக்கத்திற்குச்செல்
     Abort
 noskip:
 StrCpy $DestDrive "$DestDrive" ; Retain previously selected Drive Letter
@@ -1079,17 +977,9 @@ StrCpy $ShowingAll ""
 StrCpy $FormatMe "" ; Reset Format Option
     StrCmp $R8 4 0 End ;Compare $R8 variable with current page #
     StrCpy $R9 -3 ; Goes back to selections page
-    Call RelGotoPage ; change pages
+    Call உறவுபக்கத்திற்குச்செல் ; change pages
     Abort
 End:
-FunctionEnd
-
-Function RelGotoPage
-  IntCmp $R9 0 0 Move Move
-    StrCmp $R9 "X" 0 Move
-      StrCpy $R9 "120"
-Move:
-  SendMessage $HWNDPARENT "0x408" "$R9" ""
 FunctionEnd
 
 ; --- Stuff to do at startup of script ---
