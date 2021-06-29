@@ -134,7 +134,7 @@ FunctionEnd
 ; Acronis True Image 
  ${If} $DistroName == "Acronis True Image"
 		ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -x![BOOT] -o"$BDir\!\$JustISOName\" -y'  
-		File /oname=$PLUGINSDIR\acronisti.cfg "ஐ-மரபு\பட்டியல்\acronisti.cfg"   
+		File /oname=$PLUGINSDIR\acronisti.cfg "பட்டியல்\acronisti.cfg"   
 		CopyFiles "$PLUGINSDIR\acronisti.cfg" "$BDir\!\$JustISOName\acronisti.cfg"  
 		${கோப்பில்எழுது} "#[ $JustISOName$\r$\nLABEL $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nCONFIG /!/$JustISOName/acronisti.cfg$\r$\nAPPEND /!/$JustISOName$\r$\n#] $JustISOName" $R0 
 
@@ -157,7 +157,7 @@ FunctionEnd
   ${ElseIf} $DistroName == "Bitdefender Rescue CD"
 		CopyFiles $ISOFile "$BDir\!\ISOS\$JustISO" 
 		${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel Bitdefender ($JustISOName)$\r$\nMENU LABEL Bitdefender ($JustISOName)$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /அகர/பகவன்/bitdefender.lst$\r$\n#] $JustISOName" $R0   
-		File /oname=$PLUGINSDIR\bitdefender.lst "ஐ-மரபு\பட்டியல்\bitdefender.lst"  
+		File /oname=$PLUGINSDIR\bitdefender.lst "பட்டியல்\bitdefender.lst"  
 		CopyFiles "$PLUGINSDIR\bitdefender.lst" "$BDir\அகர\பகவன்\bitdefender.lst" 
 		!insertmacro கோப்பில்மாற்று "SLUG" "$JustISO" "all" "all" "$BDir\அகர\பகவன்\bitdefender.lst" 
  
@@ -213,7 +213,7 @@ FunctionEnd
   
 	 CopyFiles $ISOFile "$BDir\!\$JustISOName\$JustISO" 
 	 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/basic.lst$\r$\n#] $JustISOName" $R0   
-	 File /oname=$PLUGINSDIR\basic.lst "ஐ-மரபு\பட்டியல்\basic.lst"  
+	 File /oname=$PLUGINSDIR\basic.lst "பட்டியல்\basic.lst"  
 	 CopyFiles "$PLUGINSDIR\basic.lst" "$BDir\!\$JustISOName\basic.lst" 
 	 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISO" "all" "all" "$BDir\!\$JustISOName\basic.lst" 
 	 !insertmacro கோப்பில்மாற்று "IPATH" "$JustISOName" "all" "all" "$BDir\!\$JustISOName\basic.lst"  
@@ -224,14 +224,14 @@ FunctionEnd
 	 StrCpy $JustISO "$JustISO.iso"
 	 CopyFiles $ISOFile "$BDir\!\$JustISOName\$JustISO" 
 	 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/$JustISOName.lst$\r$\n#] $JustISOName" $R0   
-	 File /oname=$PLUGINSDIR\basic.lst "ஐ-மரபு\பட்டியல்\basic.lst"  
+	 File /oname=$PLUGINSDIR\basic.lst "பட்டியல்\basic.lst"  
 	 CopyFiles "$PLUGINSDIR\basic.lst" "$BDir\!\$JustISOName\$JustISOName.lst" 
 	 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISO" "all" "all" "$BDir\!\$JustISOName\$JustISOName.lst" 
 	 !insertmacro கோப்பில்மாற்று "IPATH" "$JustISOName" "all" "all" "$BDir\!\$JustISOName\$JustISOName.lst"   
  
   ${ElseIf} $DistroName == "HD Sentinel (HDD Diagnostics)"
 	 ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -o"$BDir\!\$JustISOName\" -y' 
-	 File /oname=$PLUGINSDIR\customram.lst "ஐ-மரபு\பட்டியல்\customram.lst" 
+	 File /oname=$PLUGINSDIR\customram.lst "பட்டியல்\customram.lst" 
 	 CopyFiles "$PLUGINSDIR\customram.lst" "$BDir\!\$JustISOName\customram.lst" 
 	 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nMENU LABEL $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/customram.lst$\r$\n#] $JustISOName" $R0   
 	 !insertmacro கோப்பில்மாற்று "SLUG" "hdsdos.iso" "all" "all" "$BDir\!\$JustISOName\customram.lst" 
@@ -271,7 +271,7 @@ FunctionEnd
    
 		CopyFiles $ISOFile "$BDir\!\$JustISOName\$JustISO" ; Copy the ISO to Directory
 		ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!vmlinu* -ir!init* -o"$BDir\!\$JustISOName\" -y'
-		File /oname=$PLUGINSDIR\ubuntu.lst "ஐ-மரபு\பட்டியல்\ubuntu.lst"  
+		File /oname=$PLUGINSDIR\ubuntu.lst "பட்டியல்\ubuntu.lst"  
 		CopyFiles "$PLUGINSDIR\ubuntu.lst" "$BDir\!\$JustISOName\ubuntu.lst"   
 		${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nmenu label $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/ubuntu.lst$\r$\n#] $JustISOName" $R0   
  
@@ -436,7 +436,7 @@ FunctionEnd
 	 CopyFiles $EXEDIR\%%\FD0-konboot-v1.1-2in1.img "$BDir\!\$JustISOName\konboot.img" 
 	 RMDir /R "$EXEDIR\%%"
 	 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nLABEL Kon-Boot ($JustISOName)$\r$\nMENU LABEL Kon-Boot ($JustISOName)$\r$\nMENU INDENT 1$\r$\nCONFIG /அகர/பகவன்/konboot.cfg$\r$\nAPPEND /அகர/பகவன்$\r$\n#] $JustISOName" $R0 
-	 File /oname=$PLUGINSDIR\konboot.cfg "ஐ-மரபு\பட்டியல்\konboot.cfg"  
+	 File /oname=$PLUGINSDIR\konboot.cfg "பட்டியல்\konboot.cfg"  
 	 CopyFiles "$PLUGINSDIR\konboot.cfg" "$BDir\அகர\பகவன்\konboot.cfg"
 	 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISOName" "all" "all" "$BDir\அகர\பகவன்\konboot.cfg" 
 	 
@@ -448,7 +448,7 @@ FunctionEnd
 	 CopyFiles $EXEDIR\%%\konbootOLD.img "$BDir\!\$JustISOName\konbootOLD.img" 
 	 RMDir /R "$EXEDIR\%%"
 	 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nLABEL Kon-Boot ($JustISOName)$\r$\nMENU LABEL Kon-Boot ($JustISOName)$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/konboot.lst" $R0 
-	 File /oname=$PLUGINSDIR\konboot.lst "ஐ-மரபு\பட்டியல்\konboot.lst"  
+	 File /oname=$PLUGINSDIR\konboot.lst "பட்டியல்\konboot.lst"  
 	 CopyFiles "$PLUGINSDIR\konboot.lst" "$BDir\!\$JustISOName\konboot.lst"
 	 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISOName" "all" "all" "$BDir\!\$JustISOName\konboot.lst" 
 	 
@@ -468,7 +468,7 @@ FunctionEnd
 		 CopyFiles $ISOFile "$BDir\!\ISOS\$JustISO" 
 		 ; ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nLABEL Windows Defender Offline ($JustISOName)$\r$\nMENU LABEL Windows Defender Offline ($JustISOName)$\r$\nMENU INDENT 1$\r$\nLINUX /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile $\"ls /!/ISOS/$JustISO || find --set-root /!/ISOS/$JustISO;map --heads=0 --sectors-per-track=0 /!/ISOS/$JustISO (0xff) || map --heads=0 --sectors-per-track=0 --mem /!/ISOS/$JustISO (0xff);map --hook;chainloader (0xff)$\"$\r$\n#] $JustISOName" $R0
 		 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel Windows Defender Offline ($JustISOName)$\r$\nmenu label title Windows Defender Offline ($JustISOName)$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /அகர/பகவன்/WDO.lst$\r$\n#] $JustISOName" $R0   
-		 File /oname=$PLUGINSDIR\WDO.lst "ஐ-மரபு\பட்டியல்\WDO.lst"  
+		 File /oname=$PLUGINSDIR\WDO.lst "பட்டியல்\WDO.lst"  
 		 CopyFiles "$PLUGINSDIR\WDO.lst" "$BDir\அகர\பகவன்\WDO.lst" 
 		 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISO" "all" "all" "$BDir\அகர\பகவன்\WDO.lst"  
 	 
@@ -658,7 +658,7 @@ FunctionEnd
 	 ${ElseIf} $DistroName == "Single Windows XP Installer" 
 	 CopyFiles $ISOFile "$BDir\!\ISOS\$JustISO"
 	 ${கோப்பில்எழுது} "title$\r$\nroot$\r$\n#[ $JustISOName$\r$\ntitle Begin Install of Windows XP from $JustISO (Stage 1)$\r$\nfind --set-root /!/ISOS/$JustISO$\r$\nmap (hd0) (hd1)$\r$\nmap (hd1) (hd0)$\r$\nmap --mem /!/ISOS/firadisk.img (fd0)$\r$\nmap --mem /!/ISOS/firadisk.img (fd1)$\r$\nmap --mem /!/ISOS/$JustISO (0xff)$\r$\nmap --hook$\r$\nchainloader (0xff)/I386/SETUPLDR.BIN$\r$\n$\r$\ntitle Continue Windows XP Install from $JustISO (Stage 2)$\r$\nfind --set-root /!/ISOS/$JustISO$\r$\nmap (hd0) (hd1)$\r$\nmap (hd1) (hd0)$\r$\nmap --mem /!/ISOS/$JustISO (0xff)$\r$\nmap --hook$\r$\nchainloader (hd0)+1$\r$\n$\r$\ntitle Boot Windows XP - If fails, reboot with USB removed (Stage 3)$\r$\nmap (hd1) (hd0)$\r$\nmap (hd0) (hd1)$\r$\nroot (hd1,0)$\r$\nfind --set-root /ntldr$\r$\nchainloader /ntldr$\r$\n#] $JustISOName" $R0  
-	 File /oname=$PLUGINSDIR\firadisk.img "இருமங்கள்\firadisk.img"  
+	 File /oname=$PLUGINSDIR\firadisk.img "..\பொது-இருமங்கள்\firadisk.img"  
 	 CopyFiles "$PLUGINSDIR\firadisk.img" "$BDir\!\ISOS\firadisk.img"   
 	 
 	 ; Unlisted ISOs
@@ -758,7 +758,7 @@ FunctionEnd
 	 ${ElseIf} $DistroName == "Super Grub2 Disk" 
 	 CopyFiles $ISOFile "$BDir\!\ISOS\$JustISO"
 	 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nmenu label $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /அகர/பகவன்/sgd.lst$\r$\n#] $JustISOName" $R0   
-	 File /oname=$PLUGINSDIR\sgd.lst "ஐ-மரபு\பட்டியல்\sgd.lst"  
+	 File /oname=$PLUGINSDIR\sgd.lst "பட்டியல்\sgd.lst"  
 	 CopyFiles "$PLUGINSDIR\sgd.lst" "$BDir\அகர\பகவன்\sgd.lst" 
 	 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISO" "all" "all" "$BDir\அகர\பகவன்\sgd.lst"  
 
@@ -819,14 +819,14 @@ FunctionEnd
 		 ${ElseIf} $DistroName == "Puppy Arcade"  
 		 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\!\$JustISOName\" -y'  
 		 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nmenu label $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/arcade.lst$\r$\n#] $JustISOName" $R0   
-		 File /oname=$PLUGINSDIR\arcade.lst "ஐ-மரபு\பட்டியல்\arcade.lst"  
+		 File /oname=$PLUGINSDIR\arcade.lst "பட்டியல்\arcade.lst"  
 		 CopyFiles "$PLUGINSDIR\arcade.lst" "$BDir\!\$JustISOName\arcade.lst" 
 		 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISOName" "all" "all" "$BDir\!\$JustISOName\arcade.lst"  
 		 
 		 ${ElseIf} $DistroName == "Super Grub2 Disk"  
 		 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\!\$JustISOName\" -y'  
 		 ${கோப்பில்எழுது} "#[ $JustISOName$\r$\nlabel $JustISOName$\r$\nmenu label $JustISOName$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=root (hd0,0);configfile /!/$JustISOName/sgd.lst$\r$\n#] $JustISOName" $R0   
-		 File /oname=$PLUGINSDIR\sgd.lst "ஐ-மரபு\பட்டியல்\sgd.lst"  
+		 File /oname=$PLUGINSDIR\sgd.lst "பட்டியல்\sgd.lst"  
 		 CopyFiles "$PLUGINSDIR\sgd.lst" "$BDir\!\$JustISOName\sgd.lst" 
 		 !insertmacro கோப்பில்மாற்று "SLUG" "$JustISOName" "all" "all" "$BDir\!\$JustISOName\sgd.lst"   
 	 

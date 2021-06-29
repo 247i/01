@@ -1,25 +1,25 @@
 ﻿!define பெயர் "ஐ-மரபு"
 !define பதிப்பு "2.0.8.2"
-!include துணை\தலைப்பு.நிரல்
-!include துணை\மாறிகள்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
 
 
 ; பொதுவாக பயன்படுத்தும் நிரல்கள்
-!include துணை\பக்கங்கள்.நிரல்
-!include துணை\தகவல்.நிரல்
-!include துணை\ஒழுங்கமை.நிரல்
-!include துணை\ஒருங்குறிஉரை.நிரல்
-!include துணை\கோப்பில்மாற்று.நிரல்
-!include துணை\வட்டுபொதுஉரை.நிரல்
-!include துணை\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
-!include துணை\சரம்மாற்று.நிரல் 
-!include துணை\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
-!include துணை\உதநிகோப்புபெயர்கள்அமை.நிரல் ; Macro for கோப்புபெயர்கள்
-!include துணை\புதையல்பொதுஉரை.நிரல் ; தொடர்ச்சியான புதையல் கோப்புகளை உருவாக்க
+!include ..\பொது-துணைநிரல்கள்\பக்கங்கள்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஒழுங்கமை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
+!include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
+!include ..\பொது-துணைநிரல்கள்\சரம்மாற்று.நிரல் 
+!include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
+!include ..\பொது-துணைநிரல்கள்\உதநிகோப்புபெயர்கள்அமை.நிரல் ; Macro for கோப்புபெயர்கள்
+!include ..\பொது-துணைநிரல்கள்\புதையல்பொதுஉரை.நிரல் ; தொடர்ச்சியான புதையல் கோப்புகளை உருவாக்க
 
-!include ஐ-மரபு\நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
-!include ஐ-மரபு\நிரல்கள்\துவக்கதட்டுஉரை.நிரல்
-!include ஐ-மரபு\நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
+!include நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
+!include நிரல்கள்\துவக்கதட்டுஉரை.நிரல்
+!include நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
 
 Function தேர்வுகள்பக்கம்
   StrCpy $R8 2
@@ -290,7 +290,7 @@ Function இயக்கிகளைபட்டியலிடு ; Set to Disp
   ${EndIf}
 FunctionEnd
 
-!include  துணை\இணைப்பு.நிரல்
+!include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
 
 Function அடுத்துஇயக்கு ; Enable Install Button
   ;${If} $Blocksize >= 4 
@@ -387,7 +387,7 @@ Function அடுத்துஇயக்கு ; Enable Install Button
   ShowWindow $SlideSpot 0
   ${EndIf}    
 FunctionEnd
-!include துணை\பதிவிறக்கஇணைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
 ; On Selection of Linux Distro
 Function விநியோகதேர்வில்
   Pop $Distro
@@ -703,9 +703,9 @@ FunctionEnd
 
 Function ஆம்வடிவமை ; If Format is checked, do something
 
-  File /oname=$PLUGINSDIR\diskpartformat.txt "ஐ-மரபு\உரைகள்\diskpartformat.txt"     
-  File /oname=$PLUGINSDIR\diskpartwipe1.txt "ஐ-மரபு\உரைகள்\diskpartwipe1.txt"  
-  File /oname=$PLUGINSDIR\diskpartwipe2.txt "ஐ-மரபு\உரைகள்\diskpartwipe2.txt"    
+  File /oname=$PLUGINSDIR\diskpartformat.txt "உரைகள்\diskpartformat.txt"     
+  File /oname=$PLUGINSDIR\diskpartwipe1.txt "உரைகள்\diskpartwipe1.txt"  
+  File /oname=$PLUGINSDIR\diskpartwipe2.txt "உரைகள்\diskpartwipe2.txt"    
   
   !insertmacro கோப்பில்மாற்று "DISKNUM" "$DiskNum" "all" "all" "$PLUGINSDIR\diskpartwipe1.txt"  
   !insertmacro கோப்பில்மாற்று "DSK" "$DestDisk" "all" "all" "$PLUGINSDIR\diskpartwipe2.txt" 
@@ -806,7 +806,7 @@ Function இதைவடிவமை ; Set Format Option
     Call நிறுவுஅல்லதுநீக்கு
 FunctionEnd
 
-!include துணை\அனைத்துஉதநிகள்காட்டு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\அனைத்துஉதநிகள்காட்டு.நிரல்
 
 Function இடத்தைஅமை ; Set space available for persistence
  ${If} $FSType != "NTFS"
@@ -919,7 +919,7 @@ Done:
 FunctionEnd
 
 ; தனிப்பயன் விநியோகம் நிறுவி - நிறுவல் நீக்கி சேர்க்கவும்
-!include "ஐ-மரபு\நிரல்கள்\விநியோகநிறுவல்நீக்கம்.நிரல்" ; புதிய  விநியோக நிறுவல் நீக்கம்
+!include "நிரல்கள்\விநியோகநிறுவல்நீக்கம்.நிரல்" ; புதிய  விநியோக நிறுவல் நீக்கம்
 
 Function கணிலினக்சுசெய் ; கணிலினக்சு நிறுவவும்
   ${IfNot} ${FileExists} "$BDir\!\libcom32.c32" 
@@ -1179,55 +1179,55 @@ Abort
 done:
 SetShellVarContext all
 InitPluginsDir
-File /oname=$PLUGINSDIR\dskvol.txt "ஐ-மரபு\உரைகள்\dskvol.txt" 
-File /oname=$PLUGINSDIR\diskpart.txt "ஐ-மரபு\உரைகள்\diskpart.txt" 
-File /oname=$PLUGINSDIR\w2gdiskpart.txt "ஐ-மரபு\உரைகள்\w2gdiskpart.txt"   
-File /oname=$PLUGINSDIR\dd-diskpart.txt "ஐ-மரபு\உரைகள்\dd-diskpart.txt" 
-File /oname=$PLUGINSDIR\diskpartdetach.txt "ஐ-மரபு\உரைகள்\diskpartdetach.txt"  
-File /oname=$PLUGINSDIR\autounattend.xml "ஐ-மரபு\உரைகள்\autounattend.xml"   
-File /oname=$PLUGINSDIR\syslinux.exe "இருமங்கள்\கணிலினக்சு6.04.32.exe"  
-File /oname=$PLUGINSDIR\syslinux.cfg "ஐ-மரபு\பட்டியல்\syslinux.cfg"
-File /oname=$PLUGINSDIR\ஐ.மரபு "ஐ-மரபு\பட்டியல்\ஐ.மரபு"
-File /oname=$PLUGINSDIR\menu.lst "ஐ-மரபு\பட்டியல்\menu.lst"
-File /oname=$PLUGINSDIR\vhd.lst "ஐ-மரபு\பட்டியல்\vhd.lst" 
-File /oname=$PLUGINSDIR\grubpart4.lst "ஐ-மரபு\பட்டியல்\grubpart4.lst"  
-File /oname=$PLUGINSDIR\grubram.lst "ஐ-மரபு\பட்டியல்\grubram.lst"    
-File /oname=$PLUGINSDIR\win.lst "ஐ-மரபு\பட்டியல்\win.lst"
-File /oname=$PLUGINSDIR\win2go.lst "ஐ-மரபு\பட்டியல்\win2go.lst"  
-File /oname=$PLUGINSDIR\grub.exe "இருமங்கள்\மாஒது_2.04.exe"
-File /oname=$PLUGINSDIR\info "ஐ-மரபு\பட்டியல்\info"   
-File /oname=$PLUGINSDIR\antivirus.cfg "ஐ-மரபு\பட்டியல்\antivirus.cfg" 
-File /oname=$PLUGINSDIR\system.cfg "ஐ-மரபு\பட்டியல்\system.cfg" 
-File /oname=$PLUGINSDIR\netbook.cfg "ஐ-மரபு\பட்டியல்\netbook.cfg"
-File /oname=$PLUGINSDIR\linux.cfg "ஐ-மரபு\பட்டியல்\linux.cfg" 
-File /oname=$PLUGINSDIR\anon.cfg "ஐ-மரபு\பட்டியல்\anon.cfg"
-File /oname=$PLUGINSDIR\other.cfg "ஐ-மரபு\பட்டியல்\other.cfg"   
-File /oname=$PLUGINSDIR\pe.cfg "ஐ-மரபு\பட்டியல்\pe.cfg"    
-File /oname=$PLUGINSDIR\pe.lst "ஐ-மரபு\பட்டியல்\pe.lst"  
-File /oname=$PLUGINSDIR\unlisted.cfg "ஐ-மரபு\பட்டியல்\unlisted.cfg"
-File /oname=$PLUGINSDIR\liveusb "இருமங்கள்\வாழ்உதொபே"
-File /oname=$PLUGINSDIR\7zG.exe "இருமங்கள்\7zG.exe"
-File /oname=$PLUGINSDIR\7z.dll "இருமங்கள்\7z.dll"  
+File /oname=$PLUGINSDIR\dskvol.txt "உரைகள்\dskvol.txt" 
+File /oname=$PLUGINSDIR\diskpart.txt "உரைகள்\diskpart.txt" 
+File /oname=$PLUGINSDIR\w2gdiskpart.txt "உரைகள்\w2gdiskpart.txt"   
+File /oname=$PLUGINSDIR\dd-diskpart.txt "உரைகள்\dd-diskpart.txt" 
+File /oname=$PLUGINSDIR\diskpartdetach.txt "உரைகள்\diskpartdetach.txt"  
+File /oname=$PLUGINSDIR\autounattend.xml "உரைகள்\autounattend.xml"   
+File /oname=$PLUGINSDIR\syslinux.exe "..\பொது-இருமங்கள்\கணிலினக்சு6.04.32.exe"  
+File /oname=$PLUGINSDIR\syslinux.cfg "பட்டியல்\syslinux.cfg"
+File /oname=$PLUGINSDIR\ஐ.மரபு "பட்டியல்\ஐ.மரபு"
+File /oname=$PLUGINSDIR\menu.lst "பட்டியல்\menu.lst"
+File /oname=$PLUGINSDIR\vhd.lst "பட்டியல்\vhd.lst" 
+File /oname=$PLUGINSDIR\grubpart4.lst "பட்டியல்\grubpart4.lst"  
+File /oname=$PLUGINSDIR\grubram.lst "பட்டியல்\grubram.lst"    
+File /oname=$PLUGINSDIR\win.lst "பட்டியல்\win.lst"
+File /oname=$PLUGINSDIR\win2go.lst "பட்டியல்\win2go.lst"  
+File /oname=$PLUGINSDIR\grub.exe "..\பொது-இருமங்கள்\மாஒது_2.04.exe"
+File /oname=$PLUGINSDIR\info "பட்டியல்\info"   
+File /oname=$PLUGINSDIR\antivirus.cfg "பட்டியல்\antivirus.cfg" 
+File /oname=$PLUGINSDIR\system.cfg "பட்டியல்\system.cfg" 
+File /oname=$PLUGINSDIR\netbook.cfg "பட்டியல்\netbook.cfg"
+File /oname=$PLUGINSDIR\linux.cfg "பட்டியல்\linux.cfg" 
+File /oname=$PLUGINSDIR\anon.cfg "பட்டியல்\anon.cfg"
+File /oname=$PLUGINSDIR\other.cfg "பட்டியல்\other.cfg"   
+File /oname=$PLUGINSDIR\pe.cfg "பட்டியல்\pe.cfg"    
+File /oname=$PLUGINSDIR\pe.lst "பட்டியல்\pe.lst"  
+File /oname=$PLUGINSDIR\unlisted.cfg "பட்டியல்\unlisted.cfg"
+File /oname=$PLUGINSDIR\liveusb "..\பொது-இருமங்கள்\வாழ்உதொபே"
+File /oname=$PLUGINSDIR\7zG.exe "..\பொது-இருமங்கள்\7z2\7zG.exe"
+File /oname=$PLUGINSDIR\7z.dll "..\பொது-இருமங்கள்\7z2\7z.dll"  
 File /oname=$PLUGINSDIR\ஐ.png "..\அகர\அணிகலன்\ஐ.png"
 File /oname=$PLUGINSDIR\உரிமை.உரை "..\அகர\பகவன்\உரிமை.உரை"
-File /oname=$PLUGINSDIR\vesamenu.c32 "இருமங்கள்\vesamenu.c32" 
-File /oname=$PLUGINSDIR\menu.c32 "இருமங்கள்\menu.c32"    
-File /oname=$PLUGINSDIR\memdisk "இருமங்கள்\நினைவட்டு" 
-File /oname=$PLUGINSDIR\chain.c32 "இருமங்கள்\chain.c32" 
-File /oname=$PLUGINSDIR\libcom32.c32 "இருமங்கள்\libcom32.c32"  
-File /oname=$PLUGINSDIR\libutil.c32 "இருமங்கள்\libutil.c32"   
-File /oname=$PLUGINSDIR\linux.c32 "இருமங்கள்\linux.c32"  
-File /oname=$PLUGINSDIR\wimboot "இருமங்கள்\wimboot"   
-File /oname=$PLUGINSDIR\ifcpu64.c32 "இருமங்கள்\ifcpu64.c32" 
-File /oname=$PLUGINSDIR\remount.cmd "ஐ-மரபு\உரைகள்\remount.cmd"
-File /oname=$PLUGINSDIR\boot.cmd "ஐ-மரபு\உரைகள்\boot.cmd"
-File /oname=$PLUGINSDIR\vhdremount.cmd "ஐ-மரபு\உரைகள்\vhdremount.cmd"
-File /oname=$PLUGINSDIR\ei.cfg "ஐ-மரபு\பட்டியல்\ei.cfg"
-File /oname=$PLUGINSDIR\dd.exe "இருமங்கள்\தரவுவரையறை.exe"
-File /oname=$PLUGINSDIR\fat32format.exe "இருமங்கள்\கோஒஅ32வடிவம்.exe"
+File /oname=$PLUGINSDIR\vesamenu.c32 "..\பொது-இருமங்கள்\vesamenu.c32" 
+File /oname=$PLUGINSDIR\menu.c32 "..\பொது-இருமங்கள்\menu.c32"    
+File /oname=$PLUGINSDIR\memdisk "..\பொது-இருமங்கள்\நினைவட்டு" 
+File /oname=$PLUGINSDIR\chain.c32 "..\பொது-இருமங்கள்\chain.c32" 
+File /oname=$PLUGINSDIR\libcom32.c32 "..\பொது-இருமங்கள்\libcom32.c32"  
+File /oname=$PLUGINSDIR\libutil.c32 "..\பொது-இருமங்கள்\libutil.c32"   
+File /oname=$PLUGINSDIR\linux.c32 "..\பொது-இருமங்கள்\linux.c32"  
+File /oname=$PLUGINSDIR\wimboot "..\பொது-இருமங்கள்\wimboot"   
+File /oname=$PLUGINSDIR\ifcpu64.c32 "..\பொது-இருமங்கள்\ifcpu64.c32" 
+File /oname=$PLUGINSDIR\remount.cmd "உரைகள்\remount.cmd"
+File /oname=$PLUGINSDIR\boot.cmd "உரைகள்\boot.cmd"
+File /oname=$PLUGINSDIR\vhdremount.cmd "உரைகள்\vhdremount.cmd"
+File /oname=$PLUGINSDIR\ei.cfg "பட்டியல்\ei.cfg"
+File /oname=$PLUGINSDIR\dd.exe "..\பொது-இருமங்கள்\தரவுவரையறை.exe"
+File /oname=$PLUGINSDIR\fat32format.exe "..\பொது-இருமங்கள்\கோஒஅ32வடிவம்.exe"
 SetOutPath "$PLUGINSDIR"  
-File /r "இருமங்கள்\wimlib" 
+File /r "..\பொது-இருமங்கள்\wimlib" 
 SetOutPath ""  
 FunctionEnd
 
-!include துணை\புதையல்நிலை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\புதையல்நிலை.நிரல்
