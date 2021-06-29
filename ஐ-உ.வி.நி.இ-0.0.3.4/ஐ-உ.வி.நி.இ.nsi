@@ -1,27 +1,27 @@
 ﻿!define பெயர் "ஐ-உ.வி.நி.இ"
 !define பதிப்பு "0.0.3.4"
-;!execute 'இருமங்கள்\அகர.bat' ; zip if required.
+;!execute '..\பொது-இருமங்கள்\அகர.bat' ; zip if required.
 ;!execute '"$%WINDIR%\notepad.exe" /P "${NSISDIR}\COPYING"' ; Enable this to debug previous line.
 ; பொதுவாக பயன்படுத்தும் நிரல்கள்
-!include துணை\தலைப்பு.நிரல்
-!include துணை\மாறிகள்.நிரல்
-!include துணை\பக்கங்கள்.நிரல்
-!include துணை\தகவல்.நிரல்
-!include துணை\ஒழுங்கமை.நிரல்
-!include துணை\ஒருங்குறிஉரை.நிரல்
-!include துணை\கோப்பில்மாற்று.நிரல்
-!include துணை\வட்டுபொதுஉரை.நிரல்
-!include துணை\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
-!include துணை\சரம்மாற்று.நிரல்
-!include துணை\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
-!include துணை\உதநிகோப்புபெயர்கள்அமை.நிரல் ; Macro for கோப்புபெயர்கள்
-!include துணை\புதையல்பொதுஉரை.நிரல் ; For creation of Persistent Casper-rw files
-!include  துணை\இணைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\பக்கங்கள்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஒழுங்கமை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
+!include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
+!include ..\பொது-துணைநிரல்கள்\சரம்மாற்று.நிரல்
+!include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
+!include ..\பொது-துணைநிரல்கள்\உதநிகோப்புபெயர்கள்அமை.நிரல் ; Macro for கோப்புபெயர்கள்
+!include ..\பொது-துணைநிரல்கள்\புதையல்பொதுஉரை.நிரல் ; For creation of Persistent Casper-rw files
+!include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
 
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\துவக்கதட்டுஉரை.நிரல்
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\புதையல்உரை.நிரல் ; For creation of Persistent Casper-rw files
+!include நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
+!include நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
+!include நிரல்கள்\துவக்கதட்டுஉரை.நிரல்
+!include நிரல்கள்\புதையல்உரை.நிரல் ; For creation of Persistent Casper-rw files
 
 Function தேர்வுகள்பக்கம்
 StrCpy $R8 2
@@ -344,7 +344,7 @@ ShowWindow $CasperSlider 0
 ShowWindow $SlideSpot 0
 ${EndIf}
 FunctionEnd
-!include துணை\பதிவிறக்கஇணைப்பு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
 ; On Selection of Linux Distro
 Function விநியோகதேர்வில்
 Pop $Distro
@@ -589,7 +589,7 @@ FunctionEnd
 Function ஆம்வடிவமை ; If Format is checked, do something
 SetShellVarContext all
 InitPluginsDir
-File /oname=$PLUGINSDIR\கோஒஅ32வடிவம்.exe "இருமங்கள்\கோஒஅ32வடிவம்.exe"
+File /oname=$PLUGINSDIR\கோஒஅ32வடிவம்.exe "..\பொது-இருமங்கள்\கோஒஅ32வடிவம்.exe"
 ${If} $FormatMe == "YES"
 Call பூட்டு_மட்டும் ; Just get a lock on the Volume
 Sleep 3000
@@ -620,7 +620,7 @@ ${EndIf}
 Call நிறுவுஅல்லதுநீக்கு
 FunctionEnd
 
-!include துணை\அனைத்துஉதநிகள்காட்டு.நிரல்
+!include ..\பொது-துணைநிரல்கள்\அனைத்துஉதநிகள்காட்டு.நிரல்
 
 Function இடத்தைஅமை ; Set space available for persistence
 ;StrCpy $0 '$0'
@@ -726,7 +726,7 @@ Pop $1
 FunctionEnd
 
 ; தனிப்பயன் விநியோகம் நிறுவி - நிறுவல் நீக்கி சேர்க்கவும்
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\விநியோகநிறுவல்நீக்கம்.நிரல் ; புதிய  விநியோக நிறுவல் நீக்கம்
+!include நிரல்கள்\விநியோகநிறுவல்நீக்கம்.நிரல் ; புதிய  விநியோக நிறுவல் நீக்கம்
 
 Function கணிலினக்சுசெய் ; கணிலினக்சு நிறுவவும்
 ${IfNot} ${FileExists} "$BDir\!\libcom32.c32"
@@ -931,34 +931,34 @@ InitPluginsDir
 CreateDirectory "$PLUGINSDIR\7z0\"
 CreateDirectory "$PLUGINSDIR\7z1\"
 ;CreateDirectory "$PLUGINSDIR\7z2\"
-File /oname=$PLUGINSDIR\கணிலினக்சு.exe "இருமங்கள்\கணிலினக்சு6.04.32.exe"
-File /oname=$PLUGINSDIR\கணிலினக்சு.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\கணிலினக்சு.உலகு"
-File /oname=$PLUGINSDIR\மந்தமான.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\மந்தமான.உலகு"
-File /oname=$PLUGINSDIR\நோய்தடுப்பு.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\நோய்தடுப்பு.உலகு"
-File /oname=$PLUGINSDIR\கருவிகள்.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\கருவிகள்.உலகு"
-File /oname=$PLUGINSDIR\இணையபுத்தகம்.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\இணையபுத்தகம்.உலகு"
-File /oname=$PLUGINSDIR\உலாவி.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\உலாவி.உலகு"
-File /oname=$PLUGINSDIR\லினக்சு.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\லினக்சு.உலகு"
-File /oname=$PLUGINSDIR\பட்டியலிடாத.உலகு "ஐ-உ.வி.நி.இ\உரைகள்\பட்டியலிடாத.உலகு"
-File /oname=$PLUGINSDIR\liveusb "இருமங்கள்\வாழ்உதொபே"
-File /oname=$PLUGINSDIR\7z0\7zG.exe "இருமங்கள்\7z0\7zG.exe"
-File /oname=$PLUGINSDIR\7z0\7z.dll "இருமங்கள்\7z0\7z.dll"
-File /oname=$PLUGINSDIR\7z1\7zG.exe "இருமங்கள்\7z1\7zG.exe"
-File /oname=$PLUGINSDIR\7z1\7z.dll "இருமங்கள்\7z1\7z.dll"
+File /oname=$PLUGINSDIR\கணிலினக்சு.exe "..\பொது-இருமங்கள்\கணிலினக்சு6.04.32.exe"
+File /oname=$PLUGINSDIR\கணிலினக்சு.உலகு "உரைகள்\கணிலினக்சு.உலகு"
+File /oname=$PLUGINSDIR\மந்தமான.உலகு "உரைகள்\மந்தமான.உலகு"
+File /oname=$PLUGINSDIR\நோய்தடுப்பு.உலகு "உரைகள்\நோய்தடுப்பு.உலகு"
+File /oname=$PLUGINSDIR\கருவிகள்.உலகு "உரைகள்\கருவிகள்.உலகு"
+File /oname=$PLUGINSDIR\இணையபுத்தகம்.உலகு "உரைகள்\இணையபுத்தகம்.உலகு"
+File /oname=$PLUGINSDIR\உலாவி.உலகு "உரைகள்\உலாவி.உலகு"
+File /oname=$PLUGINSDIR\லினக்சு.உலகு "உரைகள்\லினக்சு.உலகு"
+File /oname=$PLUGINSDIR\பட்டியலிடாத.உலகு "உரைகள்\பட்டியலிடாத.உலகு"
+File /oname=$PLUGINSDIR\liveusb "..\பொது-இருமங்கள்\வாழ்உதொபே"
+File /oname=$PLUGINSDIR\7z0\7zG.exe "..\பொது-இருமங்கள்\7z0\7zG.exe"
+File /oname=$PLUGINSDIR\7z0\7z.dll "..\பொது-இருமங்கள்\7z0\7z.dll"
+File /oname=$PLUGINSDIR\7z1\7zG.exe "..\பொது-இருமங்கள்\7z1\7zG.exe"
+File /oname=$PLUGINSDIR\7z1\7z.dll "..\பொது-இருமங்கள்\7z1\7z.dll"
 File /oname=$PLUGINSDIR\உரிமை.உரை "..\அகர\பகவன்\உரிமை.உரை"
-File /oname=$PLUGINSDIR\நினைவட்டு "இருமங்கள்\நினைவட்டு"
-File /oname=$PLUGINSDIR\அகர.zip "இருமங்கள்\அகர.zip"
+File /oname=$PLUGINSDIR\நினைவட்டு "..\பொது-இருமங்கள்\நினைவட்டு"
+File /oname=$PLUGINSDIR\அகர.zip "..\பொது-இருமங்கள்\அகர.zip"
 File /oname=$PLUGINSDIR\EFIGRUBX64.7z "EFIGRUB\EFIGRUBX64.7z"
 File /oname=$PLUGINSDIR\GRUBINST.7z "EFIGRUB\GRUBINST.7z"
-File /oname=$PLUGINSDIR\fat32format.exe "இருமங்கள்\கோஒஅ32வடிவம்.exe"
-File /oname=$PLUGINSDIR\boot_functions.cfg "ஐ-உ.வி.நி.இ\உரைகள்\boot_functions.cfg"
-File /oname=$PLUGINSDIR\diskpartwipe1.txt "ஐ-உ.வி.நி.இ\உரைகள்\diskpartwipe1.txt"
-File /oname=$PLUGINSDIR\diskpartwipe2.txt "ஐ-உ.வி.நி.இ\உரைகள்\diskpartwipe2.txt"
-File /oname=$PLUGINSDIR\grub.cfg "ஐ-உ.வி.நி.இ\உரைகள்\முதற்றே.உலகு"
+File /oname=$PLUGINSDIR\fat32format.exe "..\பொது-இருமங்கள்\கோஒஅ32வடிவம்.exe"
+File /oname=$PLUGINSDIR\boot_functions.cfg "உரைகள்\boot_functions.cfg"
+File /oname=$PLUGINSDIR\diskpartwipe1.txt "உரைகள்\diskpartwipe1.txt"
+File /oname=$PLUGINSDIR\diskpartwipe2.txt "உரைகள்\diskpartwipe2.txt"
+File /oname=$PLUGINSDIR\grub.cfg "உரைகள்\முதற்றே.உலகு"
 
 FunctionEnd
 
-!include துணை\புதையல்நிலை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\புதையல்நிலை.நிரல்
 
 Function ஆரம்பசீவ_கண்டுபிடி
 ; FindFirst $0 $1 "$FindInitPath"
