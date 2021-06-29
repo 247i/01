@@ -16,7 +16,6 @@
 ;!include TextFunc.nsh
 
 ; var bdir
-Var BootDir
 Var Config2Use
 
 !include ReplaceInFile.nsh
@@ -105,7 +104,7 @@ Function தேர்வுகள்பக்கம்
   
   ${NSD_CB_SelectString} $DestDriveTxt "$DestDrive"
   StrCpy $JustDrive $DestDrive 3
-  StrCpy $BootDir $DestDrive 2 ;was -1 
+  StrCpy $BDir $DestDrive 2 ;was -1 
   StrCpy $DestDisk $DestDrive 2 ;was -1
   SendMessage $Distro ${CB_RESETCONTENT} 0 0 ; Clear all distro entries because a new drive may have been chosen ; Enable for DropBox
   StrCpy $Checker "Yes"  
@@ -376,7 +375,7 @@ Function EnableNext ; Enable Install Button
 ; If using Casper Persistence...  
   ${If} $Persistence == "casper" ; If can use Casper Persistence... 
   ${AndIf} $TheISO != ""
-  ${AndIf} $BootDir != "" 
+  ${AndIf} $BDir != "" 
   ShowWindow $CasperSelection 1
   ShowWindow $CasperSlider 1
   ShowWindow $SlideSpot 1
@@ -562,14 +561,14 @@ Function ISOBrowse
  StrCpy $JustISOName "NULL" ; Set to NULL until something is selected
  ${EndIf}
  
- ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\*.*"
+ ${If} ${FileExists} "$BDir\multiboot\$JustISOName\*.*"
  ${AndIf} $JustISOName != ""
  ${AndIf} $FormatMe != "Yes"
  MessageBox MB_OK "$JustISOName is already on $DestDisk$\r$\nPlease Remove it first!"
  ${Else}
  ${EndIf}
  Call EnableNext
- ; Uncomment for Testing --> MessageBox MB_ICONQUESTION|MB_OK 'Removal: "$Removal"  ISOFileName: "$ISOFileName" ISOFile "$ISOFile" BootDir: "$BootDir" DestDisk: "$DestDisk" DestDrive: "$DestDrive" ISOTest: "$ISOTest"'
+ ; Uncomment for Testing --> MessageBox MB_ICONQUESTION|MB_OK 'Removal: "$Removal"  ISOFileName: "$ISOFileName" ISOFile "$ISOFile" BDir: "$BDir" DestDisk: "$DestDisk" DestDrive: "$DestDrive" ISOTest: "$ISOTest"'
  FunctionEnd
 
 Function ClearAll
@@ -645,7 +644,7 @@ Function OnSelectDrive
   ${NSD_GetText} $DestDriveTxt $Letters
   StrCpy $DestDrive "$Letters"
   StrCpy $JustDrive $DestDrive 3  
-  StrCpy $BootDir $DestDrive 2 ;was -1 
+  StrCpy $BDir $DestDrive 2 ;was -1 
   StrCpy $DestDisk $DestDrive 2 ;was -1
 
   Call PhysDrive
@@ -655,7 +654,7 @@ Function OnSelectDrive
    MessageBox MB_ICONSTOP|MB_OK "This version of YUMI UEFI won't work on a $FSType formatted partition. You can choose to format $JustDrive as Fat32."
   ${EndIf}
 
-  ${If} ${FileExists} "$BootDir\multiboot\legacy-yumi"
+  ${If} ${FileExists} "$BDir\multiboot\legacy-yumi"
   MessageBox MB_ICONSTOP|MB_OK "($DestDisk) contains a YUMI Legacy installation. You'll have to reformat to use UEFI YUMI."
   ${EndIf} 
  
@@ -903,54 +902,54 @@ FunctionEnd
 
 Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
 
-  ${IfNot} ${FileExists} "$BootDir\boot\grub\grub.exe" ; checking for grub.exe - we didn't include this until version 0.0.3.3
+  ${IfNot} ${FileExists} "$BDir\boot\grub\grub.exe" ; checking for grub.exe - we didn't include this until version 0.0.3.3
   ${AndIf} $DiskNum != "0"
-  ;${AndIfNot} ${FileExists} "$BootDir\multiboot\menu\boot_functions.cfg" ; same here
-  CreateDirectory $BootDir\multiboot\menu ; recursively create the directory structure if it doesn't exist
-  CreateDirectory $BootDir\multiboot\ISOS ; create the Multiboot ISOS folder
-  CopyFiles "$PLUGINSDIR\boot_functions.cfg" "$BootDir\multiboot\menu\boot_functions.cfg" 
+  ;${AndIfNot} ${FileExists} "$BDir\multiboot\menu\boot_functions.cfg" ; same here
+  CreateDirectory $BDir\multiboot\menu ; recursively create the directory structure if it doesn't exist
+  CreateDirectory $BDir\multiboot\ISOS ; create the Multiboot ISOS folder
+  CopyFiles "$PLUGINSDIR\boot_functions.cfg" "$BDir\multiboot\menu\boot_functions.cfg" 
   DetailPrint "Proceeding to copy GRUB2 EFI files..."
-  ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\EFIGRUBX64.7z" -o"$BootDir" -y' ; use newer grub2 for partnew etc
+  ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\EFIGRUBX64.7z" -o"$BDir" -y' ; use newer grub2 for partnew etc
   
-   ${IfNot} ${FileExists} "$BootDir\boot\grub\grub.cfg" 
-    CopyFiles "$PLUGINSDIR\switchgrub.cfg" "$BootDir\boot\grub\grub.cfg" 
+   ${IfNot} ${FileExists} "$BDir\boot\grub\grub.cfg" 
+    CopyFiles "$PLUGINSDIR\switchgrub.cfg" "$BDir\boot\grub\grub.cfg" 
    ${EndIf}
-   ${IfNot} ${FileExists} "$BootDir\EFI\BOOT\grub.cfg" 
-    CopyFiles "$PLUGINSDIR\grub.cfg" "$BootDir\EFI\BOOT\grub.cfg" 
+   ${IfNot} ${FileExists} "$BDir\EFI\BOOT\grub.cfg" 
+    CopyFiles "$PLUGINSDIR\grub.cfg" "$BDir\EFI\BOOT\grub.cfg" 
    ${EndIf}
    
-   ${IfNot} ${FileExists} $BootDir\EFI\BOOT\BOOTX64.EFI 
+   ${IfNot} ${FileExists} $BDir\EFI\BOOT\BOOTX64.EFI 
    ;Copy GRUB2 EFI files 
     DetailPrint "Proceeding to copy GRUB2 EFI files..."
-    ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\EFIGRUBX64.7z" -o"$BootDir" -y' 
+    ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\EFIGRUBX64.7z" -o"$BDir" -y' 
    ${EndIf}  
   
   ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\GRUBINST.7z" -o"$PLUGINSDIR" -y' 
-  ;MessageBox MB_YESNO|MB_ICONEXCLAMATION "YUMI will now install a Grub2 MBR on (Disk $DiskNum) drive letter $BootDir. Checking to make sure this is correct before proceeding!" IDYES okay
+  ;MessageBox MB_YESNO|MB_ICONEXCLAMATION "YUMI will now install a Grub2 MBR on (Disk $DiskNum) drive letter $BDir. Checking to make sure this is correct before proceeding!" IDYES okay
   ;Quit
   ;okay:
-  nsExec::ExecToLog '"$PLUGINSDIR\grub-install.exe" --force --no-floppy --removable --target=i386-pc --boot-directory="$BootDir\boot" //./PHYSICALDRIVE"$DiskNum"' 
+  nsExec::ExecToLog '"$PLUGINSDIR\grub-install.exe" --force --no-floppy --removable --target=i386-pc --boot-directory="$BDir\boot" //./PHYSICALDRIVE"$DiskNum"' 
   DetailPrint "Creating Label MULTIBOOT on $DestDisk"
   nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
   ${Else}
   DetailPrint "YUMI already exists on $DestDisk ... proceeding. "
   ${EndIf}
   
-  ${If} ${FileExists} $BootDir\multiboot\YUMI-Copying.txt    
-  ${AndIf} ${FileExists} $BootDir\multiboot\license.txt  
-  ${AndIf} ${FileExists} $BootDir\multiboot\menu\memdisk
+  ${If} ${FileExists} $BDir\multiboot\YUMI-Copying.txt    
+  ${AndIf} ${FileExists} $BDir\multiboot\license.txt  
+  ${AndIf} ${FileExists} $BDir\multiboot\menu\memdisk
   DetailPrint "A Previous YUMI MultiBoot Installation was detected."
   ; Call AddDir
   ${Else}
 ; Create and Copy files to your destination
-  DetailPrint "Adding required files to the $BootDir\multiboot directory..." 
-  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BootDir\multiboot\YUMI-Copying.txt"  
-  CopyFiles "$PLUGINSDIR\license.txt" "$BootDir\multiboot\license.txt"   
+  DetailPrint "Adding required files to the $BDir\multiboot directory..." 
+  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BDir\multiboot\YUMI-Copying.txt"  
+  CopyFiles "$PLUGINSDIR\license.txt" "$BDir\multiboot\license.txt"   
   
 ; Copy these files to multiboot\menu
-  DetailPrint "Adding required files to the $BootDir\multiboot\menu directory..." 
-  ;CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BootDir\multiboot\menu\syslinux.cfg"  
-  CopyFiles "$PLUGINSDIR\memdisk" "$BootDir\multiboot\menu\memdisk"      
+  DetailPrint "Adding required files to the $BDir\multiboot\menu directory..." 
+  ;CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BDir\multiboot\menu\syslinux.cfg"  
+  CopyFiles "$PLUGINSDIR\memdisk" "$BDir\multiboot\menu\memdisk"      
   ${EndIf}  
 
  
@@ -969,7 +968,7 @@ Pop $NameThatISO
   Quit
  ${EndIf}
 
- ${If} ${FileExists} "$BootDir\windows\system32" ; additional safeguard to help protect from mishap. 
+ ${If} ${FileExists} "$BDir\windows\system32" ; additional safeguard to help protect from mishap. 
   MessageBox MB_ICONSTOP|MB_OK "ABORTING! ($DestDisk) contains a WINDOWS/SYSTEM32 Directory."
   Quit
  ${EndIf}
@@ -987,7 +986,7 @@ Pop $NameThatISO
  MessageBox MB_YESNO|MB_ICONEXCLAMATION "WARNING: To prevent any loss of data, you must backup your data from all partitions tied to (Disk $DiskNum) before proceeding!$\r$\n$\r$\n${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Completely Wipe and create a single partition on (Disk $DiskNum). Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n2. Create an MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n3. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n4. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you positive Drive ($DestDisk) on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions or NO to Go Back!" IDYES proceed
  Quit
  ${ElseIf} $FormatMe != "Yes" 
- ${AndIfNot} ${FileExists} $BootDir\boot\grub\grub.exe
+ ${AndIfNot} ${FileExists} $BDir\boot\grub\grub.exe
  MessageBox MB_YESNO|MB_ICONEXCLAMATION "${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Create an MBR on (Drive $DiskNum) $DestDisk - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create MULTIBOOT Label on $DestDisk (Drive $DiskNum) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on (Disk $DiskNum) $DestDisk$\r$\n$\r$\nAre you absolutely positive Drive $DestDisk on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions on (Disk $DiskNum) $DestDisk or NO to Go Back!" IDYES proceed
  Quit
  ${EndIf}
@@ -1000,8 +999,8 @@ proceed:
  Call LocalISODetected
  
 ; Copy the config file if it doesn't exist and create the entry in syslinux.cfg 
- ${IfNot} ${FileExists} "$BootDir\multiboot\menu\$Config2Use" 
- CopyFiles "$PLUGINSDIR\$Config2Use" "$BootDir\multiboot\menu\$Config2Use"
+ ${IfNot} ${FileExists} "$BDir\multiboot\menu\$Config2Use" 
+ CopyFiles "$PLUGINSDIR\$Config2Use" "$BDir\multiboot\menu\$Config2Use"
  Call Config2Write
  ${EndIf} 
  
@@ -1016,21 +1015,21 @@ removeonly:
 SectionEnd
 
 Function ConfigRemove ; Find and Set Removal Configuration file
-  ${If} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\linux.cfg"
+  ${If} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\linux.cfg"
   StrCpy $Config2Use "linux.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\anon.cfg"
+  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\anon.cfg"
   StrCpy $Config2Use "anon.cfg"  
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\system.cfg"
+  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\system.cfg"
   StrCpy $Config2Use "system.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\antivirus.cfg"
+  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\antivirus.cfg"
   StrCpy $Config2Use "antivirus.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\netbook.cfg"
+  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\netbook.cfg"
   StrCpy $Config2Use "netbook.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\other.cfg"
+  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\other.cfg"
   StrCpy $Config2Use "other.cfg"
-  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\unlisted.cfg"
+  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\unlisted.cfg"
   StrCpy $Config2Use "unlisted.cfg"  
-;  ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\menu.lst"
+;  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\menu.lst"
 ;  StrCpy $Config2Use "menu.lst"
   ${EndIf}
   ; MessageBox MB_OK "$Config2Use"
