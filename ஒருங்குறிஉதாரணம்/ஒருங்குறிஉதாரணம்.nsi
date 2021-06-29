@@ -1,7 +1,7 @@
 ﻿Unicode	True
-!include ..\துணை\ஒருங்குறிஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
 !define பெயர் "ஒருங்குறிஉதாரணம்"
-!define MUI_ICON "..\..\அகர\ஐ-காண்\பூச்சி.ico"
+!define MUI_ICON "..\அகர\ஐ-காண்\பூச்சி.ico"
 
 OutFile "${பெயர்}.exe"
 Section ""
