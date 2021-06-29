@@ -3,18 +3,11 @@
 ; பொதுவாக பயன்படுத்தும் நிரல்கள்
 !include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
-!define NAME "ஐ-உ.வி.நி.இ"
-!define FILENAME "ஐ-உ.வி.நி.இ"
+!include ..\பொது-துணைநிரல்கள்\பக்கங்கள்.நிரல்
+!include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
+;!define NAME "ஐ-உ.வி.நி.இ"
+;!define FILENAME "ஐ-உ.வி.நி.இ"
 !define VERSION "0.0.3.9"
-
-; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
-VIProductVersion "${VERSION}"
-VIAddVersionKey CompanyName "pendrivelinux.com"
-VIAddVersionKey LegalCopyright "Copyright � Pendrivelinux.com"
-VIAddVersionKey FileVersion "${VERSION}"
-VIAddVersionKey FileDescription "YUMI - Your Universal MultiBoot Integrator"
-VIAddVersionKey License "GPL Version 2"
-
 
 !include WinVer.nsh
 
@@ -26,68 +19,6 @@ Var Config2Use
 
 !include ReplaceInFile.nsh
 !include DiskVoodoo.nsh 
-
-; Interface settings
-!define MUI_FINISHPAGE_NOAUTOCLOSE
-!define MUI_HEADERIMAGE
-!define MUI_HEADERIMAGE_BITMAP "images\usb-logo-nsis.bmp" 
-!define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
-!define MUI_HEADERIMAGE_RIGHT
-
-; License Agreement Page
-!define MUI_TEXT_LICENSE_SUBTITLE $(License_Subtitle)
-!define MUI_LICENSEPAGE_TEXT_TOP $(License_Text_Top)
-!define MUI_LICENSEPAGE_TEXT_BOTTOM $(License_Text_Bottom)
-!define MUI_PAGE_CUSTOMFUNCTION_PRE License_PreFunction
-!insertmacro MUI_PAGE_LICENSE "YUMI-Copying.txt"
-
-; Distro Selection Page
-Page custom SelectionsPage
-
-; Install Files Page
-!define MUI_INSTFILESPAGE_COLORS "00FF00 000000" ;Green and Black
-!define MUI_INSTFILESPAGE_FINISHHEADER_TEXT $(Finish_Install)
-!define MUI_TEXT_INSTALLING_TITLE $(Install_Title)
-!define MUI_TEXT_INSTALLING_SUBTITLE $(Install_SubTitle)
-!define MUI_TEXT_FINISH_SUBTITLE $(Install_Finish_Sucess)
-!define MUI_PAGE_CUSTOMFUNCTION_PRE InstFiles_PreFunction
-!insertmacro MUI_PAGE_INSTFILES
-
-; Finish page
-!define MUI_FINISHPAGE_TITLE $(Finish_Title)
-!define MUI_FINISHPAGE_TEXT $(Finish_Text)
-!define MUI_FINISHPAGE_LINK $(Finish_Link)
-!define MUI_FINISHPAGE_LINK_LOCATION "https://www.pendrivelinux.com/boot-multiple-iso-from-usb-multiboot-usb/"
-!define MUI_WELCOMEFINISHPAGE_BITMAP "images\finish.bmp"
-!define MUI_PAGE_CUSTOMFUNCTION_PRE Finish_PreFunction
-!insertmacro MUI_PAGE_FINISH
-
-; English Language files
-!insertmacro MUI_LANGUAGE "English" ; first language is the default language
-LangString License_Subtitle ${LANG_ENGLISH} "Please review the license terms before proceeding"
-LangString License_Text_Top ${LANG_ENGLISH} "The software within this program falls under the following Licenses."
-LangString License_Text_Bottom ${LANG_ENGLISH} "You must accept the terms of this License agreement to run this ${NAME}. If you agree, Click I Agree to Continue."
-LangString SelectDist_Title ${LANG_ENGLISH} "Drive Selection and Distro Options Page"
-LangString SelectDist_Subtitle ${LANG_ENGLISH} "Choose your Flash Drive, and a Distro, ISO/ZIP file.$\r$\nAdditional Distributions can be added each time this tool is run."
-LangString DrivePage_Text ${LANG_ENGLISH} "Step 1: Select your USB device."
-LangString Distro_Text ${LANG_ENGLISH} "Step 2: Select a Distribution from the list to put on your USB."
-LangString IsoPage_Text ${LANG_ENGLISH} "Step 3: Select the $FileFormat (Name must be the same as above)."
-LangString IsoPage_Title ${LANG_ENGLISH} "Select Your $FileFormat"
-LangString Casper_Text ${LANG_ENGLISH} "Step 4: Set a Persistent file size for storing changes (Optional)."
-LangString IsoFile ${LANG_ENGLISH} "$FileFormat file|$ISOFileName" ;$ISOFileName variable previously *.iso
-LangString Extract ${LANG_ENGLISH} "Extracting the $FileFormat: The progress bar will not move until finished. Please be patient..."
-LangString CreateSysConfig ${LANG_ENGLISH} "Creating configuration files for $DestDisk"
-LangString ExecuteSyslinux ${LANG_ENGLISH} "Executing syslinux on $BootDir"
-LangString SkipSyslinux ${LANG_ENGLISH} "Good Syslinux Exists..."
-LangString WarningSyslinux ${LANG_ENGLISH} "An error ($R8) occurred while executing syslinux.$\r$\nYour USB drive won't be bootable..."
-LangString WarningSyslinuxOLD ${LANG_ENGLISH} "This YUMI revision uses a newer Syslinux version that is not compatible with earlier revisions.$\r$\nPlease ensure your USB drive doesn't contain earlier revision installs."
-LangString Install_Title ${LANG_ENGLISH} "$InUnStalling $InUnName"
-LangString Install_SubTitle ${LANG_ENGLISH} "Please wait while we $InUnStall $InUnName $OnFrom $JustDrive"
-LangString Install_Finish_Sucess ${LANG_ENGLISH} "${NAME} $InUnStalled $InUnName $OnFrom $JustDrive"
-LangString Finish_Install ${LANG_ENGLISH} "Process Complete."
-LangString Finish_Title ${LANG_ENGLISH} "Thanks for using ${NAME}"
-LangString Finish_Text ${LANG_ENGLISH} "Your Selections have been $InUnStalled on your USB drive.$\r$\n$\r$\nFeel Free to run this tool again to $InUnStall more Distros.$\r$\n$\r$\nYUMI will keep track of selections you have already $InUnStalled."
-LangString Finish_Link ${LANG_ENGLISH} "Visit the YUMI Home Page"
 
 !include FileManipulation.nsh ; Text File Manipulation
 !include FileNames.nsh ; Macro for FileNames
@@ -1056,11 +987,11 @@ Pop $NameThatISO
  
 ;checkpoint:
  ${If} $FormatMe == "Yes" 
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "WARNING: To prevent any loss of data, you must backup your data from all partitions tied to (Disk $DiskNum) before proceeding!$\r$\n$\r$\n${NAME} is Ready to perform the following actions:$\r$\n$\r$\n1. Completely Wipe and create a single partition on (Disk $DiskNum). Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n2. Create an MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n3. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n4. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you positive Drive ($DestDisk) on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions or NO to Go Back!" IDYES proceed
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "WARNING: To prevent any loss of data, you must backup your data from all partitions tied to (Disk $DiskNum) before proceeding!$\r$\n$\r$\n${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Completely Wipe and create a single partition on (Disk $DiskNum). Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n2. Create an MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n3. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n4. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you positive Drive ($DestDisk) on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions or NO to Go Back!" IDYES proceed
  Quit
  ${ElseIf} $FormatMe != "Yes" 
  ${AndIfNot} ${FileExists} $BootDir\boot\grub\grub.exe
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "${NAME} is Ready to perform the following actions:$\r$\n$\r$\n1. Create an MBR on (Drive $DiskNum) $DestDisk - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create MULTIBOOT Label on $DestDisk (Drive $DiskNum) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on (Disk $DiskNum) $DestDisk$\r$\n$\r$\nAre you absolutely positive Drive $DestDisk on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions on (Disk $DiskNum) $DestDisk or NO to Go Back!" IDYES proceed
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Create an MBR on (Drive $DiskNum) $DestDisk - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create MULTIBOOT Label on $DestDisk (Drive $DiskNum) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on (Disk $DiskNum) $DestDisk$\r$\n$\r$\nAre you absolutely positive Drive $DestDisk on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions on (Disk $DiskNum) $DestDisk or NO to Go Back!" IDYES proceed
  Quit
  ${EndIf}
 
