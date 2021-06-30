@@ -11,9 +11,9 @@
 
 ;!include TextFunc.nsh
 
-;!include ReplaceInFile.nsh
+!include ReplaceInFile.nsh
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
-!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
+;!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
 
 !include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
