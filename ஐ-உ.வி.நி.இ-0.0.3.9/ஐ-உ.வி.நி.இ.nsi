@@ -14,9 +14,9 @@
 ;!include ReplaceInFile.nsh
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
-!include DiskVoodoo.nsh 
+!include DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
 
-!include FileManipulation.nsh ; Text File Manipulation
+!include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
 !include FileNames.nsh ; Macro for FileNames
 !include DistroList.nsh ; List of Distributions
 !include StrContains.nsh ; Let's check if a * wildcard exists
