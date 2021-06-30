@@ -826,7 +826,7 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
   ;Quit
   ;okay:
   nsExec::ExecToLog '"$PLUGINSDIR\grub-install.exe" --force --no-floppy --removable --target=i386-pc --boot-directory="$BDir\boot" //./PHYSICALDRIVE"$DiskNum"' 
-  DetailPrint "Creating Label MULTIBOOT on $DestDisk"
+  DetailPrint "Creating Label TA on $DestDisk"
   nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
   ${Else}
   DetailPrint "YUMI already exists on $DestDisk ... proceeding. "
@@ -880,11 +880,11 @@ Pop $NameThatISO
  
 ;checkpoint:
  ${If} $FormatMe == "Yes" 
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "WARNING: To prevent any loss of data, you must backup your data from all partitions tied to (Disk $DiskNum) before proceeding!$\r$\n$\r$\n${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Completely Wipe and create a single partition on (Disk $DiskNum). Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n2. Create an MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n3. Create MULTIBOOT Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n4. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you positive Drive ($DestDisk) on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions or NO to Go Back!" IDYES proceed
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "WARNING: To prevent any loss of data, you must backup your data from all partitions tied to (Disk $DiskNum) before proceeding!$\r$\n$\r$\n${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Completely Wipe and create a single partition on (Disk $DiskNum). Fat32 Format ($DestDisk) - All Data will be Irrecoverably Deleted!$\r$\n$\r$\n2. Create an MBR on ($DestDisk) - Existing MBR will be Overwritten!$\r$\n$\r$\n3. Create TA Label on ($DestDisk) - Existing Label will be Overwritten!$\r$\n$\r$\n4. Install ($DistroName) on ($DestDisk)$\r$\n$\r$\nAre you positive Drive ($DestDisk) on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions or NO to Go Back!" IDYES proceed
  Quit
  ${ElseIf} $FormatMe != "Yes" 
  ${AndIfNot} ${FileExists} $BDir\boot\grub\grub.exe
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Create an MBR on (Drive $DiskNum) $DestDisk - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create MULTIBOOT Label on $DestDisk (Drive $DiskNum) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on (Disk $DiskNum) $DestDisk$\r$\n$\r$\nAre you absolutely positive Drive $DestDisk on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions on (Disk $DiskNum) $DestDisk or NO to Go Back!" IDYES proceed
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "${பெயர்} is Ready to perform the following actions:$\r$\n$\r$\n1. Create an MBR on (Drive $DiskNum) $DestDisk - Existing MBR will be Overwritten!$\r$\n$\r$\n2. Create TA Label on $DestDisk (Drive $DiskNum) - Existing Label will be Overwritten!$\r$\n$\r$\n3. Install ($DistroName) on (Disk $DiskNum) $DestDisk$\r$\n$\r$\nAre you absolutely positive Drive $DestDisk on (Disk $DiskNum) is your USB Device?$\r$\nDouble Check with Windows diskmgmt.msc to make sure!$\r$\n$\r$\nClick YES to perform these actions on (Disk $DiskNum) $DestDisk or NO to Go Back!" IDYES proceed
  Quit
  ${EndIf}
 

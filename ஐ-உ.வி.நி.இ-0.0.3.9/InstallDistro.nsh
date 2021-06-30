@@ -172,12 +172,12 @@ FunctionEnd
  ${ElseIf} $DistroName == "Calculate Linux Desktop"
  CopyFiles $ISOFile "$BDir\multiboot\$JustISOName\$JustISO" 
  ;ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd -ir!*mlinuz -o"$BDir\multiboot\$JustISOName\" -y'    
- ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile=$\"/multiboot/$JustISOName/$JustISO$\"$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/boot/vmlinuz root=live:LABEL=MULTIBOOT init=/linuxrc rd.live.squashimg=livecd.squashfs looptype=squashfs nodevfs iso-scan/filename=/multiboot/$JustISOName/$JustISO findiso=$$isofile isoboot=$$isofile$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/boot/initrd$\r$\n}$\r$\n#end $JustISOName" $R0 
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile=$\"/multiboot/$JustISOName/$JustISO$\"$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/boot/vmlinuz root=live:LABEL=TA init=/linuxrc rd.live.squashimg=livecd.squashfs looptype=squashfs nodevfs iso-scan/filename=/multiboot/$JustISOName/$JustISO findiso=$$isofile isoboot=$$isofile$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/boot/initrd$\r$\n}$\r$\n#end $JustISOName" $R0 
  
 ; CentOS
  ${ElseIf} $DistroName == "CentOS Minimal"
  CopyFiles $ISOFile "$BDir\multiboot\$JustISOName\$JustISO" 
- ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile='/multiboot/$JustISOName/$JustISO'$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/isolinux/vmlinuz noeject inst.stage2=hd:LABEL=MULTIBOOT:/$$isofile$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/isolinux/initrd.img$\r$\n}$\r$\n#end $JustISOName" $R0 
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nset isofile='/multiboot/$JustISOName/$JustISO'$\r$\nloopback loop $$isofile$\r$\nlinux (loop)/isolinux/vmlinuz noeject inst.stage2=hd:LABEL=TA:/$$isofile$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/isolinux/initrd.img$\r$\n}$\r$\n#end $JustISOName" $R0 
  
 ; Linux Kid X
  ${ElseIf} $DistroName == "Linux Kid X" 
@@ -203,7 +203,7 @@ FunctionEnd
  ${ElseIf} $DistroName == "AntiX" 
   ${OrIf} $DistroName == "MX Linux" 
  CopyFiles $ISOFile "$BDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory
- ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nloopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux (loop)/antiX/vmlinuz load=all bootlabel=MULTIBOOT fromiso=/multiboot/$JustISOName/$JustISO nomodeset nouveau.modeset=0$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/antiX/initrd.gz$\r$\n}$\r$\n#end $JustISOName" $R0  
+ ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nloopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux (loop)/antiX/vmlinuz load=all bootlabel=TA fromiso=/multiboot/$JustISOName/$JustISO nomodeset nouveau.modeset=0$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/antiX/initrd.gz$\r$\n}$\r$\n#end $JustISOName" $R0  
 
 ; AOSS (New Method) 
  ${ElseIf} $DistroName == "AOSS (Malware Scanner)" 
@@ -271,13 +271,13 @@ FunctionEnd
  ${If} ${FileExists} "$BDir\multiboot\$JustISOName\casper\vmlinuz"
   ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\$JustISO"  
  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
   ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\casper\initrd.lz"
  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
  ${ElseIf} ${FileExists} "$BDir\multiboot\$JustISOName\live\vmlinuz"
  ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\$JustISO"  
  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
  ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\live\initrd.lz"
  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
  ${EndIf}
@@ -292,13 +292,13 @@ FunctionEnd
  ${If} ${FileExists} "$BDir\multiboot\$JustISOName\casper\vmlinuz"
   ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\$JustISO"  
  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/casper/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
   ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\casper\initrd.lz"
  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
  ${ElseIf} ${FileExists} "$BDir\multiboot\$JustISOName\live\vmlinuz"
  ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\$JustISO"  
  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/MULTIBOOT/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+ !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux /multiboot/$JustISOName/live/vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/multiboot/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
  ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\live\initrd.lz"
  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
  ${EndIf}
@@ -458,7 +458,7 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\multiboot\$JustISOName\" -y'  
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\kernel.trk"       
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\initrd.trk"  
-   ${WriteToFile} "#start $JustISOName$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nlinux /multiboot/$JustISOName/kernel.trk from=/multiboot/$JustISOName vollabel=MULTIBOOT ramdisk_size=65536 root=/dev/ram0 splash=verbose pci=conf1 trkmenu$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd /multiboot/$JustISOName/initrd.trk$\r$\n}; fi$\r$\n#end $JustISOName" $R0  
+   ${WriteToFile} "#start $JustISOName$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nlinux /multiboot/$JustISOName/kernel.trk from=/multiboot/$JustISOName vollabel=TA ramdisk_size=65536 root=/dev/ram0 splash=verbose pci=conf1 trkmenu$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd /multiboot/$JustISOName/initrd.trk$\r$\n}; fi$\r$\n#end $JustISOName" $R0  
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\trk3\trkramfs" 
    CopyFiles "$BDir\multiboot\$JustISOName\trk3\*.*" "$BDir\trk3\" ; Move trk3 to root, so we can boot!
    RMDir /R "$BDir\multiboot\$JustISOName\trk3"
@@ -572,7 +572,7 @@ FunctionEnd
 ; OpenSUSE
  ${ElseIf} $DistroName == "OpenSUSE"
   ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\multiboot\$JustISOName\" -y'  
-  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nlinux /multiboot/$JustISOName/boot/x86_64/loader/linux rd.live.image rd.live.overlay.persistent rd.live.overlay.cowfs=ext4 root=live:CDLABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd /multiboot/$JustISOName/boot/x86_64/loader/initrd$\r$\n}$\r$\n#end $JustISOName" $R0  
+  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nlinux /multiboot/$JustISOName/boot/x86_64/loader/linux rd.live.image rd.live.overlay.persistent rd.live.overlay.cowfs=ext4 root=live:CDLABEL=TA live_dir=/multiboot/$JustISOName/LiveOS$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd /multiboot/$JustISOName/boot/x86_64/loader/initrd$\r$\n}$\r$\n#end $JustISOName" $R0  
  
 ; FreeDOS (Balder img) 
  ${ElseIf} $DistroName == "FreeDOS (Balder img)"
@@ -755,9 +755,9 @@ FunctionEnd
   !insertmacro ReplaceInFile "$\"/boot/" "$\"/multiboot/$JustISOName/boot" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
   !insertmacro ReplaceInFile " /boot" " /multiboot/$JustISOName/boot" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg" 
   !insertmacro ReplaceInFile "misobasedir=manjaro" "misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile "misolabel=MJ" "misolabel=MULTIBOOT NULL-" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile "misolabel=M1" "misolabel=MULTIBOOT NULL-" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile "misolabel=MANJ" "misolabel=MULTIBOOT NULL-" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"  
+  !insertmacro ReplaceInFile "misolabel=MJ" "misolabel=TA NULL-" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro ReplaceInFile "misolabel=M1" "misolabel=TA NULL-" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro ReplaceInFile "misolabel=MANJ" "misolabel=TA NULL-" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"  
   !insertmacro ReplaceInFile "$\"/boot/" "$\"/multiboot/$JustISOName/boot" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\kernels.cfg"
   !insertmacro ReplaceInFile " /boot/" " /multiboot/$JustISOName/boot" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\loopback.cfg"
   !insertmacro ReplaceInFile "grub_theme=/boot" "grub_theme=/multiboot/$JustISOName/boot" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\variable.cfg"  
@@ -770,7 +770,7 @@ FunctionEnd
  
 ; NetRunner
  ${If} ${FileExists} "$BDir\multiboot\$JustISOName\netrunner\boot\x86_64\netrunner"  
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/netrunner/boot/x86_64/netrunner misobasedir=/multiboot/$JustISOName/netrunner misolabel=MULTIBOOT nouveau.modeset=1 i915.modeset=1 radeon.modeset=1 logo.nologo overlay=free showopts" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
+  !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/netrunner/boot/x86_64/netrunner misobasedir=/multiboot/$JustISOName/netrunner misolabel=TA nouveau.modeset=1 i915.modeset=1 radeon.modeset=1 logo.nologo overlay=free showopts" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
  ${EndIf} 
  ${If} ${FileExists} "$BDir\multiboot\$JustISOName\netrunner\boot\x86_64\netrunner.img"  
   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /multiboot/$JustISOName/netrunner/boot/x86_64/netrunner.img" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
@@ -867,15 +867,15 @@ FunctionEnd
 ; For Fedora Based and derivatives
   ${If} ${FileExists} "$BDir\multiboot\$JustISOName\isolinux\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\LiveOS\livecd-iso-to-disk"  ; Probably Fedora based
-   !insertmacro ReplaceInFile "root=live:CDLABEL=" "root=live:LABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\isolinux\isolinux.cfg"   
-   !insertmacro ReplaceInFile "root=live:LABEL=Fedora" "root=live:LABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro ReplaceInFile "root=live:CDLABEL=" "root=live:LABEL=TA live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\isolinux\isolinux.cfg"   
+   !insertmacro ReplaceInFile "root=live:LABEL=Fedora" "root=live:LABEL=TA live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "isolinux/vmlin" "multiboot/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "isolinux/init" "multiboot/$JustISOName/isolinux/init" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "linuxefi" "linux" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "initrdefi" "initrd" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
    ${AndIf} $GrubConfigFile == "NULL" ;It's likely not natively Grub supported... let's do this differently
     !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
-    !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/isolinux/vmlinuz0 live_dir=/multiboot/$JustISOName/LiveOS initrd=initrd0.img root=live:LABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS rootfstype=auto ro rd.live.image rhgb rd.luks=0 rd.md=0 rd.dm=0" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+    !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/isolinux/vmlinuz0 live_dir=/multiboot/$JustISOName/LiveOS initrd=initrd0.img root=live:LABEL=TA live_dir=/multiboot/$JustISOName/LiveOS rootfstype=auto ro rd.live.image rhgb rd.luks=0 rd.md=0 rd.dm=0" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
     !insertmacro ReplaceInFile "initrd /SLUG" "initrd /multiboot/$JustISOName/isolinux/initrd0.img" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
   ${EndIf}   
   
@@ -1122,23 +1122,23 @@ FunctionEnd
 ; Archlinux
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\arch\boot\syslinux\archiso.cfg" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=MULTIBOOT CONFIG /multiboot/$JustISOName/arch archisobasedir=/multiboot/$JustISOName/arch" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=TA CONFIG /multiboot/$JustISOName/arch archisobasedir=/multiboot/$JustISOName/arch" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /multiboot/$JustISOName/arch/boot/x86_64/archiso.img" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
    ${EndIf}  
    
 ; Archbang
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\arch\boot\syslinux\syslinux.cfg" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=MULTIBOOT CONFIG /multiboot/$JustISOName/arch archisobasedir=/multiboot/$JustISOName/arch cow_spacesize=8G copytoram=y" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=TA CONFIG /multiboot/$JustISOName/arch archisobasedir=/multiboot/$JustISOName/arch cow_spacesize=8G copytoram=y" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /multiboot/$JustISOName/arch/boot/x86_64/archiso.img" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
    ${EndIf}     
 
 ; Manjaro i686
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\manjaro\boot\i686\manjaro" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/i686/manjaro misolabel=MULTIBOOT misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/i686/manjaro misolabel=TA misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
    ${ElseIf} ${FileExists} "$BDir\multiboot\$JustISOName\manjaro\boot\i686\manjaroiso"  
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/i686/manjaroiso misolabel=MULTIBOOT misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/i686/manjaroiso misolabel=TA misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
    ${EndIf}   
    
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\manjaro\boot\i686\manjaro.img"  
@@ -1149,10 +1149,10 @@ FunctionEnd
 ; Manjaro x86_64
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\manjaro\boot\x86_64\manjaro"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/x86_64/manjaro misolabel=MULTIBOOT misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/x86_64/manjaro misolabel=TA misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
    ${ElseIf} ${FileExists} "$BDir\multiboot\$JustISOName\manjaro\boot\x86_64\manjaroiso"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/x86_64/manjaroiso misolabel=MULTIBOOT misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/manjaro/boot/x86_64/manjaroiso misolabel=TA misobasedir=/multiboot/$JustISOName/manjaro" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"  
    ${EndIf}      
    
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\manjaro\boot\x86_64\manjaro.img"    
@@ -1203,7 +1203,7 @@ FunctionEnd
 /* ; Trinity Rescue Kit 
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\kernel.trk"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/kernel.trk from=/multiboot/$JustISOName vollabel=MULTIBOOT ramdisk_size=65536 root=/dev/ram0 splash=verbose pci=conf1 trkmenu" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/kernel.trk from=/multiboot/$JustISOName vollabel=TA ramdisk_size=65536 root=/dev/ram0 splash=verbose pci=conf1 trkmenu" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\initrd.trk"  
    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /multiboot/$JustISOName/initrd.trk$\r$\n}$\r$\n#MENUSLUG" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\trk3\trkramfs" 
@@ -1233,10 +1233,10 @@ FunctionEnd
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\isolinux\isolinux.cfg"
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\LiveOS\*.*"   
    ${If} $GrubConfigFile == "NULL" 
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/isolinux/vmlinuz0 root=live:LABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg" 
+   !insertmacro ReplaceInFile "linux /SLUG" "linux /multiboot/$JustISOName/isolinux/vmlinuz0 root=live:LABEL=TA live_dir=/multiboot/$JustISOName/LiveOS" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg" 
    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /multiboot/$JustISOName/isolinux/initrd0.img" "all" "all" "$BDir\multiboot\$JustISOName\grub.cfg"    
    ${ElseIf} $GrubConfigFile != "NULL" 
-   !insertmacro ReplaceInFile "root=live:LABEL=Cent" "root=live:LABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro ReplaceInFile "root=live:LABEL=Cent" "root=live:LABEL=TA live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "isolinux/vmlin" "multiboot/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "isolinux/init" "multiboot/$JustISOName/isolinux/init" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"      
    !insertmacro ReplaceInFile "set default=$\"1$\"" "set default=$\"0$\"" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"      
@@ -1252,13 +1252,13 @@ FunctionEnd
    ${AndIf} $GrubConfigFile != "NULL" 
    !insertmacro ReplaceInFile "images/pxeboot/vmlin" "multiboot/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    !insertmacro ReplaceInFile "images/pxeboot/init" "multiboot/$JustISOName/isolinux/init" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"         
-   !insertmacro ReplaceInFile "inst.stage2=hd:LABEL=Cent" "inst.stage2=hd:LABEL=MULTIBOOT root=live:LABEL=MULTIBOOT live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro ReplaceInFile "inst.stage2=hd:LABEL=Cent" "inst.stage2=hd:LABEL=TA root=live:LABEL=TA live_dir=/multiboot/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    ${EndIf}  
 
 ; Mageia
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\isolinux\isolinux.cfg"
    ${AndIf} ${FileExists} "$BDir\multiboot\$JustISOName\loopbacks\distrib-lzma.sqfs"   
-   !insertmacro ReplaceInFile "root=mgalive:LABEL=Mageia" "root=mgalive:LABEL=MULTIBOOT NULL=Mageia" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+   !insertmacro ReplaceInFile "root=mgalive:LABEL=Mageia" "root=mgalive:LABEL=TA NULL=Mageia" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
    ${EndIf}        
    
 ; SlitaZ
@@ -1303,7 +1303,7 @@ FunctionEnd
 ; ESET SysRescue Live
    ${If} ${FileExists} "$BDir\multiboot\$JustISOName\eset-favicon.ico" 
    !insertmacro ReplaceInFile "live-media=/dev/disk/by-label/eSysRescueLiveCD" " " "all" "all" "$BDir\multiboot\$JustISOName\$CopyPath\txt.cfg"   
-   !insertmacro ReplaceInFile "/dev/disk/by-label/eSysRescueLiveCD" "/dev/disk/by-label/MULTIBOOT" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\grub.cfg"   
+   !insertmacro ReplaceInFile "/dev/disk/by-label/eSysRescueLiveCD" "/dev/disk/by-label/TA" "all" "all" "$BDir\multiboot\$JustISOName\boot\grub\grub.cfg"   
    ${EndIf}  
 
 ; RIP Linux
@@ -1350,8 +1350,8 @@ FunctionEnd
   
   !insertmacro ReplaceInFile "/sysresccd/boot/" "/multiboot/$JustISOName/SLUGGER/boot/" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
   !insertmacro ReplaceInFile "SLUGGER" "sysresccd" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "archisolabel=SYSRCD" "archisolabel=MULTIBOOT NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "archisolabel=RESC" "archisolabel=MULTIBOOT NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+  !insertmacro ReplaceInFile "archisolabel=SYSRCD" "archisolabel=TA NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro ReplaceInFile "archisolabel=RESC" "archisolabel=TA NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
   !insertmacro ReplaceInFile "archisobasedir=sys" "archisobasedir=/multiboot/$JustISOName/sysresccd NULL=" "all" "all" "$BDir\multiboot\$JustISOName\$GrubCopyPath\$GrubConfigFile"
   
 ; Xiaopan 
