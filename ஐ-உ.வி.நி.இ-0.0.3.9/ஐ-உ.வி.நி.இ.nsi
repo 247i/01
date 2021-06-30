@@ -466,7 +466,7 @@ Function ISOBrowse
  StrCpy $JustISOName "NULL" ; Set to NULL until something is selected
  ${EndIf}
  
- ${If} ${FileExists} "$BDir\multiboot\$JustISOName\*.*"
+ ${If} ${FileExists} "$BDir\!\$JustISOName\*.*"
  ${AndIf} $JustISOName != ""
  ${AndIf} $FormatMe != "Yes"
  MessageBox MB_OK "$JustISOName is already on $DestDisk$\r$\nPlease Remove it first!"
@@ -551,7 +551,7 @@ Function OnSelectDrive
    MessageBox MB_ICONSTOP|MB_OK "This version of YUMI UEFI won't work on a $FSType formatted partition. You can choose to format $JustDrive as Fat32."
   ${EndIf}
 
-  ${If} ${FileExists} "$BDir\multiboot\legacy-yumi"
+  ${If} ${FileExists} "$BDir\!\legacy-yumi"
   MessageBox MB_ICONSTOP|MB_OK "($DestDisk) contains a YUMI Legacy installation. You'll have to reformat to use UEFI YUMI."
   ${EndIf} 
  
@@ -801,10 +801,10 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
 
   ${IfNot} ${FileExists} "$BDir\boot\grub\grub.exe" ; checking for grub.exe - we didn't include this until version 0.0.3.3
   ${AndIf} $DiskNum != "0"
-  ;${AndIfNot} ${FileExists} "$BDir\multiboot\menu\boot_functions.cfg" ; same here
-  CreateDirectory $BDir\multiboot\menu ; recursively create the directory structure if it doesn't exist
-  CreateDirectory $BDir\multiboot\ISOS ; create the Multiboot ISOS folder
-  CopyFiles "$PLUGINSDIR\boot_functions.cfg" "$BDir\multiboot\menu\boot_functions.cfg" 
+  ;${AndIfNot} ${FileExists} "$BDir\!\menu\boot_functions.cfg" ; same here
+  CreateDirectory $BDir\!\menu ; recursively create the directory structure if it doesn't exist
+  CreateDirectory $BDir\!\ISOS ; create the Multiboot ISOS folder
+  CopyFiles "$PLUGINSDIR\boot_functions.cfg" "$BDir\!\menu\boot_functions.cfg" 
   DetailPrint "Proceeding to copy GRUB2 EFI files..."
   ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\EFIGRUBX64.7z" -o"$BDir" -y' ; use newer grub2 for partnew etc
   
@@ -832,21 +832,21 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
   DetailPrint "YUMI already exists on $DestDisk ... proceeding. "
   ${EndIf}
   
-  ${If} ${FileExists} $BDir\multiboot\YUMI-Copying.txt    
-  ${AndIf} ${FileExists} $BDir\multiboot\license.txt  
-  ${AndIf} ${FileExists} $BDir\multiboot\menu\memdisk
+  ${If} ${FileExists} $BDir\!\YUMI-Copying.txt    
+  ${AndIf} ${FileExists} $BDir\!\license.txt  
+  ${AndIf} ${FileExists} $BDir\!\menu\memdisk
   DetailPrint "A Previous YUMI MultiBoot Installation was detected."
   ; Call AddDir
   ${Else}
 ; Create and Copy files to your destination
-  DetailPrint "Adding required files to the $BDir\multiboot directory..." 
-  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BDir\multiboot\YUMI-Copying.txt"  
-  CopyFiles "$PLUGINSDIR\license.txt" "$BDir\multiboot\license.txt"   
+  DetailPrint "Adding required files to the $BDir\! directory..." 
+  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BDir\!\YUMI-Copying.txt"  
+  CopyFiles "$PLUGINSDIR\license.txt" "$BDir\!\license.txt"   
   
-; Copy these files to multiboot\menu
-  DetailPrint "Adding required files to the $BDir\multiboot\menu directory..." 
-  ;CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BDir\multiboot\menu\syslinux.cfg"  
-  CopyFiles "$PLUGINSDIR\memdisk" "$BDir\multiboot\menu\memdisk"      
+; Copy these files to !\menu
+  DetailPrint "Adding required files to the $BDir\!\menu directory..." 
+  ;CopyFiles "$PLUGINSDIR\syslinux.cfg" "$BDir\!\menu\syslinux.cfg"  
+  CopyFiles "$PLUGINSDIR\memdisk" "$BDir\!\menu\memdisk"      
   ${EndIf}  
 
  
@@ -896,8 +896,8 @@ proceed:
  Call உள்உதநிகண்டறியப்பட்டது
  
 ; Copy the config file if it doesn't exist and create the entry in syslinux.cfg 
- ${IfNot} ${FileExists} "$BDir\multiboot\menu\$DistroPath" 
- CopyFiles "$PLUGINSDIR\$DistroPath" "$BDir\multiboot\menu\$DistroPath"
+ ${IfNot} ${FileExists} "$BDir\!\menu\$DistroPath" 
+ CopyFiles "$PLUGINSDIR\$DistroPath" "$BDir\!\menu\$DistroPath"
  Call Config2Write
  ${EndIf} 
  
@@ -912,21 +912,21 @@ removeonly:
 SectionEnd
 
 Function ConfigRemove ; Find and Set Removal Configuration file
-  ${If} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\linux.cfg"
+  ${If} ${FileExists} "$BDir\!\$DistroName\YUMI\linux.cfg"
   StrCpy $DistroPath "linux.cfg"
-  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\anon.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\anon.cfg"
   StrCpy $DistroPath "anon.cfg"  
-  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\system.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\system.cfg"
   StrCpy $DistroPath "system.cfg"
-  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\antivirus.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\antivirus.cfg"
   StrCpy $DistroPath "antivirus.cfg"
-  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\netbook.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\netbook.cfg"
   StrCpy $DistroPath "netbook.cfg"
-  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\other.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\other.cfg"
   StrCpy $DistroPath "other.cfg"
-  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\unlisted.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\unlisted.cfg"
   StrCpy $DistroPath "unlisted.cfg"  
-;  ${ElseIf} ${FileExists} "$BDir\multiboot\$DistroName\YUMI\menu.lst"
+;  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\menu.lst"
 ;  StrCpy $DistroPath "menu.lst"
   ${EndIf}
   ; MessageBox MB_OK "$DistroPath"
@@ -934,21 +934,21 @@ FunctionEnd
 
 Function Config2Write
  ${If} $DistroPath == "linux.cfg"
-  ${WriteToSysFile} "menuentry $\">Linux Distributions$\"{configfile /multiboot/menu/linux.cfg}" $R0 
+  ${WriteToSysFile} "menuentry $\">Linux Distributions$\"{configfile /!/menu/linux.cfg}" $R0 
  ${ElseIf} $DistroPath == "anon.cfg"
-  ${WriteToSysFile} "menuentry $\">Anonymous Browsers$\"{configfile /multiboot/menu/anon.cfg}" $R0  
+  ${WriteToSysFile} "menuentry $\">Anonymous Browsers$\"{configfile /!/menu/anon.cfg}" $R0  
  ${ElseIf} $DistroPath == "system.cfg"
-  ${WriteToSysFile} "menuentry $\">System Tools$\"{configfile /multiboot/menu/system.cfg}" $R0
+  ${WriteToSysFile} "menuentry $\">System Tools$\"{configfile /!/menu/system.cfg}" $R0
  ${ElseIf} $DistroPath == "antivirus.cfg"
-  ${WriteToSysFile} "menuentry $\">Antivirus Tools$\"{configfile /multiboot/menu/antivirus.cfg}" $R0 
+  ${WriteToSysFile} "menuentry $\">Antivirus Tools$\"{configfile /!/menu/antivirus.cfg}" $R0 
  ${ElseIf} $DistroPath == "netbook.cfg"
-  ${WriteToSysFile} "menuentry $\">Netbook Distributions$\"{configfile /multiboot/menu/netbook.cfg}" $R0 
+  ${WriteToSysFile} "menuentry $\">Netbook Distributions$\"{configfile /!/menu/netbook.cfg}" $R0 
  ${ElseIf} $DistroPath == "other.cfg"
-  ${WriteToSysFile} "menuentry $\">Other OS and Tools$\"{configfile /multiboot/menu/other.cfg}" $R0 
+  ${WriteToSysFile} "menuentry $\">Other OS and Tools$\"{configfile /!/menu/other.cfg}" $R0 
  ${ElseIf} $DistroPath == "unlisted.cfg"
-  ${WriteToSysFile} "menuentry $\">Unlisted ISOs$\"{configfile /multiboot/menu/unlisted.cfg}" $R0  
+  ${WriteToSysFile} "menuentry $\">Unlisted ISOs$\"{configfile /!/menu/unlisted.cfg}" $R0  
 ; ${ElseIf} $DistroPath == "menu.lst"
-;  ${WriteToSysFile} "label GRUB Bootable ISOs$\r$\nmenu label GRUB Bootable ISOs and Windows XP/7/8 ->$\r$\nMENU INDENT 1$\r$\nKERNEL /multiboot/grub.exe$\r$\nAPPEND --config-file=/multiboot/menu/menu.lst" $R0 
+;  ${WriteToSysFile} "label GRUB Bootable ISOs$\r$\nmenu label GRUB Bootable ISOs and Windows XP/7/8 ->$\r$\nMENU INDENT 1$\r$\nKERNEL /!/grub.exe$\r$\nAPPEND --config-file=/!/menu/menu.lst" $R0 
  ${EndIf} 
 FunctionEnd
 
