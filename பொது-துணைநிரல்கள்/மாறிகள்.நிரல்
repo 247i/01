@@ -77,15 +77,7 @@ Var BOOT_LETTER
 Var INST_DISK
 Var IDR
 Var ShowAll
-!else ;ஐ-உ.வி.நி.இ || ஐ-மரபு
-Var ConfigFile
-Var ConfigPath
-Var CopyPath
-Var OnlyVal
-Var SUSEDIR
-!endif
-
-!if ${பதிப்பு} == 0.0.3.4    ; ஐ-உ.வி.நி.இ
+!else if ${பதிப்பு} == 0.0.3.4    ; ஐ-உ.வி.நி.இ
 Var GrubConfigFile
 Var GrubConfigPath
 Var GrubCopyPath
@@ -95,6 +87,11 @@ Var ISONameDotLess
 Var DisplayAll
 Var ShowAll
 Var AllDriveOption
+Var ConfigFile
+Var ConfigPath
+Var CopyPath
+Var OnlyVal
+Var SUSEDIR
 !else if ${பதிப்பு} == 0.0.3.9 ; ஐ-உ.வி.நி.இ
 Var GrubConfigFile
 Var GrubConfigPath
@@ -102,6 +99,11 @@ Var GrubCopyPath
 Var Initrd
 Var Vmlinuz
 Var ISONameDotLess
+Var ConfigFile
+Var ConfigPath
+Var CopyPath
+Var OnlyVal
+Var SUSEDIR
 !else ;ஐ-மரபு
 Var AllDriveOption
 Var DisplayAll
@@ -116,6 +118,11 @@ Var VHDDisk
 Var VHDSize
 Var VHDLBL
 Var ShowAll
+Var ConfigFile
+Var ConfigPath
+Var CopyPath
+Var OnlyVal
+Var SUSEDIR
 !endif
 
 

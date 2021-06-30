@@ -1,22 +1,4 @@
-/*   
-  This file is part of YUMI
- 
-  YUMI is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 2 of the License, or
-  any later version.
- 
-  YUMI is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
- 
-  You should have received a copy of the GNU General Public License
-  along with YUMI.  If not, see <http://www.gnu.org/licenses/>.
-
-  YUMI UEFI Copyright ©2011-2021 https://www.pendrivelinux.com (See YUMI-Copying.txt and YUMI-Readme.txt for more information, Credits, and Licensing)
-*/
-
+ï»¿
 !define NAME "YUMI UEFI"
 !define FILENAME "YUMI-UEFI"
 !define VERSION "0.0.3.4"
@@ -25,7 +7,7 @@
 ; MoreInfo Plugin - Adds Version Tab fields to Properties. Plugin created by onad http://nsis.sourceforge.net/MoreInfo_plug-in
 VIProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "pendrivelinux.com"
-VIAddVersionKey LegalCopyright "Copyright ©2021 Pendrivelinux.com"
+VIAddVersionKey LegalCopyright "Copyright ï¿½2021 Pendrivelinux.com"
 VIAddVersionKey FileVersion "${VERSION}"
 VIAddVersionKey FileDescription "YUMI - Your Universal MultiBoot Integrator"
 VIAddVersionKey License "GPL Version 2"

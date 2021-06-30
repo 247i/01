@@ -827,7 +827,7 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
   ;okay:
   nsExec::ExecToLog '"$PLUGINSDIR\grub-install.exe" --force --no-floppy --removable --target=i386-pc --boot-directory="$BDir\boot" //./PHYSICALDRIVE"$DiskNum"' 
   DetailPrint "Creating Label TA on $DestDisk"
-  nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskMULTIBOOT"'
+  nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskTA"'
   ${Else}
   DetailPrint "YUMI already exists on $DestDisk ... proceeding. "
   ${EndIf}
@@ -835,7 +835,7 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
   ${If} ${FileExists} $BDir\!\YUMI-Copying.txt    
   ${AndIf} ${FileExists} $BDir\!\license.txt  
   ${AndIf} ${FileExists} $BDir\!\menu\memdisk
-  DetailPrint "A Previous YUMI MultiBoot Installation was detected."
+  DetailPrint "A Previous I ! Installation was detected."
   ; Call AddDir
   ${Else}
 ; Create and Copy files to your destination
