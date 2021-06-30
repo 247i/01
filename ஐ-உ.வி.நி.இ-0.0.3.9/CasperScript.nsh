@@ -113,6 +113,6 @@ FunctionEnd
 Function GetCaspTools
 SetShellVarContext all
 InitPluginsDir
-File /oname=$PLUGINSDIR\dd.exe "tools\dd.exe"
-File /oname=$PLUGINSDIR\mke2fs.exe "tools\mke2fs.exe"
+File /oname=$PLUGINSDIR\dd.exe "..\பொது-இருமங்கள்\தரவுவரையறை.exe"
+File /oname=$PLUGINSDIR\mke2fs.exe "..\பொது-இருமங்கள்\நீட்2கோமுவடிவஉரு.exe"
 FunctionEnd

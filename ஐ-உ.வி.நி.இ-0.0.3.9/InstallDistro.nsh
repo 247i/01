@@ -616,7 +616,7 @@ FunctionEnd
  
 ; Try Unlisted ISOs 
  ${ElseIf} $DistroName == "Try Unlisted ISO" 
- CopyFiles $ISOFile "$BDir\!\ISOS\$JustISO" ; Copy the ISO to the Multiboot ISOS Directory 
+ CopyFiles $ISOFile "$BDir\!\ISOS\$JustISO" ; Copy the ISO to the ! ISOS Directory 
  
  
 ; Hiren's BootCD PE

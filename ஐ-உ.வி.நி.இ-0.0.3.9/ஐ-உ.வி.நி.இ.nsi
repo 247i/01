@@ -803,7 +803,7 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
   ${AndIf} $DiskNum != "0"
   ;${AndIfNot} ${FileExists} "$BDir\!\menu\boot_functions.cfg" ; same here
   CreateDirectory $BDir\!\menu ; recursively create the directory structure if it doesn't exist
-  CreateDirectory $BDir\!\ISOS ; create the Multiboot ISOS folder
+  CreateDirectory $BDir\!\ISOS ; create the ! ISOS folder
   CopyFiles "$PLUGINSDIR\boot_functions.cfg" "$BDir\!\menu\boot_functions.cfg" 
   DetailPrint "Proceeding to copy GRUB2 EFI files..."
   ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\EFIGRUBX64.7z" -o"$BDir" -y' ; use newer grub2 for partnew etc
@@ -1007,15 +1007,15 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\linux.cfg "menu\linux.cfg" 
   File /oname=$PLUGINSDIR\unlisted.cfg "menu\unlisted.cfg" 
   File /oname=$PLUGINSDIR\liveusb "menu\liveusb"   
-  File /oname=$PLUGINSDIR\7zG.exe "tools\7zG.exe"
-  File /oname=$PLUGINSDIR\7z.dll "tools\7z.dll"  
-  File /oname=$PLUGINSDIR\new7z\7zG.exe "tools\new7z\7zG.exe"
-  File /oname=$PLUGINSDIR\new7z\7z.dll "tools\new7z\7z.dll"  
+  File /oname=$PLUGINSDIR\7zG.exe "..\பொது-இருமங்கள்\7ஃ0\7zG.exe"
+  File /oname=$PLUGINSDIR\7z.dll "..\பொது-இருமங்கள்\7ஃ0\7z.dll"  
+  File /oname=$PLUGINSDIR\new7z\7zG.exe "..\பொது-இருமங்கள்\7ஃ1\7zG.exe"
+  File /oname=$PLUGINSDIR\new7z\7z.dll "..\பொது-இருமங்கள்\7ஃ1\7z.dll"  
   File /oname=$PLUGINSDIR\உரிமை.உரை "..\அகர\பகவன்\உரிமை.உரை"
-  File /oname=$PLUGINSDIR\memdisk "tools\memdisk"  
+  File /oname=$PLUGINSDIR\memdisk "..\பொது-இருமங்கள்\நினைவட்டு"  
   File /oname=$PLUGINSDIR\EFIGRUBX64.7z "EFIGRUB\EFIGRUBX64.7z"   
   File /oname=$PLUGINSDIR\GRUBINST.7z "EFIGRUB\GRUBINST.7z" 
-  File /oname=$PLUGINSDIR\fat32format.exe "tools\fat32format.exe"     
+  File /oname=$PLUGINSDIR\fat32format.exe "..\பொது-இருமங்கள்\கோஒஅ32வடிவம்.exe"     
   File /oname=$PLUGINSDIR\diskpartwipe1.txt "menu\diskpartwipe1.txt"  
   File /oname=$PLUGINSDIR\diskpartwipe2.txt "menu\diskpartwipe2.txt"    
 FunctionEnd
