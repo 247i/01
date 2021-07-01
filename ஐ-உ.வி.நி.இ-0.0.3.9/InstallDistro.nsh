@@ -2,7 +2,7 @@
  
 ; ------------ Install Distros Macro -------------- 
 
-; !include ReplaceInFile.nsh
+; !include கோப்பில்மாற்று.nsh
 Function FindConfig ; Set config path and file
   ${If} ${FileExists} "$BDir\!\$JustISOName\liberte\boot\syslinux\syslinux.cfg" ; Liberte
   StrCpy $ConfigPath "liberte/boot/syslinux"
@@ -227,9 +227,9 @@ FunctionEnd
  ;${StrRep} '$ISONameDotLess' '$JustISOName' '-x86_64-' '-'
  ${StrRep} '$ISONameDotLess' '$JustISOName' '.' '-'
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nloopback loop /!/$JustISOName/$JustISO$\r$\nlinux (loop)/isolinux/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO rootfstype=auto root=live:CDLABEL=$ISONameDotLess ro rd.live.image$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/isolinux/$Initrd$\r$\n}$\r$\n#end $JustISOName" $R0  
- !insertmacro ReplaceInFile "CDLABEL=Fedora-Live-Workstation" "CDLABEL=Fedora-Live-WS" "all" "all" "$BDir\!\menu\linux.cfg"   
- !insertmacro ReplaceInFile "CDLABEL=Fedora-Workstation-Live" "CDLABEL=Fedora-WS-Live" "all" "all" "$BDir\!\menu\linux.cfg" 
- !insertmacro ReplaceInFile "CDLABEL=Fedora-WS-Live-x86_64" "CDLABEL=Fedora-WS-Live" "all" "all" "$BDir\!\menu\linux.cfg" 
+ !insertmacro கோப்பில்மாற்று "CDLABEL=Fedora-Live-Workstation" "CDLABEL=Fedora-Live-WS" "all" "all" "$BDir\!\menu\linux.cfg"   
+ !insertmacro கோப்பில்மாற்று "CDLABEL=Fedora-Workstation-Live" "CDLABEL=Fedora-WS-Live" "all" "all" "$BDir\!\menu\linux.cfg" 
+ !insertmacro கோப்பில்மாற்று "CDLABEL=Fedora-WS-Live-x86_64" "CDLABEL=Fedora-WS-Live" "all" "all" "$BDir\!\menu\linux.cfg" 
  
 ; Linpus Lite (New Method) 
  ${ElseIf} $DistroName == "Linpus Lite" 
@@ -242,11 +242,11 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\!\$JustISOName\" -y' 
  CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BDir\!\$JustISOName\grub.cfg" 
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${If} ${FileExists} "$BDir\!\$JustISOName\boot\grml64full\vmlinuz"
- !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/grml64full/vmlinuz boot=live live-media-path=/!/$JustISOName/live/grml64-full/ verbose noeject noprompt" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/grml64full/vmlinuz boot=live live-media-path=/!/$JustISOName/live/grml64-full/ verbose noeject noprompt" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\grml64full\initrd.img"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/grml64full/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/grml64full/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}
 
 ; Liberte
@@ -254,11 +254,11 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\!\$JustISOName\" -y' 
  CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BDir\!\$JustISOName\grub.cfg" 
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${If} ${FileExists} "$BDir\!\$JustISOName\liberte\boot\kernel-x86.zi"
- !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/liberte/boot/kernel-x86.zi loop=/!/$JustISOName/liberte/boot/root-x86.sfs" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/liberte/boot/kernel-x86.zi loop=/!/$JustISOName/liberte/boot/root-x86.sfs" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\liberte\boot\initrd-x86.xz"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/liberte/boot/initrd-x86.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/liberte/boot/initrd-x86.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}
   
 ; Linux Mint (New Method) 
@@ -270,16 +270,16 @@ FunctionEnd
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0 
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\vmlinuz"
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"  
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.lz"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz"
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"  
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\live\initrd.lz"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}
  
  ; Linux Mint (New Method) 
@@ -291,16 +291,16 @@ FunctionEnd
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0 
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\vmlinuz"
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"  
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=casper noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.lz"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz"
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"  
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO isofrom=/dev/disk/by-label/TA/!/$JustISOName/$JustISO file=/cdrom/preseed/linuxmint.seed boot=live noprompt floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\live\initrd.lz"
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}
  
  ; Recatux
@@ -325,12 +325,12 @@ FunctionEnd
  Call FindVmlinuz
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
 
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\$Initrd"  ; likely 86_64
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt components config findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt components config findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
  ${EndIf}
  
 ; Clonezilla (New Method) - Debian Based - TORAM
@@ -345,12 +345,12 @@ FunctionEnd
   Call FindVmlinuz
  
   ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
-  !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+  !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
 
   ${If} ${FileExists} "$BDir\!\$JustISOName\live\$Initrd"  ; likely 86_64
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
-  !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt components config toram=live,syslinux,EFI,boot,.disk,utils findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-  !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt components config toram=live,syslinux,EFI,boot,.disk,utils findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
   ${EndIf}
   
 ; Solus
@@ -370,12 +370,12 @@ FunctionEnd
  Call FindVmlinuz
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
 
  ${If} ${FileExists} "$BDir\!\$JustISOName\$Initrd"  ; likely 86_64
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt components config findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt components config findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
  ${EndIf}
  
 ; Open Mandriva
@@ -390,12 +390,12 @@ FunctionEnd
  Call FindVmlinuz
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
 
  ${If} ${FileExists} "$BDir\!\$JustISOName\$Initrd"  ; likely 86_64
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO findiso=/!/$JustISOName/$JustISO root=live:LABEL=OpenMandrivaLx_4.0 rd.live.image toram" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO findiso=/!/$JustISOName/$JustISO root=live:LABEL=OpenMandrivaLx_4.0 rd.live.image toram" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
  ${EndIf}
  
 ; Alpine Linux
@@ -410,12 +410,12 @@ FunctionEnd
  Call FindVmlinuz
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
 
  ${If} ${FileExists} "$BDir\!\$JustISOName\$Initrd"  ; likely 86_64
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO findiso=/!/$JustISOName/$JustISO modules=loop,squashfs,sd-mod,usb-storage nomodeset" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO findiso=/!/$JustISOName/$JustISO modules=loop,squashfs,sd-mod,usb-storage nomodeset" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
  ${EndIf}  
  
 ; Clear Linux
@@ -430,12 +430,12 @@ FunctionEnd
  Call FindVmlinuz
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
 
  ${If} ${FileExists} "$BDir\!\$JustISOName\$Initrd"  ; likely 86_64
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/$Initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
  ${EndIf} 
 
 ; WIFISLAX (New Method) 
@@ -487,86 +487,86 @@ FunctionEnd
  CopyFiles $ISOFile "$BDir\!\$JustISOName\$JustISO" ; Copy the ISO to Directory
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'    
  CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BDir\!\$JustISOName\grub.cfg" 
- !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\vmlinuz.efi" 
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"  
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz.efi iso-scan/filename=/!/$JustISOName/$JustISO boot=casper noprompt noeject fsck.mode=skip floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz.efi iso-scan/filename=/!/$JustISOName/$JustISO boot=casper noprompt noeject fsck.mode=skip floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${EndIf}
   
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\vmlinuz"
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=casper noprompt noeject fsck.mode=skip floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/casper/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=casper noprompt noeject fsck.mode=skip floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${EndIf}
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz" 
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt noeject fsck.mode=skip components config findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "linux /SLUG" "loopback loop /!/$JustISOName/$JustISO$\r$\nlinux /!/$JustISOName/live/vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO boot=live noprompt noeject fsck.mode=skip components config findiso=/!/$JustISOName/$JustISO" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${EndIf}
  
  ; add method for initrd
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\initrd"
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\initrd" 
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"   
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/casper/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  ; end method for initrd
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\initrd.gz"
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO" 
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.gz" 
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"   
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/casper/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.lz" 
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"   
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\initrd.lz" 
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"   
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\initrd.img" ; For Distros such as Emmabuntus
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"   
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.img"
  ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$JustISO"   
- !insertmacro ReplaceInFile "initrd /SLUG" "initrd (loop)/casper/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+ !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd (loop)/casper/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  
  ${If} $DistroName == "Ubuntu"  
- !insertmacro ReplaceInFile "SOMETHING.seed" "ubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "ubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Cub Linux"  
- !insertmacro ReplaceInFile "SOMETHING.seed" "ubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "ubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Ubuntu Gnome"
- !insertmacro ReplaceInFile "SOMETHING.seed" "ubuntu-gnome.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "ubuntu-gnome.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Ubuntu Studio"
- !insertmacro ReplaceInFile "SOMETHING.seed" "ubuntustudio.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "ubuntustudio.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Xubuntu"
- !insertmacro ReplaceInFile "SOMETHING.seed" "xubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "xubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Kubuntu"
- !insertmacro ReplaceInFile "SOMETHING.seed" "kubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "kubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Lubuntu"
- !insertmacro ReplaceInFile "SOMETHING.seed" "lubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "lubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Edubuntu"
- !insertmacro ReplaceInFile "SOMETHING.seed" "edubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "edubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"  
  ${ElseIf} $DistroName == "Ubuntu Budgie"
- !insertmacro ReplaceInFile "SOMETHING.seed" "ubuntu-budgie.seed" "all" "all" "$BDir\!\menu\linux.cfg"
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "ubuntu-budgie.seed" "all" "all" "$BDir\!\menu\linux.cfg"
  ${ElseIf} $DistroName == "Feren OS"
- !insertmacro ReplaceInFile "SOMETHING.seed" "lubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"
+ !insertmacro கோப்பில்மாற்று "SOMETHING.seed" "lubuntu.seed" "all" "all" "$BDir\!\menu\linux.cfg"
  ${EndIf}  
   
 ; OpenSUSE
@@ -635,20 +635,20 @@ FunctionEnd
  RMDir /R "$EXEDIR\TEMPI"
  Call FindGrubConfig
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/$GrubConfigPath/$GrubConfigFile$\r$\n}$\r$\n#end $JustISOName" $R0   
-  !insertmacro ReplaceInFile "linuxefi /kernel" "linux /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
-  !insertmacro ReplaceInFile "initrdefi /initrd.img" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
-  !insertmacro ReplaceInFile "--set=root /kernel" "--set=root /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "quiet DATA= USB_DATA_PARTITION=1" "CREATE_DATA_IMG=1" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+  !insertmacro கோப்பில்மாற்று "linuxefi /kernel" "linux /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+  !insertmacro கோப்பில்மாற்று "initrdefi /initrd.img" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
+  !insertmacro கோப்பில்மாற்று "--set=root /kernel" "--set=root /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "quiet DATA= USB_DATA_PARTITION=1" "CREATE_DATA_IMG=1" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
   
 ; Pop!_OS  
  ${ElseIf} $DistroName == "POP!_OS"
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -o"$BDir\!\$JustISOName\" -y'    
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/boot/grub/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0   
- !insertmacro ReplaceInFile "linux /casper_pop-os" "linux /!/$JustISOName/casper_pop-os" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
- !insertmacro ReplaceInFile "initrd /casper_pop-os" "initrd /!/$JustISOName/casper_pop-os" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
- !insertmacro ReplaceInFile "=/casper_pop-os" "=/!/$JustISOName/casper_pop-os" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
- !insertmacro ReplaceInFile "loadfont /boot" "loadfont /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
- !insertmacro ReplaceInFile "theme=/boot" "theme=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+ !insertmacro கோப்பில்மாற்று "linux /casper_pop-os" "linux /!/$JustISOName/casper_pop-os" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
+ !insertmacro கோப்பில்மாற்று "initrd /casper_pop-os" "initrd /!/$JustISOName/casper_pop-os" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+ !insertmacro கோப்பில்மாற்று "=/casper_pop-os" "=/!/$JustISOName/casper_pop-os" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+ !insertmacro கோப்பில்மாற்று "loadfont /boot" "loadfont /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+ !insertmacro கோப்பில்மாற்று "theme=/boot" "theme=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
  
 ; Memtest86 
  ${ElseIf} $DistroName == "Memtest86 (Memory Testing Tool)"  
@@ -668,8 +668,8 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -x![BOOT] -o"$BDir\!\$JustISOName\" -y'  
  # Call FindGrubConfig
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0   
-  !insertmacro ReplaceInFile "linux /vmlinuz" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-  !insertmacro ReplaceInFile "initrd /initrd" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+  !insertmacro கோப்பில்மாற்று "linux /vmlinuz" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd /initrd" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
  
 ; Ultimate Boot CD and Hirens Boot CD
  ${ElseIf} $DistroName == "Ultimate Boot CD (Diagnostics Tools) - BIOS ONLY"  
@@ -688,35 +688,35 @@ FunctionEnd
  ${AndIfNot} ${FileExists} "$BDir\!\$JustISOName\grub.cfg"  
     CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BDir\!\$JustISOName\grub.cfg"
     ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0 
-    !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+    !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${EndIf}
 
 ; Ubuntu derived
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\vmlinuz.efi" 
   ${AndIf} $GrubConfigFile == "NULL" ; If Grub config file does not exist... 
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/casper/vmlinuz.efi boot=casper noprompt live-media-path=/!/$JustISOName/casper floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/casper/vmlinuz.efi boot=casper noprompt live-media-path=/!/$JustISOName/casper floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${EndIf}
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\vmlinuz"
   ${AndIf} $GrubConfigFile == "NULL" ; If Grub config file does not exist...  
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/casper/vmlinuz boot=casper noprompt live-media-path=/!/$JustISOName/casper floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/casper/vmlinuz boot=casper noprompt live-media-path=/!/$JustISOName/casper floppy.allowed_drive_mask=0 ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
  ${EndIf}
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.lz"  
   ${AndIf} $GrubConfigFile == "NULL" ; If Grub config file does not exist...  
-  !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/casper/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\initrd.gz"  
   ${AndIf} $GrubConfigFile == "NULL" ; If Grub config file does not exist...  
-  !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/casper/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/casper/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}  
   
 ; For RemixOS - Android derived
  ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\android-x86.png" 
-  !insertmacro ReplaceInFile "linuxefi /kernel" "linux /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
-  !insertmacro ReplaceInFile "initrdefi /initrd.img" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
-  !insertmacro ReplaceInFile "--set=root /kernel" "--set=root /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
+  !insertmacro கோப்பில்மாற்று "linuxefi /kernel" "linux /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+  !insertmacro கோப்பில்மாற்று "initrdefi /initrd.img" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
+  !insertmacro கோப்பில்மாற்று "--set=root /kernel" "--set=root /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
  ${EndIf}
 
 ; More Catch All Methods for Vmlinuz, Initrd, Livedir
@@ -724,440 +724,440 @@ FunctionEnd
 ; Vmlinuz check
  ${If} ${FileExists} "$BDir\!\$JustISOName\boot\vmlinu*"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
-  !insertmacro ReplaceInFile "linux /boot" "linux /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "linux /boot" "linux /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
  ${EndIf} 
  
 ; Init check
  ${If} ${FileExists} "$BDir\!\$JustISOName\boot\initr*"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
-  !insertmacro ReplaceInFile "initrd /boot" "initrd /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "initrd /boot" "initrd /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
  ${EndIf}  
  
  ; Live media path check
  ${If} ${FileExists} "$BDir\!\$JustISOName\live\*.*"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
-  !insertmacro ReplaceInFile "boot=live" "boot=NULL" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
-  !insertmacro ReplaceInFile "boot=NULL" "boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "boot=live" "boot=NULL" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+  !insertmacro கோப்பில்மாற்று "boot=NULL" "boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
  ${EndIf}  
  
  ; Casper path check
  ${If} ${FileExists} "$BDir\!\$JustISOName\casper\*.*"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...   
-   !insertmacro ReplaceInFile "boot=casper" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=NULL live-media-path=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
-  !insertmacro ReplaceInFile "boot=NULL" "boot=casper" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+   !insertmacro கோப்பில்மாற்று "boot=casper" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=NULL live-media-path=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+  !insertmacro கோப்பில்மாற்று "boot=NULL" "boot=casper" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
  ${EndIf}
  
  
 ; Mageia / Manjaro
   ${If} ${FileExists} "$BDir\!\$JustISOName\boot\grub\kernels.cfg"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
-  !insertmacro ReplaceInFile " /boot" " /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "$\"/boot/" "$\"/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile " /boot" " /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg" 
-  !insertmacro ReplaceInFile "misobasedir=manjaro" "misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile "misolabel=MJ" "misolabel=TA NULL-" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile "misolabel=M1" "misolabel=TA NULL-" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile "misolabel=MANJ" "misolabel=TA NULL-" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"  
-  !insertmacro ReplaceInFile "$\"/boot/" "$\"/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
-  !insertmacro ReplaceInFile " /boot/" " /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"
-  !insertmacro ReplaceInFile "grub_theme=/boot" "grub_theme=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\variable.cfg"  
+  !insertmacro கோப்பில்மாற்று " /boot" " /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "$\"/boot/" "$\"/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று " /boot" " /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg" 
+  !insertmacro கோப்பில்மாற்று "misobasedir=manjaro" "misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro கோப்பில்மாற்று "misolabel=MJ" "misolabel=TA NULL-" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro கோப்பில்மாற்று "misolabel=M1" "misolabel=TA NULL-" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro கோப்பில்மாற்று "misolabel=MANJ" "misolabel=TA NULL-" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"  
+  !insertmacro கோப்பில்மாற்று "$\"/boot/" "$\"/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\kernels.cfg"
+  !insertmacro கோப்பில்மாற்று " /boot/" " /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"
+  !insertmacro கோப்பில்மாற்று "grub_theme=/boot" "grub_theme=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\boot\grub\variable.cfg"  
  ${EndIf} 
 
  ${If} ${FileExists} "$BDir\!\$JustISOName\boot\cdrom\init*"  
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
-  !insertmacro ReplaceInFile "initrd /boot" "initrd /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "initrd /boot" "initrd /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
  ${EndIf}  
  
 ; NetRunner
  ${If} ${FileExists} "$BDir\!\$JustISOName\netrunner\boot\x86_64\netrunner"  
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/netrunner/boot/x86_64/netrunner misobasedir=/!/$JustISOName/netrunner misolabel=TA nouveau.modeset=1 i915.modeset=1 radeon.modeset=1 logo.nologo overlay=free showopts" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/netrunner/boot/x86_64/netrunner misobasedir=/!/$JustISOName/netrunner misolabel=TA nouveau.modeset=1 i915.modeset=1 radeon.modeset=1 logo.nologo overlay=free showopts" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  ${If} ${FileExists} "$BDir\!\$JustISOName\netrunner\boot\x86_64\netrunner.img"  
-  !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/netrunner/boot/x86_64/netrunner.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/netrunner/boot/x86_64/netrunner.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}  
  
 ; PCLinuxOS
  ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\vmlinuz"  
    ${AndIf} $GrubConfigFile == "NULL" ; If native Grub config file does not exist... 
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/isolinux/vmlinuz fromusb livecd=/!/$JustISOName/livecd root=/dev/rd/3 keyb=us" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/isolinux/vmlinuz fromusb livecd=/!/$JustISOName/livecd root=/dev/rd/3 keyb=us" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf} 
  ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\initrd.gz"
    ${AndIf} $GrubConfigFile == "NULL" ; If native Grub config file does not exist...  
-  !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
  ${EndIf}  
  
  ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\vmlinuz"  
    ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist... 
-  !insertmacro ReplaceInFile "linux /isolinux/vmlinuz" "linux /!/$JustISOName/isolinux/vmlinuz fromusb livecd=/!/$JustISOName/livecd root=/dev/rd/3 keyb=us" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "linux /isolinux/vmlinuz" "linux /!/$JustISOName/isolinux/vmlinuz fromusb livecd=/!/$JustISOName/livecd root=/dev/rd/3 keyb=us" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
  ${EndIf} 
  ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\initrd.gz"
   ${AndIf} $GrubConfigFile != "NULL" ; If native Grub config file does exist...  
-  !insertmacro ReplaceInFile "initrd /isolinux/initrd.gz" "initrd /!/$JustISOName/isolinux/initrd.gz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "initrd /isolinux/initrd.gz" "initrd /!/$JustISOName/isolinux/initrd.gz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\EFI\BOOT\grub.cfg"
-  !insertmacro ReplaceInFile "theme=($$root)/EFI/BOOT/" "theme=($$root)/!/$JustISOName/EFI/BOOT/" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "theme=($$root)/EFI/BOOT/" "theme=($$root)/!/$JustISOName/EFI/BOOT/" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
  ${EndIf}    
  
 ; Partition Wizard 
  ${If} ${FileExists} "$BDir\!\$JustISOName\BOOT\BZIMAGE3"
  ${AndIf} $GrubConfigFile != "NULL" 
- !insertmacro ReplaceInFile "linuxefi /boot/bzImage3" "linux /!/$JustISOName/boot/bzImage3" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
- !insertmacro ReplaceInFile "initrdefi /boot/tinycore.gz" "initrd /!/$JustISOName/boot/tinycore.gz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+ !insertmacro கோப்பில்மாற்று "linuxefi /boot/bzImage3" "linux /!/$JustISOName/boot/bzImage3" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+ !insertmacro கோப்பில்மாற்று "initrdefi /boot/tinycore.gz" "initrd /!/$JustISOName/boot/tinycore.gz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
  ${EndIf}
  
 ; Alt For derivatives like Dr.Web Livedisk
   ${If} ${FileExists} "$BDir\!\$JustISOName\syslinux\txt.cfg" ; Rename the following for syslinux txt.cfg
-  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\syslinux\txt.cfg"  
-  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\txt.cfg"  
-  !insertmacro ReplaceInFile "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\txt.cfg"  
+  !insertmacro கோப்பில்மாற்று "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\syslinux\txt.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\txt.cfg"  
+  !insertmacro கோப்பில்மாற்று "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\txt.cfg"  
   ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\syslinux\text.cfg" ; Rename the following for syslinux text.cfg
-  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\syslinux\text.cfg"  
-  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\text.cfg"  
-  !insertmacro ReplaceInFile "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\text.cfg"  
+  !insertmacro கோப்பில்மாற்று "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\syslinux\text.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\text.cfg"  
+  !insertmacro கோப்பில்மாற்று "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\text.cfg"  
   ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\syslinux\syslinux.cfg" ; Rename the following for syslinux.cfg
-  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\syslinux\syslinux.cfg"  
-  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\syslinux.cfg"  
-  !insertmacro ReplaceInFile "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\syslinux.cfg"  
+  !insertmacro கோப்பில்மாற்று "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\syslinux\syslinux.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\syslinux.cfg"  
+  !insertmacro கோப்பில்மாற்று "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\syslinux\syslinux.cfg"  
   ${EndIf}
    
   ${If} ${FileExists} "$BDir\!\$JustISOName\boot\grub\loopback.cfg" ; Rename the following for grub loopback.cfg
-  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
-  !insertmacro ReplaceInFile "/casper/vmlinuz" "/!/$JustISOName/casper/vmlinuz" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
-  !insertmacro ReplaceInFile "/casper/initrd" "/!/$JustISOName/casper/initrd" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg" 
-  !insertmacro ReplaceInFile "boot=casper" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=NULL live-media-path=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
-  !insertmacro ReplaceInFile "boot=NULL" "boot=casper" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
+  !insertmacro கோப்பில்மாற்று "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
+  !insertmacro கோப்பில்மாற்று "/casper/vmlinuz" "/!/$JustISOName/casper/vmlinuz" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
+  !insertmacro கோப்பில்மாற்று "/casper/initrd" "/!/$JustISOName/casper/initrd" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg" 
+  !insertmacro கோப்பில்மாற்று "boot=casper" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=NULL live-media-path=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
+  !insertmacro கோப்பில்மாற்று "boot=NULL" "boot=casper" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
   ${EndIf}
   ${If} ${FileExists} "$BDir\!\$JustISOName\boot\grub\grub.cfg" ; Rename the following for grub.cfg
-  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
-  !insertmacro ReplaceInFile "/casper/vmlinuz" "/!/$JustISOName/casper/vmlinuz" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
-  !insertmacro ReplaceInFile "/casper/initrd" "/!/$JustISOName/casper/initrd" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
-  !insertmacro ReplaceInFile "boot=casper" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=NULL live-media-path=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
-  !insertmacro ReplaceInFile "boot=NULL" "boot=casper" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
-  !insertmacro ReplaceInFile "=/boot/grub/" "=/!/$JustISOName/boot/grub/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  ; Rescuezilla
+  !insertmacro கோப்பில்மாற்று "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "/casper/vmlinuz" "/!/$JustISOName/casper/vmlinuz" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "/casper/initrd" "/!/$JustISOName/casper/initrd" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
+  !insertmacro கோப்பில்மாற்று "boot=casper" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid boot=NULL live-media-path=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "boot=NULL" "boot=casper" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "=/boot/grub/" "=/!/$JustISOName/boot/grub/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  ; Rescuezilla
   ${EndIf}    
   
 ; SolydX
   ${If} ${FileExists} "$BDir\!\$JustISOName\solydxk\filesystem.squashfs" 
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/solydxk/vmlinuz live-media-path=/!/$JustISOName/solydxk boot=live config ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-  !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/solydxk/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/solydxk/vmlinuz live-media-path=/!/$JustISOName/solydxk boot=live config ignore_uuid" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/solydxk/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
   ${EndIf} 
 
 ; Sparky Linux, Subgraph, Clonezilla, etc
   ${If} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz" 
   ${AndIf} $GrubConfigFile != "NULL" 
-  !insertmacro ReplaceInFile "/live/vmlinuz" "VMLSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "VMLSLUG" " /!/$JustISOName/live/vmlinuz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "live-media-path=/live" "live-media-path=/!/$JustISOName/live cdrom-detect/try-usb=true" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-  !insertmacro ReplaceInFile "boot=live" "BOOTSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "BOOTSLUG" "boot=live noprompt live-media-path=/!/$JustISOName/live cdrom-detect/try-usb=true" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+  !insertmacro கோப்பில்மாற்று "/live/vmlinuz" "VMLSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "VMLSLUG" " /!/$JustISOName/live/vmlinuz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "live-media-path=/live" "live-media-path=/!/$JustISOName/live cdrom-detect/try-usb=true" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+  !insertmacro கோப்பில்மாற்று "boot=live" "BOOTSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "BOOTSLUG" "boot=live noprompt live-media-path=/!/$JustISOName/live cdrom-detect/try-usb=true" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
   ${EndIf} 
   ${If} ${FileExists} "$BDir\!\$JustISOName\live\initrd.img" 
   ${AndIf} $GrubConfigFile != "NULL" 
-  !insertmacro ReplaceInFile "/live/initrd.img" "INITSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
-  !insertmacro ReplaceInFile "INITSLUG" " /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
+  !insertmacro கோப்பில்மாற்று "/live/initrd.img" "INITSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "INITSLUG" " /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
   ${EndIf}  
   
 ; For Desinfect Distro 
   ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\os.cfg" ; Rename the following for isolinux os.cfg
-  !insertmacro ReplaceInFile "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"  
-  !insertmacro ReplaceInFile "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"  
-  !insertmacro ReplaceInFile "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"    
-  !insertmacro ReplaceInFile "BOOT_IMAGE=/casper/" "BOOT_IMAGE=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"    
+  !insertmacro கோப்பில்மாற்று "file=/cdrom/preseed/" "file=/cdrom/!/$JustISOName/preseed/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"  
+  !insertmacro கோப்பில்மாற்று "initrd=/casper/" "cdrom-detect/try-usb=true noprompt floppy.allowed_drive_mask=0 ignore_uuid live-media-path=/!/$JustISOName/casper/ initrd=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"  
+  !insertmacro கோப்பில்மாற்று "kernel /casper/" "kernel /!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"    
+  !insertmacro கோப்பில்மாற்று "BOOT_IMAGE=/casper/" "BOOT_IMAGE=/!/$JustISOName/casper/" "all" "all" "$BDir\!\$JustISOName\isolinux\os.cfg"    
   ${EndIf} 
    
 ; For Fedora Based and derivatives
   ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\LiveOS\livecd-iso-to-disk"  ; Probably Fedora based
-   !insertmacro ReplaceInFile "root=live:CDLABEL=" "root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\isolinux\isolinux.cfg"   
-   !insertmacro ReplaceInFile "root=live:LABEL=Fedora" "root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "isolinux/vmlin" "!/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "isolinux/init" "!/$JustISOName/isolinux/init" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "linuxefi" "linux" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "initrdefi" "initrd" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+   !insertmacro கோப்பில்மாற்று "root=live:CDLABEL=" "root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\isolinux\isolinux.cfg"   
+   !insertmacro கோப்பில்மாற்று "root=live:LABEL=Fedora" "root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "isolinux/vmlin" "!/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "isolinux/init" "!/$JustISOName/isolinux/init" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "linuxefi" "linux" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "initrdefi" "initrd" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
    ${AndIf} $GrubConfigFile == "NULL" ;It's likely not natively Grub supported... let's do this differently
-    !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-    !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/isolinux/vmlinuz0 live_dir=/!/$JustISOName/LiveOS initrd=initrd0.img root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS rootfstype=auto ro rd.live.image rhgb rd.luks=0 rd.md=0 rd.dm=0" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd0.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+    !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+    !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/isolinux/vmlinuz0 live_dir=/!/$JustISOName/LiveOS initrd=initrd0.img root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS rootfstype=auto ro rd.live.image rhgb rd.luks=0 rd.md=0 rd.dm=0" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+    !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd0.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
   ${EndIf}   
   
 ; Offline NT and others 
    ${If} ${FileExists} "$BDir\!\$JustISOName\initrd.cgz" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\scsi.cgz"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\vmlinuz" 
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/vmlinuz rw loglevel=1" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.cgz /!/$JustISOName/scsi.cgz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/vmlinuz rw loglevel=1" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.cgz /!/$JustISOName/scsi.cgz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}   
 
 ; For Puppy Based and derivatives
   ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\help2.msg"  ; Probably Puppy based 
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.gz"   
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
    ${EndIf}    
    
 /* ; For Slacko Puppy Based and derivatives
   ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\slacko.png"  ; Probably Slacko based
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\help\help.msg"  ; Probably Puppy based 
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.gz"   
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
    ${EndIf}    */
    
 ; Fatdog64  
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\help\help.msg"  ; Probably Puppy based 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\fatdog.png"  ; Fatdog64
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/vmlinuz rootfstype=ramfs waitdev=5" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/vmlinuz rootfstype=ramfs waitdev=5" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.gz" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf} 
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\help\help.msg"  ; Probably Puppy based 
    ${AndIfNot} ${FileExists} "$BDir\!\$JustISOName\fatdog.png"  ; Fatdog64
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.gz"    
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}   
    
 ; Dpup
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\help.msg"  ; Probably Puppy based 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\dpup*"  ; Dpup
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/vmlinuz psubdir=/!/$JustISOName psubok=TRUE" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.gz" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}    
   
 ; AntivirusLiveCD, Comodo
   ${If} ${FileExists} "$BDir\!\$JustISOName\boot\bzImage"  
   ${AndIf} $GrubConfigFile != "NULL"  
-  !insertmacro ReplaceInFile "kernel /boot/bzImage" "kernel /!/$JustISOName/boot/bzImage" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile" 
+  !insertmacro கோப்பில்மாற்று "kernel /boot/bzImage" "kernel /!/$JustISOName/boot/bzImage" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile" 
   ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\boot\bzImage"  
   ${AndIf} $GrubConfigFile == "NULL"    
-  !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/bzImage" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/bzImage" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
   ${EndIf}   
   
   ${If} ${FileExists} "$BDir\!\$JustISOName\boot\bzImage"   
   ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\initrd*" 
   ${AndIf} $GrubConfigFile != "NULL"    
   ${OrIf} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs*"  
-  !insertmacro ReplaceInFile "append initrd=/boot" "append initrd=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"  
+  !insertmacro கோப்பில்மாற்று "append initrd=/boot" "append initrd=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"  
   ${EndIf} 
   
   ${If} ${FileExists} "$BDir\!\$JustISOName\boot\*.jpg" ; Fix background Image Paths
   ${OrIf} ${FileExists} "$BDir\!\$JustISOName\boot\*.png"   
-  !insertmacro ReplaceInFile "MENU BACKGROUND /boot" "MENU BACKGROUND /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"   
+  !insertmacro கோப்பில்மாற்று "MENU BACKGROUND /boot" "MENU BACKGROUND /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"   
   ${EndIf} 
   
 ; AOSS
    ${If} ${FileExists} "$BDir\!\$JustISOName\system\stage1"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/system/stage1 root=/dev/ram0 rw rdinit=/linuxrc video=vesa:ywrap,mtrr vga=0x303 loglevel=0 boot=usb" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/system/stage2" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
-   ;!insertmacro ReplaceInFile "boot=cdrom" "boot=usb" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"    
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/system/stage1 root=/dev/ram0 rw rdinit=/linuxrc video=vesa:ywrap,mtrr vga=0x303 loglevel=0 boot=usb" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/system/stage2" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+   ;!insertmacro கோப்பில்மாற்று "boot=cdrom" "boot=usb" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"    
    ${EndIf} 
    
 ; AVG Rescue CD   
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\initrd.lzm"     
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd.lzm" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd.lzm" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
    ${EndIf}  
    
 ; TinyCore, + REVISIT WifiWay, + REVISIT Dr.Web
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\vmlinuz"  
    ${AndIf} $GrubConfigFile == "NULL"   
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/vmlinuz loglevel=3 cde waitusb=5" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/vmlinuz loglevel=3 cde waitusb=5" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\initrd"
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${OrIf} ${FileExists} "$BDir\!\$JustISOName\boot\initrd.gz"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${OrIf} ${FileExists} "$BDir\!\$JustISOName\boot\initrd.lz"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd.lz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\vmlinuz64"  
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/vmlinuz64 loglevel=3 cde waitusb=5" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/vmlinuz64 loglevel=3 cde waitusb=5" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
    ${ElseIf} $GrubConfigFile != "NULL"    
-   !insertmacro ReplaceInFile "/boot/vmlinuz64" "KERNSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"       
-   !insertmacro ReplaceInFile "KERNSLUG" "/!/$JustISOName/boot/vmlinuz64" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"       
+   !insertmacro கோப்பில்மாற்று "/boot/vmlinuz64" "KERNSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"       
+   !insertmacro கோப்பில்மாற்று "KERNSLUG" "/!/$JustISOName/boot/vmlinuz64" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"       
    ${EndIf} 
 
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\corepure64.gz" ; TinyCore specific
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/corepure64.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/corepure64.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${ElseIf} $GrubConfigFile != "NULL" 
-   !insertmacro ReplaceInFile "/boot/corepure64.gz" "INITSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
-   !insertmacro ReplaceInFile "INITSLUG" "/!/$JustISOName/boot/corepure64.gz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
+   !insertmacro கோப்பில்மாற்று "/boot/corepure64.gz" "INITSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
+   !insertmacro கோப்பில்மாற்று "INITSLUG" "/!/$JustISOName/boot/corepure64.gz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
    ${EndIf}   
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\core.gz" ; TinyCore specific
    ${AndIf} $GrubConfigFile == "NULL"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/core.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "INITRD /SLUG" "INITRD /!/$JustISOName/boot/core.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/core.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "INITRD /SLUG" "INITRD /!/$JustISOName/boot/core.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
    ${EndIf}
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\tinycore.gz" ; Partition Wizard, TinyCore specific
    ${AndIf} $GrubConfigFile == "NULL"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/tinycore.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "INITRD /SLUG" "INITRD /!/$JustISOName/boot/tinycore.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/tinycore.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "INITRD /SLUG" "INITRD /!/$JustISOName/boot/tinycore.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
    ${EndIf}    
    
 ; F-Secure Rescue CD
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\isolinux\fsecure\linux"  
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/isolinux/fsecure/linux noprompt knoppix_dir=/!/$JustISOName/KNOPPIX" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/isolinux/fsecure/minirt.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/isolinux/fsecure/linux noprompt knoppix_dir=/!/$JustISOName/KNOPPIX" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/isolinux/fsecure/minirt.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}   
 
 ; GData
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\linux17" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/linux17 boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/linux17 boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\initrd17.xz"
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd17.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd17.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf} 
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\linux6" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/linux6 boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/linux6 boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\initrd6.xz"
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd6.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/initrd6.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
 
 ; Liberte
    ${If} ${FileExists} "$BDir\!\$JustISOName\liberte\boot\syslinux\syslinux.cfg"  
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/liberte/boot/kernel-x86.zi loop=/!/$JustISOName/liberte/boot/root-x86.sfs" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/liberte/boot/initrd-x86.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/liberte/boot/kernel-x86.zi loop=/!/$JustISOName/liberte/boot/root-x86.sfs" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/liberte/boot/initrd-x86.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
 
 ; Panda Safe CD 
    ${If} $DistroName == "Panda SafeCD" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz noprompt boot=live config union=aufs live-media-path=/!/$JustISOName/live noacpi acpi=off" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz noprompt boot=live config union=aufs live-media-path=/!/$JustISOName/live noacpi acpi=off" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf} 
    
    ${If} $DistroName == "Panda SafeCD" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz1"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz1 noprompt boot=live config union=aufs live-media-path=/!/$JustISOName/live noacpi acpi=off" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/live/initrd1.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz1 noprompt boot=live config union=aufs live-media-path=/!/$JustISOName/live noacpi acpi=off" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/live/initrd1.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
    
 ; Ghost 4 Linux
    ${If} ${FileExists} "$BDir\!\$JustISOName\bz3x12.59"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/bz3x12.59 root=/dev/ram0 noapic noacpi pnpbios=off acpi=off pci=noacpi nosmp" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/bz3x12.59 root=/dev/ram0 noapic noacpi pnpbios=off acpi=off pci=noacpi nosmp" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\ramdisk.lzma"          
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/ramdisk.lzma" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/ramdisk.lzma" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\BZ4X14.134"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/BZ4X14.134 root=/dev/ram0 noapic noacpi pnpbios=off acpi=off pci=noacpi nosmp" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/BZ4X14.134 root=/dev/ram0 noapic noacpi pnpbios=off acpi=off pci=noacpi nosmp" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\ramdisk.lzma"          
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/ramdisk.lzma" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/ramdisk.lzma" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
    
 ; TAILS 
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\tails.cfg"  ; Tails Specific
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz live-media-path=/!/$JustISOName/live boot=live config apparmor=1 security=apparmor nopersistence noprompt timezone=Etc/UTC block.events_dfl_poll_msecs=1000 noautologin module=Tails" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz live-media-path=/!/$JustISOName/live boot=live config apparmor=1 security=apparmor nopersistence noprompt timezone=Etc/UTC block.events_dfl_poll_msecs=1000 noautologin module=Tails" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
    ${ElseIf} $GrubConfigFile != "NULL"  
-   !insertmacro ReplaceInFile "syslinux_configfile /efi" "syslinux_configfile /!/$JustISOName/efi" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+   !insertmacro கோப்பில்மாற்று "syslinux_configfile /efi" "syslinux_configfile /!/$JustISOName/efi" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\efi\boot\live64.cfg"
-   !insertmacro ReplaceInFile "kernel /live" "kernel /!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live64.cfg" 
-   !insertmacro ReplaceInFile "initrd=/live" "live-media-path=/!/$JustISOName/live initrd=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live64.cfg"
+   !insertmacro கோப்பில்மாற்று "kernel /live" "kernel /!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live64.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd=/live" "live-media-path=/!/$JustISOName/live initrd=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live64.cfg"
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\efi\boot\live.cfg"
-   !insertmacro ReplaceInFile "kernel /live" "kernel /!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live.cfg" 
-   !insertmacro ReplaceInFile "initrd=/live" "live-media-path=/!/$JustISOName/live initrd=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live.cfg"
+   !insertmacro கோப்பில்மாற்று "kernel /live" "kernel /!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd=/live" "live-media-path=/!/$JustISOName/live initrd=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\efi\boot\live.cfg"
    ${EndIf}  
    
 ; AEOMI Backupper 
    ${If} $DistroName == "AEOMI Backupper"       
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/bzImage quiet root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/bzImage quiet root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
 
 ; Matriux and extracted Live
    ${If} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\live\initrd.img"    
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz boot=live config live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz boot=live config live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf} 
    
 ; Ping
    ${If} ${FileExists} "$BDir\!\$JustISOName\kernel" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.gz"    
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/kernel devfs=nomount pxe ramdisk_size=60000 load_ramdisk=1 init=/linuxrc prompt_ramdisk=0 root=/dev/ram0 rw noapic nolapic lba combined_mode=libata ide0=noprobe nomce pci=nomsi irqpoll" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/kernel devfs=nomount pxe ramdisk_size=60000 load_ramdisk=1 init=/linuxrc prompt_ramdisk=0 root=/dev/ram0 rw noapic nolapic lba combined_mode=libata ide0=noprobe nomce pci=nomsi irqpoll" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}   
    
 ; Webconverger
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\live.cfg"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   ;!insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz noprompt boot=live live-media-path=/!/$JustISOName/live skipconfig components=gitfs" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz noprompt boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   ;!insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz noprompt boot=live live-media-path=/!/$JustISOName/live skipconfig components=gitfs" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/live/vmlinuz noprompt boot=live live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\grub.cfg"     
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/live/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}   
    
 ; Archlinux
    ${If} ${FileExists} "$BDir\!\$JustISOName\arch\boot\syslinux\archiso.cfg" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=TA CONFIG /!/$JustISOName/arch archisobasedir=/!/$JustISOName/arch" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/arch/boot/x86_64/archiso.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=TA CONFIG /!/$JustISOName/arch archisobasedir=/!/$JustISOName/arch" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/arch/boot/x86_64/archiso.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
    ${EndIf}  
    
 ; Archbang
    ${If} ${FileExists} "$BDir\!\$JustISOName\arch\boot\syslinux\syslinux.cfg" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=TA CONFIG /!/$JustISOName/arch archisobasedir=/!/$JustISOName/arch cow_spacesize=8G copytoram=y" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/arch/boot/x86_64/archiso.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/arch/boot/x86_64/vmlinuz archisolabel=TA CONFIG /!/$JustISOName/arch archisobasedir=/!/$JustISOName/arch cow_spacesize=8G copytoram=y" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/arch/boot/x86_64/archiso.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
    ${EndIf}     
 
 ; Manjaro i686
    ${If} ${FileExists} "$BDir\!\$JustISOName\manjaro\boot\i686\manjaro" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/i686/manjaro misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/i686/manjaro misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\manjaro\boot\i686\manjaroiso"  
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/i686/manjaroiso misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/i686/manjaroiso misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}   
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\manjaro\boot\i686\manjaro.img"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/manjaro/boot/i686/manjaro.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/manjaro/boot/i686/manjaro.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}   
    
 ; Manjaro x86_64
    ${If} ${FileExists} "$BDir\!\$JustISOName\manjaro\boot\x86_64\manjaro"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/x86_64/manjaro misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/x86_64/manjaro misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
    ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\manjaro\boot\x86_64\manjaroiso"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/x86_64/manjaroiso misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/manjaro/boot/x86_64/manjaroiso misolabel=TA misobasedir=/!/$JustISOName/manjaro" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}      
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\manjaro\boot\x86_64\manjaro.img"    
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/manjaro/boot/x86_64/manjaro.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/manjaro/boot/x86_64/manjaro.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}   
  
    ${If} ${FileExists} "$BDir\!\$JustISOName\.miso"     
@@ -1167,45 +1167,45 @@ FunctionEnd
 ; Slax
    ${If} ${FileExists} "$BDir\!\$JustISOName\slax\boot\syslinux.cfg"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/slax/boot/vmlinuz from=/!/$JustISOName/slax changes=/!/$JustISOName/slax load_ramdisk=1 prompt_ramdisk=0 rw printk.time=0 slax.flags=perch,xmode" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/slax/boot/initrfs.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/slax/boot/vmlinuz from=/!/$JustISOName/slax changes=/!/$JustISOName/slax load_ramdisk=1 prompt_ramdisk=0 rw printk.time=0 slax.flags=perch,xmode" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/slax/boot/initrfs.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}   
    
 ; Porteus
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\syslinux\porteus.cfg"  
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/syslinux/vmlinuz from=/!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\grub.cfg" ;eventually use changes=/!/$JustISOName/changes.dat
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/syslinux/initrd.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/syslinux/vmlinuz from=/!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\grub.cfg" ;eventually use changes=/!/$JustISOName/changes.dat
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/syslinux/initrd.xz" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}
    
 ; Rescutux   
    ${If} ${FileExists} "$BDir\!\$JustISOName\live\vmlinuz1"     
    ${AndIf} $GrubConfigFile != "NULL"    
-   !insertmacro ReplaceInFile "/live/vmlinuz1" "VMLSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-   !insertmacro ReplaceInFile "VMLSLUG" "/!/$JustISOName/live/vmlinuz1 live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+   !insertmacro கோப்பில்மாற்று "/live/vmlinuz1" "VMLSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+   !insertmacro கோப்பில்மாற்று "VMLSLUG" "/!/$JustISOName/live/vmlinuz1 live-media-path=/!/$JustISOName/live" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\live\initrd1.img" 
-   !insertmacro ReplaceInFile "/live/initrd1.img" "INITSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-   !insertmacro ReplaceInFile "INITSLUG" "/!/$JustISOName/live/initrd1.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+   !insertmacro கோப்பில்மாற்று "/live/initrd1.img" "INITSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+   !insertmacro கோப்பில்மாற்று "INITSLUG" "/!/$JustISOName/live/initrd1.img" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
    ${EndIf}   
    
 ; RIPLinux 
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\kernel32"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/kernel32 from=/!/$JustISOName root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/kernel32 from=/!/$JustISOName root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs.cgz"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/rootfs.cgz$\r$\n}$\r$\n#MENUSLUG" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/rootfs.cgz$\r$\n}$\r$\n#MENUSLUG" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\kernel64"      
-   !insertmacro ReplaceInFile "#MENUSLUG" "menuentry '64bit - $JustISOName' {$\r$\nlinux /!/$JustISOName/boot/kernel64 from=/!/$JustISOName root=/dev/ram0 rw$\r$\ninitrd /!/$JustISOName/boot/rootfs.cgz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
-   !insertmacro ReplaceInFile "set timeout=0" "set timeout=20" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
-   !insertmacro ReplaceInFile "set TIMEOUT_STYLE=hidden" "#set TIMEOUT_STYLE=hidden" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "#MENUSLUG" "menuentry '64bit - $JustISOName' {$\r$\nlinux /!/$JustISOName/boot/kernel64 from=/!/$JustISOName root=/dev/ram0 rw$\r$\ninitrd /!/$JustISOName/boot/rootfs.cgz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+   !insertmacro கோப்பில்மாற்று "set timeout=0" "set timeout=20" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+   !insertmacro கோப்பில்மாற்று "set TIMEOUT_STYLE=hidden" "#set TIMEOUT_STYLE=hidden" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}
    
 /* ; Trinity Rescue Kit 
    ${If} ${FileExists} "$BDir\!\$JustISOName\kernel.trk"     
    ${AndIf} $GrubConfigFile == "NULL"    
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/kernel.trk from=/!/$JustISOName vollabel=TA ramdisk_size=65536 root=/dev/ram0 splash=verbose pci=conf1 trkmenu" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/kernel.trk from=/!/$JustISOName vollabel=TA ramdisk_size=65536 root=/dev/ram0 splash=verbose pci=conf1 trkmenu" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\initrd.trk"  
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.trk$\r$\n}$\r$\n#MENUSLUG" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.trk$\r$\n}$\r$\n#MENUSLUG" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\trk3\trkramfs" 
    CopyFiles "$BDir\!\$JustISOName\trk3\*.*" "$BDir\trk3\" ; Move trk3 to root, so we can boot!
    RMDir /R "$BDir\!\$JustISOName\trk3"
@@ -1214,34 +1214,34 @@ FunctionEnd
 ; Knoppix 
    ${If} ${FileExists} "$BDir\!\$JustISOName\KNOPPIX\KNOPPIX" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/isolinux/linux knoppix_dir=/!/$JustISOName/KNOPPIX noprompt mem=800M" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/isolinux/minirt.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/isolinux/linux knoppix_dir=/!/$JustISOName/KNOPPIX noprompt mem=800M" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/isolinux/minirt.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}  
    
 ; DSL   
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\isolinux\linux24"   
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/isolinux/linux24 noprompt ramdisk_size=100000 init=/etc/init lang=us apm=power-off nomce noapic BOOT_IMAGE=knoppix" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/isolinux/linux24 noprompt ramdisk_size=100000 init=/etc/init lang=us apm=power-off nomce noapic BOOT_IMAGE=knoppix" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}  
 
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\isolinux\minirt24.gz"  
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/isolinux/minirt24.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/isolinux/minirt24.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}      
    
 ; Mandriva/CentOS
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\isolinux.cfg"
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\LiveOS\*.*"   
    ${If} $GrubConfigFile == "NULL" 
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/isolinux/vmlinuz0 root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd0.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/isolinux/vmlinuz0 root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/isolinux/initrd0.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"    
    ${ElseIf} $GrubConfigFile != "NULL" 
-   !insertmacro ReplaceInFile "root=live:LABEL=Cent" "root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "isolinux/vmlin" "!/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "isolinux/init" "!/$JustISOName/isolinux/init" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"      
-   !insertmacro ReplaceInFile "set default=$\"1$\"" "set default=$\"0$\"" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"      
-   !insertmacro ReplaceInFile "linuxefi" "linux" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "initrdefi" "initrd" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "root=live:LABEL=Cent" "root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "isolinux/vmlin" "!/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "isolinux/init" "!/$JustISOName/isolinux/init" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"      
+   !insertmacro கோப்பில்மாற்று "set default=$\"1$\"" "set default=$\"0$\"" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"      
+   !insertmacro கோப்பில்மாற்று "linuxefi" "linux" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "initrdefi" "initrd" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    ${EndIf} 
    ${EndIf}
    
@@ -1250,15 +1250,15 @@ FunctionEnd
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\LiveOS\*.*"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\images\pxeboot\*.*"
    ${AndIf} $GrubConfigFile != "NULL" 
-   !insertmacro ReplaceInFile "images/pxeboot/vmlin" "!/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-   !insertmacro ReplaceInFile "images/pxeboot/init" "!/$JustISOName/isolinux/init" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"         
-   !insertmacro ReplaceInFile "inst.stage2=hd:LABEL=Cent" "inst.stage2=hd:LABEL=TA root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "images/pxeboot/vmlin" "!/$JustISOName/isolinux/vmlin" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+   !insertmacro கோப்பில்மாற்று "images/pxeboot/init" "!/$JustISOName/isolinux/init" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"         
+   !insertmacro கோப்பில்மாற்று "inst.stage2=hd:LABEL=Cent" "inst.stage2=hd:LABEL=TA root=live:LABEL=TA live_dir=/!/$JustISOName/LiveOS NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
    ${EndIf}  
 
 ; Mageia
    ${If} ${FileExists} "$BDir\!\$JustISOName\isolinux\isolinux.cfg"
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\loopbacks\distrib-lzma.sqfs"   
-   !insertmacro ReplaceInFile "root=mgalive:LABEL=Mageia" "root=mgalive:LABEL=TA NULL=Mageia" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+   !insertmacro கோப்பில்மாற்று "root=mgalive:LABEL=Mageia" "root=mgalive:LABEL=TA NULL=Mageia" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
    ${EndIf}        
    
 ; SlitaZ
@@ -1266,53 +1266,53 @@ FunctionEnd
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\*slitaz" 
    ${AndIfNot} ${FileExists} "$BDir\!\$JustISOName\boot\isolinux\ophcrack.cfg"
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/bzImage root=/dev/null rw autologin" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/bzImage root=/dev/null rw autologin" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}    
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs4.gz" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs3.gz"  
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs2.gz" 
    ${AndIf} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs1.gz"   
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/rootfs4.gz /!/$JustISOName/boot/rootfs3.gz /!/$JustISOName/boot/rootfs2.gz /!/$JustISOName/boot/rootfs1.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/rootfs4.gz /!/$JustISOName/boot/rootfs3.gz /!/$JustISOName/boot/rootfs2.gz /!/$JustISOName/boot/rootfs1.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}  
    
 ; Ophcrack
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\isolinux\ophcrack.cfg"
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/boot/bzImage root=/dev/null rw lang=en_US kmap=us autologin" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
+   !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/boot/bzImage root=/dev/null rw lang=en_US kmap=us autologin" "all" "all" "$BDir\!\$JustISOName\grub.cfg" 
    ${EndIf}  
    
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\rootfs.gz" 
    ${AndIf} $GrubConfigFile == "NULL"     
-   !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/boot/rootfs.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
+   !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/boot/rootfs.gz" "all" "all" "$BDir\!\$JustISOName\grub.cfg"  
    ${EndIf}    
 
    ${If} ${FileExists} "$BDir\!\$JustISOName\bzImage"     
     ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$CopyPath\live.cfg" 
    ${AndIf} $GrubConfigFile == "NULL"  	
-    !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/bzImage root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
-    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+    !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/bzImage root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+    !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf} 
    ${If} ${FileExists} "$BDir\!\$JustISOName\bzImage"     
     ${AndIf} ${FileExists} "$BDir\!\$JustISOName\$CopyPath\isolinux.cfg"  
    ${AndIf} $GrubConfigFile == "NULL"  	
-    !insertmacro ReplaceInFile "linux /SLUG" "linux /!/$JustISOName/bzImage root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
-    !insertmacro ReplaceInFile "initrd /SLUG" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+    !insertmacro கோப்பில்மாற்று "linux /SLUG" "linux /!/$JustISOName/bzImage root=/dev/ram0 rw" "all" "all" "$BDir\!\$JustISOName\grub.cfg"
+    !insertmacro கோப்பில்மாற்று "initrd /SLUG" "initrd /!/$JustISOName/initrd.img" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf} 
  
 ; ESET SysRescue Live
    ${If} ${FileExists} "$BDir\!\$JustISOName\eset-favicon.ico" 
-   !insertmacro ReplaceInFile "live-media=/dev/disk/by-label/eSysRescueLiveCD" " " "all" "all" "$BDir\!\$JustISOName\$CopyPath\txt.cfg"   
-   !insertmacro ReplaceInFile "/dev/disk/by-label/eSysRescueLiveCD" "/dev/disk/by-label/TA" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "live-media=/dev/disk/by-label/eSysRescueLiveCD" " " "all" "all" "$BDir\!\$JustISOName\$CopyPath\txt.cfg"   
+   !insertmacro கோப்பில்மாற்று "/dev/disk/by-label/eSysRescueLiveCD" "/dev/disk/by-label/TA" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
    ${EndIf}  
 
 ; RIP Linux
    ${If} ${FileExists} "$BDir\!\$JustISOName\BOOT\DOC\RIPLINUX.TXT" 
-   !insertmacro ReplaceInFile "F1 /boot" "F1 /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
-   !insertmacro ReplaceInFile "F2 /boot" "F1 /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
-   !insertmacro ReplaceInFile "F3 /boot" "F1 /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
-   !insertmacro ReplaceInFile "KERNEL /boot" "KERNEL /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
-   !insertmacro ReplaceInFile "initrd=/boot" "initrd=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"     
+   !insertmacro கோப்பில்மாற்று "F1 /boot" "F1 /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro கோப்பில்மாற்று "F2 /boot" "F1 /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro கோப்பில்மாற்று "F3 /boot" "F1 /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro கோப்பில்மாற்று "KERNEL /boot" "KERNEL /!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
+   !insertmacro கோப்பில்மாற்று "initrd=/boot" "initrd=/!/$JustISOName/boot" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"     
    ${EndIf}  
   
  ${EndIf} 
@@ -1322,44 +1322,44 @@ FunctionEnd
 
 ; Parted Magic
  ${If} $DistroName == "Parted Magic (Partition Tools)" 
-  !insertmacro ReplaceInFile "/EFI/boot/grub.cfg" "/!/$JustISOName/EFI/boot/grub.cfg" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
-  !insertmacro ReplaceInFile "/pmagic/fu.img" "/!/$JustISOName/pmagic/fu.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg" 
-  !insertmacro ReplaceInFile "/pmagic/m32.img" "/!/$JustISOName/pmagic/m32.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"   
-  !insertmacro ReplaceInFile "/pmagic/m64.img" "/!/$JustISOName/pmagic/m64.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"    
-  !insertmacro ReplaceInFile "/pmagic/bzIma" "/!/$JustISOName/pmagic/bzIma" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg" 
-  !insertmacro ReplaceInFile "/pmagic/initrd.img" "/!/$JustISOName/pmagic/initrd.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg" 
-  !insertmacro ReplaceInFile "/EFI/boot/" "/!/$JustISOName/EFI/boot/" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"
-  !insertmacro ReplaceInFile "vga=normal" "directory=/!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"
+  !insertmacro கோப்பில்மாற்று "/EFI/boot/grub.cfg" "/!/$JustISOName/EFI/boot/grub.cfg" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"  
+  !insertmacro கோப்பில்மாற்று "/pmagic/fu.img" "/!/$JustISOName/pmagic/fu.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "/pmagic/m32.img" "/!/$JustISOName/pmagic/m32.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"   
+  !insertmacro கோப்பில்மாற்று "/pmagic/m64.img" "/!/$JustISOName/pmagic/m64.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "/pmagic/bzIma" "/!/$JustISOName/pmagic/bzIma" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "/pmagic/initrd.img" "/!/$JustISOName/pmagic/initrd.img" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "/EFI/boot/" "/!/$JustISOName/EFI/boot/" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"
+  !insertmacro கோப்பில்மாற்று "vga=normal" "directory=/!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\EFI\boot\grub.cfg"
   
-  !insertmacro ReplaceInFile "/pmagic/fu.img" "/!/$JustISOName/pmagic/fu.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
-  !insertmacro ReplaceInFile "/pmagic/m32.img" "/!/$JustISOName/pmagic/m32.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
-  !insertmacro ReplaceInFile "/pmagic/m64.img" "/!/$JustISOName/pmagic/m64.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"    
-  !insertmacro ReplaceInFile "/pmagic/bzIma" "/!/$JustISOName/pmagic/bzIma" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
-  !insertmacro ReplaceInFile "/pmagic/initrd.img" "/!/$JustISOName/pmagic/initrd.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
-  !insertmacro ReplaceInFile "/EFI/boot/" "/!/$JustISOName/EFI/boot/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"
-  !insertmacro ReplaceInFile "vga=normal" "directory=/!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"
+  !insertmacro கோப்பில்மாற்று "/pmagic/fu.img" "/!/$JustISOName/pmagic/fu.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "/pmagic/m32.img" "/!/$JustISOName/pmagic/m32.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
+  !insertmacro கோப்பில்மாற்று "/pmagic/m64.img" "/!/$JustISOName/pmagic/m64.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"    
+  !insertmacro கோப்பில்மாற்று "/pmagic/bzIma" "/!/$JustISOName/pmagic/bzIma" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "/pmagic/initrd.img" "/!/$JustISOName/pmagic/initrd.img" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg" 
+  !insertmacro கோப்பில்மாற்று "/EFI/boot/" "/!/$JustISOName/EFI/boot/" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"
+  !insertmacro கோப்பில்மாற்று "vga=normal" "directory=/!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"
 
 ; System Rescue CD
  ${ElseIf} $DistroName == "System Rescue CD" 
-  !insertmacro ReplaceInFile "/isolinux/rescue64" "/!/$JustISOName/isolinux/SLUGrescue subdir=!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
-  !insertmacro ReplaceInFile "SLUGrescue" "rescue64" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
-  !insertmacro ReplaceInFile "/isolinux/altker64" "/!/$JustISOName/isolinux/SLUGaltker subdir=!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
-  !insertmacro ReplaceInFile "SLUGaltker" "altker64" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
-  !insertmacro ReplaceInFile "/isolinux/initram.igz" "/!/$JustISOName/isolinux/initramSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "initramSLUG" "initram.igz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
+  !insertmacro கோப்பில்மாற்று "/isolinux/rescue64" "/!/$JustISOName/isolinux/SLUGrescue subdir=!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "SLUGrescue" "rescue64" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
+  !insertmacro கோப்பில்மாற்று "/isolinux/altker64" "/!/$JustISOName/isolinux/SLUGaltker subdir=!/$JustISOName" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"    
+  !insertmacro கோப்பில்மாற்று "SLUGaltker" "altker64" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"     
+  !insertmacro கோப்பில்மாற்று "/isolinux/initram.igz" "/!/$JustISOName/isolinux/initramSLUG" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "initramSLUG" "initram.igz" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
   
-  !insertmacro ReplaceInFile "/sysresccd/boot/" "/!/$JustISOName/SLUGGER/boot/" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "SLUGGER" "sysresccd" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "archisolabel=SYSRCD" "archisolabel=TA NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
-  !insertmacro ReplaceInFile "archisolabel=RESC" "archisolabel=TA NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
-  !insertmacro ReplaceInFile "archisobasedir=sys" "archisobasedir=/!/$JustISOName/sysresccd NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
+  !insertmacro கோப்பில்மாற்று "/sysresccd/boot/" "/!/$JustISOName/SLUGGER/boot/" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "SLUGGER" "sysresccd" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "archisolabel=SYSRCD" "archisolabel=TA NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile" 
+  !insertmacro கோப்பில்மாற்று "archisolabel=RESC" "archisolabel=TA NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"   
+  !insertmacro கோப்பில்மாற்று "archisobasedir=sys" "archisobasedir=/!/$JustISOName/sysresccd NULL=" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"
   
 ; Xiaopan 
   ${ElseIf} $DistroName == "Xiaopan (Penetration Testing)"   
   CopyFiles "$BDir\!\$JustISOName\cde\*.*" "$BDir\cde\" ;(quick hack until a cde bootcode/cheatcode is made upstream from tinyCore)
   CopyFiles "$BDir\!\$JustISOName\mydata.tgz" "$BDir\mydata.tgz"
-  !insertmacro ReplaceInFile "MENU BACKGROUND /boot/isolinux/splash.jpg" "MENU BACKGROUND /!/$JustISOName/boot/isolinux/splash.jpg" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
-  !insertmacro ReplaceInFile "MENU BACKGROUND /boot/isolinux/splash.jpg" "MENU BACKGROUND /!/$JustISOName/boot/isolinux/splash.jpg" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
+  !insertmacro கோப்பில்மாற்று "MENU BACKGROUND /boot/isolinux/splash.jpg" "MENU BACKGROUND /!/$JustISOName/boot/isolinux/splash.jpg" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
+  !insertmacro கோப்பில்மாற்று "MENU BACKGROUND /boot/isolinux/splash.jpg" "MENU BACKGROUND /!/$JustISOName/boot/isolinux/splash.jpg" "all" "all" "$BDir\!\$JustISOName\$CopyPath\$ConfigFile"
   
 ; Ophcrack
  ${ElseIf} ${FileExists} "$BDir\!\$JustISOName\$CopyPath\ophcrack.cfg"  
@@ -1369,7 +1369,7 @@ FunctionEnd
  
 ; OpenSuse/BlehOS  
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\i386\loader\isolinux.cfg"       
-   !insertmacro ReplaceInFile "ui gfxboot" "#ui NULL gfxboot" "all" "all" "$BDir\!\$JustISOName\boot\i386\loader\isolinux.cfg"     
+   !insertmacro கோப்பில்மாற்று "ui gfxboot" "#ui NULL gfxboot" "all" "all" "$BDir\!\$JustISOName\boot\i386\loader\isolinux.cfg"     
   ${EndIf}   
   
 ; For OpenSuSe like compilations!
@@ -1384,16 +1384,16 @@ FunctionEnd
   ${AndIf} $Casper != "0" ; Casper Slider (Size) was not Null
   ; Add Boot Code Persistent
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\grub\loopback.cfg" ; Rename the following for grub loopback.cfg
-   !insertmacro ReplaceInFile "cdrom-detect/try-usb=true noprompt" "cdrom-detect/try-usb=true persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
+   !insertmacro கோப்பில்மாற்று "cdrom-detect/try-usb=true noprompt" "cdrom-detect/try-usb=true persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\boot\grub\loopback.cfg"  
    ${EndIf}
    ${If} ${FileExists} "$BDir\!\$JustISOName\boot\grub\grub.cfg" ; Rename the following for grub.cfg
-   !insertmacro ReplaceInFile "cdrom-detect/try-usb=true noprompt" "cdrom-detect/try-usb=true persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "cdrom-detect/try-usb=true noprompt" "cdrom-detect/try-usb=true persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\boot\grub\grub.cfg"   
    ${EndIf} 
    ${If} ${FileExists} "$BDir\!\$JustISOName\grub.cfg" ; Rename the following for grub.cfg ubuntu based
-   !insertmacro ReplaceInFile "boot=casper noprompt" "boot=casper persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "boot=casper noprompt" "boot=casper persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}   
    ${If} ${FileExists} "$BDir\!\$JustISOName\grub.cfg" ; Rename the following for grub.cfg debian based
-   !insertmacro ReplaceInFile "boot=live noprompt" "boot=live persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
+   !insertmacro கோப்பில்மாற்று "boot=live noprompt" "boot=live persistent persistent-path=/!/$JustISOName noprompt" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
    ${EndIf}    
 ; Create Casper-rw file
    Call CasperScript  

@@ -1,5 +1,7 @@
 ﻿!define பெயர் "ஐ-உ.வி.நி.இ"
 !define பதிப்பு "0.0.3.9"
+;!execute '..\பொது-இருமங்கள்\அகர.bat' ; zip if required.
+;!execute '"$%WINDIR%\notepad.exe" /P "${NSISDIR}\COPYING"' ; Enable this to debug previous line.
 ; பொதுவாக பயன்படுத்தும் நிரல்கள்
 !include ..\பொது-துணைநிரல்கள்\தலைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\மாறிகள்.நிரல்
@@ -8,14 +10,11 @@
 !include ..\பொது-துணைநிரல்கள்\பதிவிறக்கஇணைப்பு.நிரல்
 !include ..\பொது-துணைநிரல்கள்\தகவல்.நிரல்
 !include WinVer.nsh
-
 ;!include TextFunc.nsh
-
-!include ReplaceInFile.nsh
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
-;!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
+;!include கோப்பில்மாற்று.nsh
+!include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
-
 !include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
 !include FileNames.nsh ; Macro for FileNames
 !include DistroList.nsh ; List of Distributions
@@ -612,9 +611,9 @@ Function FormatYes ; If Format is checked, do something
  MessageBox MB_YESNO|MB_ICONEXCLAMATION "I is ready to Wipe (Disk $DiskNum) and Fat32 format ($DestDisk).$\r$\nAll partitions and existing data on (Disk $DiskNum) will be deleted.$\r$\n$\r$\nClick YES if you've confirmed that both the drive letter and disk number are correct, or NO to Exit!" IDYES formatit
  Quit 
 formatit:  
-  !insertmacro ReplaceInFile "DISKNUM" "$DiskNum" "all" "all" "$PLUGINSDIR\diskpartwipe1.txt"  
-  !insertmacro ReplaceInFile "DSK" "$DestDisk" "all" "all" "$PLUGINSDIR\diskpartwipe2.txt" 
-  !insertmacro ReplaceInFile "DISKNUM" "$DiskNum" "all" "all" "$PLUGINSDIR\diskpartwipe2.txt"      
+  !insertmacro கோப்பில்மாற்று "DISKNUM" "$DiskNum" "all" "all" "$PLUGINSDIR\diskpartwipe1.txt"  
+  !insertmacro கோப்பில்மாற்று "DSK" "$DestDisk" "all" "all" "$PLUGINSDIR\diskpartwipe2.txt" 
+  !insertmacro கோப்பில்மாற்று "DISKNUM" "$DiskNum" "all" "all" "$PLUGINSDIR\diskpartwipe2.txt"      
    
 ; Wipes the Entire Disk and reformats it with one Fat32 Partition  
    ;(Checkpoint oninit If Windows 8 or greater) test if is greater than Win XP (Vista or later OS?). XP doesn't support Diskpart on removable disks. 
