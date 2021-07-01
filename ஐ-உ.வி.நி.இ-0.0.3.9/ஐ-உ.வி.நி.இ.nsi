@@ -12,9 +12,9 @@
 !include WinVer.nsh
 ;!include TextFunc.nsh
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
-;!include கோப்பில்மாற்று.nsh
 !include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஒழுங்கமை.நிரல்
 !include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
 !include FileNames.nsh ; Macro for FileNames
 !include DistroList.nsh ; List of Distributions

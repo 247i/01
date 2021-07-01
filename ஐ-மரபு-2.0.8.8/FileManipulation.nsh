@@ -147,7 +147,7 @@ FunctionEnd
 !macroend  
 !define InstalledList "!insertmacro InstalledList"
 
-Function Trim ; Remove leading and trailing whitespace from string - function by Iceman_K  http://nsis.sourceforge.net/Remove_leading_and_trailing_whitespaces_from_a_string edited for YUMI
+Function ஒழுங்கமை ; Remove leading and trailing whitespace from string - function by Iceman_K  http://nsis.sourceforge.net/Remove_leading_and_trailing_whitespaces_from_a_string edited for YUMI
 	Exch $R1 ; Original string
 	Push $R2
 Loop:
@@ -174,12 +174,12 @@ Done:
 	Pop $R2
 	Exch $R1
 FunctionEnd
-!macro Trim TrimmedString OriginalString
+!macro ஒழுங்கமை TrimmedString OriginalString
   Push "${OriginalString}"
-  Call Trim
+  Call ஒழுங்கமை
   Pop "${TrimmedString}"
 !macroend
-!define Trim "!insertmacro Trim" 
+!define ஒழுங்கமை "!insertmacro ஒழுங்கமை" 
 
 Function RemovalList ; Lists the distros installed on the select drive.
  ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution to remove from $DestDisk"  
@@ -190,7 +190,7 @@ Function RemovalList ; Lists the distros installed on the select drive.
    FileRead $0 $1
     IfErrors done
     StrCpy $DistroName $1
-	${Trim} "$DistroName" "$DistroName" ; Remove spaces, newlines, and carriage return
+	${ஒழுங்கமை} "$DistroName" "$DistroName" ; Remove spaces, newlines, and carriage return
     ${NSD_CB_AddString} $Distro "$DistroName" ; Add DistroName to the listbox of removable distros ; was ${NSD_LB_AddString} $Distro "$DistroName" ; Enable for DropBox
    Goto loop
   done:  

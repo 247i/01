@@ -65,40 +65,6 @@ FunctionEnd
 !macroend  
 !define InstalledList "!insertmacro InstalledList"
 
-Function Trim ; Remove leading and trailing whitespace from string - orgiginal function by Iceman_K  http://nsis.sourceforge.net/Remove_leading_and_trailing_whitespaces_from_a_string edited for use with ஐ
-	Exch $R1 ; Original string
-	Push $R2
-Loop:
-	StrCpy $R2 "$R1" 1
-	StrCmp "$R2" " " TrimLeft
-	StrCmp "$R2" "$\r" TrimLeft
-	StrCmp "$R2" "$\n" TrimLeft
-	StrCmp "$R2" "$\t" TrimLeft
-	GoTo Loop2
-TrimLeft:	
-	StrCpy $R1 "$R1" "" 1
-	Goto Loop
-Loop2:
-	StrCpy $R2 "$R1" 1 -1
-	StrCmp "$R2" " " TrimRight
-	StrCmp "$R2" "$\r" TrimRight
-	StrCmp "$R2" "$\n" TrimRight
-	StrCmp "$R2" "$\t" TrimRight
-	GoTo Done
-TrimRight:	
-	StrCpy $R1 "$R1" -1
-	Goto Loop2
-Done:
-	Pop $R2
-	Exch $R1
-FunctionEnd
-!macro Trim TrimmedString OriginalString
-  Push "${OriginalString}"
-  Call Trim
-  Pop "${TrimmedString}"
-!macroend
-!define Trim "!insertmacro Trim" 
-
 Function RemovalList ; Lists the distros installed on the select drive.
  ${NSD_SetText} $LinuxDistroSelection "Step 2: Select a Distribution from the list to remove from $DestDisk"  
  ${If} ${FileExists} "$BDir\!\Installed.txt" ; Are there distributions on the select drive? 
@@ -108,7 +74,7 @@ Function RemovalList ; Lists the distros installed on the select drive.
    FileRead $0 $1
     IfErrors done
     StrCpy $DistroName $1
-	${Trim} "$DistroName" "$DistroName" ; Remove spaces, newlines, and carriage return
+	${ஒழுங்கமை} "$DistroName" "$DistroName" ; Remove spaces, newlines, and carriage return
     ${NSD_CB_AddString} $Distro "$DistroName" ; Add DistroName to the listbox of removable distros ; was ${NSD_LB_AddString} $Distro "$DistroName" ; Enable for DropBox
    Goto loop
   done:  

@@ -35,7 +35,7 @@ Function RemovalList ; Lists the distros installed on the select drive.
    FileRead $0 $1
     IfErrors done
     StrCpy $DistroName $1
-	${Trim} "$DistroName" "$DistroName" ; Remove spaces, newlines, and carriage return
+	${ஒழுங்கமை} "$DistroName" "$DistroName" ; Remove spaces, newlines, and carriage return
     ${NSD_CB_AddString} $Distro "$DistroName" ; Add DistroName to the listbox of removable distros ; was ${NSD_LB_AddString} $Distro "$DistroName" ; Enable for DropBox
    Goto loop
   done:  
