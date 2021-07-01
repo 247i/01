@@ -421,7 +421,7 @@ Pop $1
 Exch $0 ; output string
 FunctionEnd
 
-; !include StrContains.nsh ; Let's check if a * wildcard exists
+; !include சரம்கொண்டுள்ளது.nsh ; Let's check if a * wildcard exists
 
 ; On Selection of Linux Distro
 Function OnSelectDistro
@@ -463,7 +463,7 @@ ${EndIf}
 ; Autodetect ISO's in same folder and select if they exist
 ${If} ${FileExists} "$EXEDIR\$ISOFileName"
 ${AndIf} $Removal != "Yes"
-${StrContains} $WILD "*" "$ISOFileName" ; Check for Wildcard and force Browse if * exists.
+${சரம்கொண்டுள்ளது} $WILD "*" "$ISOFileName" ; Check for Wildcard and force Browse if * exists.
 ${AndIf} $WILD != "*"
 StrCpy $TheISO "$EXEDIR\$ISOFileName"
 StrCpy $ISOFile "$TheISO"

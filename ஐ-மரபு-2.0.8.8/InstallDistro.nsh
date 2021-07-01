@@ -358,10 +358,10 @@ FunctionEnd
 		
 	  ; Set CasperName - (Persistence Filename)
         ${If} $DistroName == "Ubuntu"
-		 ${StrContains} $0 "buntu-19" "$JustISO"   
-		 ${StrContains} $1 "buntu-18" "$JustISO"
-		 ${StrContains} $2 "buntu-17" "$JustISO" 
-		 ${StrContains} $3 "buntu-16" "$JustISO" 		
+		 ${சரம்கொண்டுள்ளது} $0 "buntu-19" "$JustISO"   
+		 ${சரம்கொண்டுள்ளது} $1 "buntu-18" "$JustISO"
+		 ${சரம்கொண்டுள்ளது} $2 "buntu-17" "$JustISO" 
+		 ${சரம்கொண்டுள்ளது} $3 "buntu-16" "$JustISO" 		
 		 
 		 ${If} $0 != "buntu-19" 
 		 ${AndIf} $1 != "buntu-18"  
@@ -373,10 +373,10 @@ FunctionEnd
 		 ${EndIf}
 		 
          ${ElseIf} $DistroName == "Linux Mint"
-		 ${StrContains} $0 "mint-19" "$JustISO"   
-		 ${StrContains} $1 "mint-18" "$JustISO"
-		 ${StrContains} $2 "mint-17" "$JustISO" 
-		 ${StrContains} $3 "mint-16" "$JustISO" 		
+		 ${சரம்கொண்டுள்ளது} $0 "mint-19" "$JustISO"   
+		 ${சரம்கொண்டுள்ளது} $1 "mint-18" "$JustISO"
+		 ${சரம்கொண்டுள்ளது} $2 "mint-17" "$JustISO" 
+		 ${சரம்கொண்டுள்ளது} $3 "mint-16" "$JustISO" 		
 		 
 		 ${If} $0 != "mint-19" 
 		 ${AndIf} $1 != "mint-18"  
@@ -918,10 +918,10 @@ FunctionEnd
 
 	 ; Disable Ubuntu modified gfxboot as older Ubuntu bootlogo archives might not contain all necessary files for newer syslinux 6+.
 	   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\isolinux\isolinux.cfg" ; Rename the following for isolinux.cfg  
-		 ${StrContains} $0 "buntu-17" "$JustISO"   
-		 ${StrContains} $1 "buntu-16" "$JustISO"
-		 ${StrContains} $2 "buntu-15" "$JustISO" 
-		 ${StrContains} $3 "buntu" "$JustISO" 		 
+		 ${சரம்கொண்டுள்ளது} $0 "buntu-17" "$JustISO"   
+		 ${சரம்கொண்டுள்ளது} $1 "buntu-16" "$JustISO"
+		 ${சரம்கொண்டுள்ளது} $2 "buntu-15" "$JustISO" 
+		 ${சரம்கொண்டுள்ளது} $3 "buntu" "$JustISO" 		 
 		 ${If} $0 != "buntu-17" 
 		 ${AndIf} $1 != "buntu-16"  
 		 ${AndIf} $2 != "buntu-15"  
@@ -930,10 +930,10 @@ FunctionEnd
 		 ${EndIf}
 	   ${EndIf}  
 	   ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\syslinux\syslinux.cfg"
-		 ${StrContains} $0 "buntu-17" "$JustISO"   
-		 ${StrContains} $1 "buntu-16" "$JustISO"
-		 ${StrContains} $2 "buntu-15" "$JustISO" 
-		 ${StrContains} $3 "buntu" "$JustISO" 		 
+		 ${சரம்கொண்டுள்ளது} $0 "buntu-17" "$JustISO"   
+		 ${சரம்கொண்டுள்ளது} $1 "buntu-16" "$JustISO"
+		 ${சரம்கொண்டுள்ளது} $2 "buntu-15" "$JustISO" 
+		 ${சரம்கொண்டுள்ளது} $3 "buntu" "$JustISO" 		 
 		 ${If} $0 != "buntu-17" 
 		 ${AndIf} $1 != "buntu-16"  
 		 ${AndIf} $2 != "buntu-15" 

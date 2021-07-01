@@ -18,7 +18,7 @@
 !include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
 !include FileNames.nsh ; Macro for FileNames
 !include DistroList.nsh ; List of Distributions
-!include StrContains.nsh ; Let's check if a * wildcard exists
+!include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
 
 Function தேர்வுகள்பக்கம்
@@ -347,7 +347,7 @@ Function EnableNext ; Enable Install Button
   ${EndIf}    
 FunctionEnd
 
-; !include StrContains.nsh ; Let's check if a * wildcard exists
+; !include சரம்கொண்டுள்ளது.nsh ; Let's check if a * wildcard exists
  
 ; On Selection of Linux Distro
 Function OnSelectDistro
@@ -389,7 +389,7 @@ Function OnSelectDistro
 ; Autodetect ISO's in same folder and select if they exist  
  ${If} ${FileExists} "$EXEDIR\$ISOFileName"
  ${AndIf} $Removal != "Yes"
- ${StrContains} $WILD "*" "$ISOFileName" ; Check for Wildcard and force Browse if * exists.
+ ${சரம்கொண்டுள்ளது} $WILD "*" "$ISOFileName" ; Check for Wildcard and force Browse if * exists.
  ${AndIf} $WILD != "*"  
   StrCpy $TheISO "$EXEDIR\$ISOFileName"
   StrCpy $ISOFile "$TheISO"  

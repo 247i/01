@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of YUMI
  *
  * YUMI is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
  * along with YUMI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-; StrContains Written by kenglish_hi http://nsis.sourceforge.net/StrContains
+; சரம்கொண்டுள்ளது Written by kenglish_hi http://nsis.sourceforge.net/சரம்கொண்டுள்ளது
 ; Adapted from StrReplace written by dandaman32
 ; Modified to check for * Wildcard in variable ISOFileName for YUMI and UUI
 ; This function does a case sensitive searches for an occurrence of a substring in a string. 
@@ -30,7 +30,7 @@ Var /Global STR_CONTAINS_VAR_4
 Var /Global STR_RETURN_VAR
 Var /Global WILD
  
-Function StrContains
+Function சரம்கொண்டுள்ளது
   Exch $STR_NEEDLE
   Exch 1
   Exch $STR_HAYSTACK
@@ -54,11 +54,11 @@ Function StrContains
    Exch $STR_RETURN_VAR 
 FunctionEnd
 
-!macro _StrContainsConstructor OUT NEEDLE HAYSTACK
+!macro _சரம்கொண்டுள்ளதுகட்டமைப்பாளர் OUT NEEDLE HAYSTACK
   Push "${HAYSTACK}"
   Push "${NEEDLE}"
-  Call StrContains
+  Call சரம்கொண்டுள்ளது
   Pop "${OUT}"
 !macroend
  
-!define StrContains '!insertmacro "_StrContainsConstructor"' 
+!define சரம்கொண்டுள்ளது '!insertmacro "_சரம்கொண்டுள்ளதுகட்டமைப்பாளர்"' 

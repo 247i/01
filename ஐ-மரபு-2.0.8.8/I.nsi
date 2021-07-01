@@ -203,7 +203,7 @@ LangString Finish_Link ${LANG_ENGLISH} "Visit the YUMI Home Page"
 !include FileManipulation.nsh ; Text File Manipulation
 !include FileNames.nsh ; Macro for FileNames
 !include DistroList.nsh ; List of Distributions
-!include StrContains.nsh
+!include சரம்கொண்டுள்ளது.nsh
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
 !include ReplaceInFile.nsh
 
@@ -664,7 +664,7 @@ Function GrabNameOnly
     Exch $0 ; output string
 FunctionEnd
 
-; !include StrContains.nsh ; Let's check if a * wildcard exists
+; !include சரம்கொண்டுள்ளது.nsh ; Let's check if a * wildcard exists
  
 ; On Selection of Linux Distro
 Function OnSelectDistro
@@ -712,7 +712,7 @@ Function OnSelectDistro
 ; Autodetect ISO's in same folder and select if they exist  
  ${If} ${FileExists} "$EXEDIR\$ISOFileName"
  ${AndIf} $Removal != "Yes"
- ${StrContains} $WILD "*" "$ISOFileName" ; Check for Wildcard and force Browse if * exists.
+ ${சரம்கொண்டுள்ளது} $WILD "*" "$ISOFileName" ; Check for Wildcard and force Browse if * exists.
  ${AndIf} $WILD != "*"  
   StrCpy $TheISO "$EXEDIR\$ISOFileName"
   StrCpy $ISOFile "$TheISO"  
