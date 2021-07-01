@@ -128,8 +128,8 @@ Function FoundGrubFile
 FunctionEnd
 
 Function WriteStuff
- ; Now done before this function is called (see line 122) CreateDirectory "$BDir\!\$JustISOName\YUMI\" ; Create the YUMI Directory.. so we can copy the following config file to it.
- CopyFiles "$PLUGINSDIR\$DistroPath" "$BDir\!\$JustISOName\YUMI\$DistroPath" ; Copy the $DistroPath file to $JustISOName\YUMI folder for the distro (so we know where to remove entry) 
+ ; Now done before this function is called (see line 122) CreateDirectory "$BDir\!\$JustISOName\ஐ\" ; Create the ஐ Directory.. so we can copy the following config file to it.
+ CopyFiles "$PLUGINSDIR\$DistroPath" "$BDir\!\$JustISOName\I\$DistroPath" ; Copy the $DistroPath file to $JustISOName\ஐ folder for the distro (so we know where to remove entry) 
  DetailPrint "$DistroName ($JustISOName) and its menu entry were added!"
  	
 FunctionEnd
@@ -151,7 +151,7 @@ FunctionEnd
  CopyFiles "$BDir\!\Installed.txt" "$BDir\!\BackupInstalled.txt" ; Make a backup of installed for safety
  
 ; Create the Directory for this ISOs files
- CreateDirectory "$BDir\!\$JustISOName\YUMI\" ; Create the YUMI Directory.. so we can eventually copy the config file (see line 90) to it.
+ CreateDirectory "$BDir\!\$JustISOName\I\" ; Create the ஐ Directory.. so we can eventually copy the config file (see line 90) to it.
 
 ; Kaspersky Rescue Disk - Gentoo
  ${If} $DistroName == "Kaspersky Rescue Disk (Antivirus Scanner)" 
@@ -591,16 +591,16 @@ FunctionEnd
 
 ; Windows 10
  ${ElseIf} $DistroName == "Windows 10 Installer"
- CreateDirectory "$EXEDIR\TEMPYUMI" ; Create the TEMPYUMI directory
+ CreateDirectory "$EXEDIR\TEMPI" ; Create the TEMPI directory
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -xr!install.wim -xr!bootx64.efi -o"$BDir\" -y' 
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!install.wim -o"$EXEDIR\TEMPYUMI" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!install.wim -o"$EXEDIR\TEMPI" -y' 
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!bootx64.efi -aou -o"$BDir\" -y'  
  ReadEnvStr $R0 COMSPEC ; grab commandline
  nsExec::Exec "$R0 /C Rename $BDir\EFI\BOOT\bootx64_1.efi win10.efi" ; rename efi file
  DetailPrint "Now splitting install.wim. Please be patient as this will take some time..."
- NsExec::ExecToLog "cmd /C Dism /Split-Image /ImageFile:$EXEDIR\TEMPYUMI\sources\install.wim /SWMFile:$BDir\sources\install.swm /FileSize:3800"
+ NsExec::ExecToLog "cmd /C Dism /Split-Image /ImageFile:$EXEDIR\TEMPI\sources\install.wim /SWMFile:$BDir\sources\install.swm /FileSize:3800"
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\nif [ $${grub_platform} == $\"pc$\" ]; then ntldr /bootmgr; fi$\r$\nif [ $${grub_platform} == $\"efi$\" ]; then chainloader /EFI/BOOT/win10.efi; fi$\r$\n}$\r$\n#end $JustISOName" $R0
- RMDir /R "$EXEDIR\TEMPYUMI"
+ RMDir /R "$EXEDIR\TEMPI"
  
  ; Windows Vista/7/8
  ${ElseIf} $DistroName == "Windows Vista/7/8 Installer"
@@ -629,10 +629,10 @@ FunctionEnd
  
 ; RemixOS  
  ${ElseIf} $DistroName == "RemixOS"
- CreateDirectory "$EXEDIR\TEMPYUMI" ; Create the TEMPYUMI directory
- ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
- ExecWait '"$PLUGINSDIR\7zG.exe" x "$EXEDIR\TEMPYUMI\Remix_OS*.iso" -o"$BDir\!\$JustISOName\" -y'  
- RMDir /R "$EXEDIR\TEMPYUMI"
+ CreateDirectory "$EXEDIR\TEMPI" ; Create the TEMPI directory
+ ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -o"$EXEDIR\TEMPI" -y' 
+ ExecWait '"$PLUGINSDIR\7zG.exe" x "$EXEDIR\TEMPI\Remix_OS*.iso" -o"$BDir\!\$JustISOName\" -y'  
+ RMDir /R "$EXEDIR\TEMPI"
  Call FindGrubConfig
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/$GrubConfigPath/$GrubConfigFile$\r$\n}$\r$\n#end $JustISOName" $R0   
   !insertmacro ReplaceInFile "linuxefi /kernel" "linux /!/$JustISOName/kernel" "all" "all" "$BDir\!\$JustISOName\$GrubCopyPath\$GrubConfigFile"  
@@ -652,13 +652,13 @@ FunctionEnd
  
 ; Memtest86 
  ${ElseIf} $DistroName == "Memtest86 (Memory Testing Tool)"  
- ;CreateDirectory "$EXEDIR\TEMPYUMI" ; Create the TEMPYUMI directory
- ;ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -o"$EXEDIR\TEMPYUMI" -y' 
+ ;CreateDirectory "$EXEDIR\TEMPI" ; Create the TEMPI directory
+ ;ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -o"$EXEDIR\TEMPI" -y' 
   ExecWait '"$PLUGINSDIR\new7z\7zG.exe" e "$ISOFile" -ir!memtest86-usb.img -o"$BDir\!\$JustISOName\" -y' 
-  ;CopyFiles $EXEDIR\TEMPYUMI\memtest86-usb.img "$BDir\!\$JustISOName\" 
+  ;CopyFiles $EXEDIR\TEMPI\memtest86-usb.img "$BDir\!\$JustISOName\" 
   ExecWait '"$PLUGINSDIR\new7z\7zG.exe" x "$BDir\!\$JustISOName\memtest86-usb.img" -o"$BDir\!\$JustISOName\" -y'
   ExecWait '"$PLUGINSDIR\new7z\7zG.exe" x "$BDir\!\$JustISOName\EFI System Partition.img" -o"$BDir\!\$JustISOName\" -y'
- ;RMDir /R "$EXEDIR\TEMPYUMI" 
+ ;RMDir /R "$EXEDIR\TEMPI" 
  ${WriteToFile} "#start $JustISOName$\r$\nif [ $${grub_platform} == $\"efi$\" ]; then$\r$\nmenuentry $\"$JustISOName X64$\" {$\r$\nset gfxpayload=keep$\r$\nloopback loop /!/$JustISOName/memtest86-usb.img$\r$\nchainloader /!/$JustISOName/EFI/BOOT/BOOTX64.efi$\r$\n}$\r$\n$\r$\nmenuentry $\"$JustISOName IA32$\" {$\r$\nloopback loop /!/$JustISOName/memtest86-usb.img$\r$\nchainloader /!/$JustISOName/EFI/BOOT/BOOTIA32.efi$\r$\n}$\r$\nfi$\r$\n#end $JustISOName" $R0 
  
 ; Slacko Puppy/BionicPup

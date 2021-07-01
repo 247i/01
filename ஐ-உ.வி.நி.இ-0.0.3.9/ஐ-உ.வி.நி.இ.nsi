@@ -86,7 +86,7 @@ Function தேர்வுகள்பக்கம்
 ; Drive Pre-Selection  
   ${NSD_CreateLabel} 0 0 58% 15 "" ; was 58%
   Pop $LabelDrivePage 
-  ${NSD_SetText} $LabelDrivePage "Step 1: YUMI Summoned $DestDisk as your USB Device"  
+  ${NSD_SetText} $LabelDrivePage "Step 1: I Summoned $DestDisk as your USB Device"  
 ; Droplist for Drive Selection  
   ${NSD_CreateDropList} 0 20 55% 15 "" 
   Pop $DestDriveTxt 
@@ -548,11 +548,11 @@ Function OnSelectDrive
   Call GetFSType
    ${If} $FSType == "exFAT"
    ${OrIf} $FSType == "NTFS"
-   MessageBox MB_ICONSTOP|MB_OK "This version of YUMI UEFI won't work on a $FSType formatted partition. You can choose to format $JustDrive as Fat32."
+   MessageBox MB_ICONSTOP|MB_OK "This version of I UEFI won't work on a $FSType formatted partition. You can choose to format $JustDrive as Fat32."
   ${EndIf}
 
   ${If} ${FileExists} "$BDir\!\legacy-yumi"
-  MessageBox MB_ICONSTOP|MB_OK "($DestDisk) contains a YUMI Legacy installation. You'll have to reformat to use UEFI YUMI."
+  MessageBox MB_ICONSTOP|MB_OK "($DestDisk) contains a I Legacy installation. You'll have to reformat to use UEFI I."
   ${EndIf} 
  
   SendMessage $Distro ${CB_RESETCONTENT} 0 0 ; Clear all distro entries because a new drive may have been chosen ; Enable for DropBox
@@ -609,7 +609,7 @@ FunctionEnd
 
 Function FormatYes ; If Format is checked, do something
   ${If} $FormatMe == "Yes"
- MessageBox MB_YESNO|MB_ICONEXCLAMATION "YUMI is ready to Wipe (Disk $DiskNum) and Fat32 format ($DestDisk).$\r$\nAll partitions and existing data on (Disk $DiskNum) will be deleted.$\r$\n$\r$\nClick YES if you've confirmed that both the drive letter and disk number are correct, or NO to Exit!" IDYES formatit
+ MessageBox MB_YESNO|MB_ICONEXCLAMATION "I is ready to Wipe (Disk $DiskNum) and Fat32 format ($DestDisk).$\r$\nAll partitions and existing data on (Disk $DiskNum) will be deleted.$\r$\n$\r$\nClick YES if you've confirmed that both the drive letter and disk number are correct, or NO to Exit!" IDYES formatit
  Quit 
 formatit:  
   !insertmacro ReplaceInFile "DISKNUM" "$DiskNum" "all" "all" "$PLUGINSDIR\diskpartwipe1.txt"  
@@ -731,7 +731,7 @@ Function HaveSpace ; Check space required
   System::Int64Op $1 > $SizeOfCasper ; Compare the space available > space required
   Pop $3 ; Get the result ...
   IntCmp $3 1 okay ; ... and compare it
-  MessageBox MB_ICONSTOP|MB_OK "Not enough free space remains. Quitting YUMI!"
+  MessageBox MB_ICONSTOP|MB_OK "Not enough free space remains. Quitting I!"
   quit ; Close the program if the disk space was too small...
   okay: ; Proceed to execute...
   ;MessageBox MB_OK "ISO + Persistence will use $SizeOfCasper MB of the $1 MB Free disk space on $JustDrive Drive."  
@@ -822,17 +822,17 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
    ${EndIf}  
   
   ExecWait '"$PLUGINSDIR\7zG.exe" x "$PLUGINSDIR\GRUBINST.7z" -o"$PLUGINSDIR" -y' 
-  ;MessageBox MB_YESNO|MB_ICONEXCLAMATION "YUMI will now install a Grub2 MBR on (Disk $DiskNum) drive letter $BDir. Checking to make sure this is correct before proceeding!" IDYES okay
+  ;MessageBox MB_YESNO|MB_ICONEXCLAMATION "I will now install a Grub2 MBR on (Disk $DiskNum) drive letter $BDir. Checking to make sure this is correct before proceeding!" IDYES okay
   ;Quit
   ;okay:
   nsExec::ExecToLog '"$PLUGINSDIR\grub-install.exe" --force --no-floppy --removable --target=i386-pc --boot-directory="$BDir\boot" //./PHYSICALDRIVE"$DiskNum"' 
   DetailPrint "Creating Label TA on $DestDisk"
   nsExec::ExecToLog '"cmd" /c "LABEL $DestDiskTA"'
   ${Else}
-  DetailPrint "YUMI already exists on $DestDisk ... proceeding. "
+  DetailPrint "I already exists on $DestDisk ... proceeding. "
   ${EndIf}
   
-  ${If} ${FileExists} $BDir\!\YUMI-Copying.txt    
+  ${If} ${FileExists} $BDir\!\I-Copying.txt    
   ${AndIf} ${FileExists} $BDir\!\license.txt  
   ${AndIf} ${FileExists} $BDir\!\menu\memdisk
   DetailPrint "A Previous I ! Installation was detected."
@@ -840,7 +840,7 @@ Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
   ${Else}
 ; Create and Copy files to your destination
   DetailPrint "Adding required files to the $BDir\! directory..." 
-  CopyFiles "$PLUGINSDIR\YUMI-Copying.txt" "$BDir\!\YUMI-Copying.txt"  
+  CopyFiles "$PLUGINSDIR\I-Copying.txt" "$BDir\!\I-Copying.txt"  
   CopyFiles "$PLUGINSDIR\license.txt" "$BDir\!\license.txt"   
   
 ; Copy these files to !\menu
@@ -861,7 +861,7 @@ Call பெயரைமட்டும்பெறு
 Pop $NameThatISO
 
  ${If} $DiskNum == "0" 
-  MessageBox MB_ICONEXCLAMATION|MB_OK "YUMI will not attempt to install on (Disk $DiskNum). Did you select a drive?"
+  MessageBox MB_ICONEXCLAMATION|MB_OK "I will not attempt to install on (Disk $DiskNum). Did you select a drive?"
   Quit
  ${EndIf}
 
@@ -874,7 +874,7 @@ Pop $NameThatISO
  ${If} $FSType == "exFAT"
   ${OrIf} $FSType == "NTFS"
    ${AndIf} $FormatMe != "Yes" 
-   MessageBox MB_ICONSTOP|MB_OK "UEFI won't natively work on $FSType formatted partitions. YUMI will now Exit!" 
+   MessageBox MB_ICONSTOP|MB_OK "UEFI won't natively work on $FSType formatted partitions. I will now Exit!" 
    Quit
  ${EndIf} 
  
@@ -912,21 +912,21 @@ removeonly:
 SectionEnd
 
 Function ConfigRemove ; Find and Set Removal Configuration file
-  ${If} ${FileExists} "$BDir\!\$DistroName\YUMI\linux.cfg"
+  ${If} ${FileExists} "$BDir\!\$DistroName\I\linux.cfg"
   StrCpy $DistroPath "linux.cfg"
-  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\anon.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\anon.cfg"
   StrCpy $DistroPath "anon.cfg"  
-  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\system.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\system.cfg"
   StrCpy $DistroPath "system.cfg"
-  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\antivirus.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\antivirus.cfg"
   StrCpy $DistroPath "antivirus.cfg"
-  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\netbook.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\netbook.cfg"
   StrCpy $DistroPath "netbook.cfg"
-  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\other.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\other.cfg"
   StrCpy $DistroPath "other.cfg"
-  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\unlisted.cfg"
+  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\unlisted.cfg"
   StrCpy $DistroPath "unlisted.cfg"  
-;  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\YUMI\menu.lst"
+;  ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\menu.lst"
 ;  StrCpy $DistroPath "menu.lst"
   ${EndIf}
   ; MessageBox MB_OK "$DistroPath"

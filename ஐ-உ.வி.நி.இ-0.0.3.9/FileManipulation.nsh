@@ -65,7 +65,7 @@ FunctionEnd
 !macroend  
 !define InstalledList "!insertmacro InstalledList"
 
-Function Trim ; Remove leading and trailing whitespace from string - orgiginal function by Iceman_K  http://nsis.sourceforge.net/Remove_leading_and_trailing_whitespaces_from_a_string edited for use with YUMI
+Function Trim ; Remove leading and trailing whitespace from string - orgiginal function by Iceman_K  http://nsis.sourceforge.net/Remove_leading_and_trailing_whitespaces_from_a_string edited for use with ஐ
 	Exch $R1 ; Original string
 	Push $R2
 Loop:
