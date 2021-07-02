@@ -23,13 +23,4 @@ Delete "$PLUGINSDIR\$CasperName"
 ${EndIf}
 FunctionEnd
 
-Function புதையல்அளவு
- IntOp $SizeOfCasper $SizeOfCasper + $Casper
-FunctionEnd
-
-Function புதைகருவிகளைப்பெறு
-SetShellVarContext all
-InitPluginsDir
-File /oname=$PLUGINSDIR\dd.exe "..\பொது-இருமங்கள்\தரவுவரையறை.exe"
-File /oname=$PLUGINSDIR\mke2fs.exe "..\பொது-இருமங்கள்\நீட்2கோமுவடிவஉரு.exe"
-FunctionEnd
+!include ..\பொது-துணைநிரல்கள்\புதைகருவிகளைப்பெறு.நிரல்

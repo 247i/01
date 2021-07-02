@@ -19,7 +19,9 @@
 !include FileNames.nsh ; Macro for FileNames
 !include DistroList.nsh ; List of Distributions
 !include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
+!include ..\பொது-துணைநிரல்கள்\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
+!include ..\பொது-துணைநிரல்கள்\புதைகருவிகளைப்பெறு.நிரல்
 
 Function தேர்வுகள்பக்கம்
   StrCpy $R8 2
@@ -713,7 +715,7 @@ FunctionEnd
 
 Function HaveSpacePre ; Check space required
  ${If} $FormatMe != "Yes" 
-  Call CasperSize
+  Call புதையல்அளவு
   Call FreeDiskSpace
   System::Int64Op $1 > $SizeOfCasper ; Compare the space available > space required
   Pop $3 ; Get the result ...
@@ -725,7 +727,7 @@ FunctionEnd
 
 Function HaveSpace ; Check space required
  ${If} $FormatMe != "Yes"
-  Call CasperSize
+  Call புதையல்அளவு
   Call FreeDiskSpace
   System::Int64Op $1 > $SizeOfCasper ; Compare the space available > space required
   Pop $3 ; Get the result ...
@@ -952,11 +954,11 @@ Function Config2Write
 FunctionEnd
 
 Function வெளியேறாதே
-MessageBox MB_YESNO "Would you like to add more ISOs/Distros Now on $DestDisk?" IDYES noskip
-    StrCmp $R8 3 0 End ;Compare $R8 variable with current page #
-    StrCpy $R9 1 ; Goes to finish page
-    Call உறவுபக்கத்திற்குச்செல்
-    Abort
+MessageBox MB_YESNO "$DestDisk இயக்ககத்தில் இப்போது மேலும் உதநிகள் / விநியோகங்களை சேர்க்க விரும்புகிறீர்களா?" IDYES noskip
+StrCmp $R8 3 0 End ;Compare $R8 variable with current page #
+StrCpy $R9 1 ; Goes to finish page
+Call உறவுபக்கத்திற்குச்செல்
+Abort
 noskip:
 StrCpy $DestDrive "$DestDrive" ; Retain previously selected Drive Letter
 StrCpy $RepeatInstall "YES" ; Set Repeat Install Option to YES
@@ -964,26 +966,26 @@ StrCpy $ISOTest "" ; Reset
 StrCpy $ISOFile "" ; Reset
 StrCpy $Removal "" ; Reset
 StrCpy $Persistence "NULL" ; Reset
-StrCpy $NameThatISO "" ; Reset NameThatISO ISO Name
-StrCpy $DistroPath "" ; Clear Config File to create and write to
+StrCpy $NameThatISO "" ; Reset NameThatISO உதநி Name
+StrCpy $DistroPath "" ; Clear Path to create
 StrCpy $DistroName "" ; Clear Distro Name
-StrCpy $ISOFileName "" ; Clear ISO Selection
+StrCpy $ISOFileName "" ; Clear உதநி Selection
 StrCpy $FileFormat "" ; Clear File Format
 StrCpy $DownloadMe 0 ; Ensure Uncheck of Download Option
 StrCpy $LocalSelection "" ; Reset Local Selection
 StrCpy $ShowingAll ""
 StrCpy $FormatMe "" ; Reset Format Option
-    StrCmp $R8 4 0 End ;Compare $R8 variable with current page #
-    StrCpy $R9 -3 ; Goes back to selections page
-    Call உறவுபக்கத்திற்குச்செல் ; change pages
-    Abort
+StrCmp $R8 4 0 End ;Compare $R8 variable with current page #
+StrCpy $R9 -3 ; Goes back to selections page
+Call உறவுபக்கத்திற்குச்செல் ; change pages
+Abort
 End:
 FunctionEnd
 
 ; --- Stuff to do at startup of script ---
 Function .onInit
 StrCpy $TASupport "YES"
-StrCpy $R9 0 ; we start on page 0
+StrCpy $R9 0 ; உரிமை உரை தவிர், பக்கம் 0க்கு செல்
 ;StrCpy $InstallButton ""
  StrCpy $FileFormat "ISO"
  userInfo::getAccountType

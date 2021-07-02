@@ -36,3 +36,4 @@ StrCpy $CasperName "writable" ; default to newer persistence label
 ${EndIf}
 Call புதையல்பொதுஉரை
 FunctionEnd
+
