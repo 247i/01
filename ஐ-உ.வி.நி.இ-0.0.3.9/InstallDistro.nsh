@@ -1,8 +1,4 @@
-﻿
- 
-; ------------ Install Distros Macro -------------- 
-
-; !include கோப்பில்மாற்று.nsh
+﻿; ------------ Install Distros Macro -------------- 
 Function FindConfig ; Set config path and file
   ${If} ${FileExists} "$BDir\!\$JustISOName\liberte\boot\syslinux\syslinux.cfg" ; Liberte
   StrCpy $ConfigPath "liberte/boot/syslinux"
