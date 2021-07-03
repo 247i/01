@@ -1344,29 +1344,8 @@ Function உதநிஅளவைஅமை ; Get size of ISO
  System::Call 'kernel32::CloseHandle(i r0)'
 FunctionEnd
 
-Function ஆரம்பசீவ_கண்டுபிடி
-; FindFirst $0 $1 "$FindInitPath"
- loop:
-  StrCmp $1 "" done
-  ;DetailPrint Found $1
-  StrCpy $Initrd $1 
-  FindNext $0 $1
-  Goto loop
- done:
- FindClose $0
- FunctionEnd
- 
- Function லினக்சுஉட்கரு_கண்டுபிடி
-; FindFirst $0 $1 "$லினக்சுஉட்கரு_கண்டுபிடிPath"
- loop:
-  StrCmp $1 "" done
-  ;DetailPrint Found $1
-  StrCpy $Vmlinuz $1 
-  FindNext $0 $1
-  Goto loop
- done:
- FindClose $0
-FunctionEnd
+!include ..\பொது-துணைநிரல்கள்\ஆரம்பசீவ_கண்டுபிடி.நிரல்
+!include ..\பொது-துணைநிரல்கள்\லினக்சுஉட்கரு_கண்டுபிடி.நிரல்
 
 Function GetFSType
 System::Call 'Kernel32::GetVolumeInformation(t "$JustDrive",t,i ${NSIS_MAX_STRLEN},*i,*i,*i,t .r1" ,i ${NSIS_MAX_STRLEN}) i.r0'

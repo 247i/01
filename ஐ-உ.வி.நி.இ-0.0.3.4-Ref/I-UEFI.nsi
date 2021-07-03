@@ -1103,28 +1103,5 @@ File /oname=$PLUGINSDIR\switchgrub.cfg "menu\switchgrub.cfg"
 FunctionEnd
 
 !include ..\பொது-துணைநிரல்கள்\புதையல்நிலை.நிரல்
-
-Function ஆரம்பசீவ_கண்டுபிடி
-; FindFirst $0 $1 "$FindInitPath"
-loop:
-StrCmp $1 "" done
-;DetailPrint கண்டறியப்பட்டது $1
-StrCpy $Initrd $1
-FindNext $0 $1
-Goto loop
-done:
-FindClose $0
-FunctionEnd
-
-
-Function லினக்சுஉட்கரு_கண்டுபிடி ; find the path location of
-; FindFirst $0 $1 "$லினக்சுஉட்கரு_கண்டுபிடிPath"
-loop:
-StrCmp $1 "" done
-;DetailPrint கண்டறியப்பட்டது $1
-StrCpy $Vmlinuz $1
-FindNext $0 $1
-Goto loop
-done:
-FindClose $0
-FunctionEnd
+!include ..\பொது-துணைநிரல்கள்\ஆரம்பசீவ_கண்டுபிடி.நிரல்
+!include ..\பொது-துணைநிரல்கள்\லினக்சுஉட்கரு_கண்டுபிடி.நிரல்
