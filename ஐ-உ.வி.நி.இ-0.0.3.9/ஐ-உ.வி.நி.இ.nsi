@@ -14,14 +14,14 @@
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை-மாறிலி.நிரல்
-!include DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
+!include நிரல்கள்\DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\ஒழுங்கமை.நிரல்
-!include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
-!include FileNames.nsh ; Macro for FileNames
-!include DistroList.nsh ; List of Distributions
+!include நிரல்கள்\FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
+!include நிரல்கள்\FileNames.nsh ; Macro for FileNames
+!include நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
 !include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
 !include ..\பொது-துணைநிரல்கள்\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
-!include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
+!include "நிரல்கள்\புதையல்உரை.நிரல்" ; For creation of Persistent Casper-rw files
 !include ..\பொது-துணைநிரல்கள்\புதைகருவிகளைப்பெறு.நிரல்
 
 Function தேர்வுகள்பக்கம்
@@ -792,8 +792,8 @@ Done:
 FunctionEnd
 
 ; Custom Distros Installer - Uninstaller Include
-!include "InstallDistro.nsh" ; ##################################### ADD NEW DISTRO ########################################
-!include "RemoveDistro.nsh" ; ##################################### ADD NEW DISTRO ########################################
+!include "நிரல்கள்\InstallDistro.nsh" ; ##################################### ADD NEW DISTRO ########################################
+!include "நிரல்கள்\RemoveDistro.nsh" ; ##################################### ADD NEW DISTRO ########################################
 
 Function DoSyslinux ; Install Syslinux on USB ; Now it's just grub2
 
@@ -903,13 +903,13 @@ removeonly:
  ${If} $Removal != "Yes"
  !insertmacro Install_Distros ; Install those distros
  ${ElseIf} $Removal == "Yes"
-  Call ConfigRemove
+  Call கட்டமைப்புநீக்க
  !insertmacro Uninstall_Distros ; Remove those distros
  ${EndIf}
  
 SectionEnd
 
-Function ConfigRemove ; Find and Set Removal Configuration file
+Function கட்டமைப்புநீக்க ; Find and Set Removal Configuration file
   ${If} ${FileExists} "$BDir\!\$DistroName\I\linux.cfg"
   StrCpy $DistroPath "linux.cfg"
   ${ElseIf} ${FileExists} "$BDir\!\$DistroName\I\anon.cfg"

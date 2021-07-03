@@ -978,13 +978,13 @@ removeonly:
 ${If} $Removal != "Yes"
 !insertmacro Install_Distros ; Install those distros
 ${ElseIf} $Removal == "Yes"
-Call ConfigRemove
+Call கட்டமைப்புநீக்க
 !insertmacro Uninstall_Distros ; Remove those distros
 ${EndIf}
 
 SectionEnd
 
-Function ConfigRemove ; Find and Set Removal Configuration file
+Function கட்டமைப்புநீக்க ; Find and Set Removal Configuration file
 ${If} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\linux.cfg"
 StrCpy $Config2Use "linux.cfg"
 ${ElseIf} ${FileExists} "$BootDir\multiboot\$DistroName\YUMI\anon.cfg"
