@@ -292,7 +292,7 @@ Function SelectionsPage
   StrCpy $BootDir $DestDrive 2  
   StrCpy $DestDisk $DestDrive 2
   StrCpy $9 $JustDrive
-  Call GetFSType
+  Call கோமுவகைபெறு
   Call இயற்பியக்கி
   SendMessage $Distro ${CB_RESETCONTENT} 0 0 ; was ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen ; Enable for DropBox
   StrCpy $Checker "Yes"  
@@ -912,7 +912,7 @@ Function OnSelectDrive
   ;StrCpy $HDDUSB $Letters "" -3 
   
   StrCpy $9 $JustDrive
-  Call GetFSType
+  Call கோமுவகைபெறு
   Call இயற்பியக்கி
   ${NSD_SetText} $LabelDrivePage "Step 1: You Selected $DestDisk on (Disk $DiskNum) as your USB Device"   
   ;MessageBox MB_ICONSTOP|MB_OK " $9 $FSType" 
@@ -986,7 +986,7 @@ Function DrivesList
  Call இயற்பியக்கி
  Call GetDiskVolumeName
  Call DiskSpace
- Call GetFSType
+ Call கோமுவகைபெறு
  
 ;Prevent System Drive from being selected
  StrCpy $7 $WINDIR 3
@@ -1647,7 +1647,7 @@ Function உதநிஅளவைஅமை ; Get size of ISO
  System::Call 'kernel32::CloseHandle(i r0)'
 FunctionEnd
 
-Function GetFSType
+Function கோமுவகைபெறு
 System::Call 'Kernel32::GetVolumeInformation(t "$9",t,i ${NSIS_MAX_STRLEN},*i,*i,*i,t .r1" ,i ${NSIS_MAX_STRLEN}) i.r0'
  StrCpy $FSType "$1"
 FunctionEnd

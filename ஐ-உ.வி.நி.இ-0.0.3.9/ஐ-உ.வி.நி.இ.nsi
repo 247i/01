@@ -543,7 +543,7 @@ Function OnSelectDrive
   StrCpy $DestDisk $DestDrive 2 ;was -1
 
   Call இயற்பியக்கி
-  Call GetFSType
+  Call கோமுவகைபெறு
    ${If} $FSType == "exFAT"
    ${OrIf} $FSType == "NTFS"
    MessageBox MB_ICONSTOP|MB_OK "This version of I UEFI won't work on a $FSType formatted partition. You can choose to format $JustDrive as Fat32."
@@ -594,7 +594,7 @@ Function DrivesList
  Call இயற்பியக்கி
  Call GetDiskVolumeName
  Call DiskSpace
- Call GetFSType
+ Call கோமுவகைபெறு
 ;Prevent System Drive from being selected
  StrCpy $7 $WINDIR 3
  ${If} $9 != "$7" 
@@ -868,7 +868,7 @@ Pop $NameThatISO
   Quit
  ${EndIf}
  
- Call GetFSType
+ Call கோமுவகைபெறு
  ${If} $FSType == "exFAT"
   ${OrIf} $FSType == "NTFS"
    ${AndIf} $FormatMe != "Yes" 
@@ -1021,8 +1021,4 @@ FunctionEnd
 !include ..\பொது-துணைநிரல்கள்\புதையல்நிலை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\ஆரம்பசீவ_கண்டுபிடி.நிரல்
 !include ..\பொது-துணைநிரல்கள்\லினக்சுஉட்கரு_கண்டுபிடி.நிரல்
-
-Function GetFSType
-System::Call 'Kernel32::GetVolumeInformation(t "$JustDrive",t,i ${NSIS_MAX_STRLEN},*i,*i,*i,t .r1" ,i ${NSIS_MAX_STRLEN}) i.r0'
- StrCpy $FSType "$1"
-FunctionEnd
+!include ..\பொது-துணைநிரல்கள்\கோமுவகைபெறு.நிரல்

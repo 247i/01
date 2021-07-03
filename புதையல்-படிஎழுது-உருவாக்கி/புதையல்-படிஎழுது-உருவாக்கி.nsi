@@ -174,12 +174,12 @@ Function DrivesList
   StrCpy $JustDrive $9
   Call GetDiskVolumeName
   Call DiskSpace
-  Call GetFSType
+  Call கோமுவகைபெறு
   SendMessage $DestDriveTxt ${CB_ADDSTRING} 0 "STR:$9 $VolName $Capacity $FSType"
   Push 1
 FunctionEnd
 
-Function GetFSType
+Function கோமுவகைபெறு
 System::Call 'Kernel32::GetVolumeInformation(t "$9",t,i ${NSIS_MAX_STRLEN},*i,*i,*i,t .r1" ,i ${NSIS_MAX_STRLEN}) i.r0'
  StrCpy $FSType "$1"
 FunctionEnd

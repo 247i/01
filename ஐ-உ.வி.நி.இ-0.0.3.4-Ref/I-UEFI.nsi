@@ -626,7 +626,7 @@ StrCpy $BootDir $DestDrive 2 ;was -1
 StrCpy $DestDisk $DestDrive 2 ;was -1
 
 Call இயற்பியக்கி
-Call GetFSType
+Call கோமுவகைபெறு
 ${If} $FSType == "exFAT"
 ${OrIf} $FSType == "NTFS"
 MessageBox MB_ICONSTOP|MB_OK "This version of YUMI UEFI won't work on a $FSType formatted partition. You can choose to format $JustDrive as Fat32."
@@ -677,7 +677,7 @@ StrCpy $JustDrive $9
 Call இயற்பியக்கி
 Call GetDiskVolumeName
 Call DiskSpace
-Call GetFSType
+Call கோமுவகைபெறு
 ;Prevent System Drive from being selected
 StrCpy $7 $WINDIR 3
 ${If} $9 != "$7"
@@ -943,7 +943,7 @@ MessageBox MB_ICONSTOP|MB_OK "ABORTING! ($DestDisk) contains a WINDOWS/SYSTEM32 
 Quit
 ${EndIf}
 
-Call GetFSType
+Call கோமுவகைபெறு
 ${If} $FSType == "exFAT"
 ${OrIf} $FSType == "NTFS"
 ${AndIf} $FormatMe != "Yes"

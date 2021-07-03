@@ -26,7 +26,7 @@ ${AndIf} $DistroName != "Windows to Go (Virtual Hard Disk)"
  ExpandEnvStrings $COMSPEC "%COMSPEC%"
  
  StrCpy $9 $JustDrive
- Call GetFSType
+ Call கோமுவகைபெறு
  ;MessageBox MB_ICONSTOP|MB_OK " $9 $FSType"
  
  ${If} $FSType == "NTFS" ; Already is NTFS
