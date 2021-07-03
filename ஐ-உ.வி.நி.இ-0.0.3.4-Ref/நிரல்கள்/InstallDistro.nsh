@@ -193,9 +193,9 @@ ${ElseIf} $DistroName == "Fedora"
 CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to Directory
 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\isolinux\initrd*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\isolinux\vmlinuz*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ;${StrRep} '$ISONameDotLess' '$JustISOName' '-x86_64-' '-'
 ${StrRep} '$ISONameDotLess' '$JustISOName' '.' '-'
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nloopback loop /multiboot/$JustISOName/$JustISO$\r$\nlinux (loop)/isolinux/$Vmlinuz iso-scan/filename=/multiboot/$JustISOName/$JustISO rootfstype=auto root=live:CDLABEL=$ISONameDotLess ro rd.live.image$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/isolinux/$Initrd$\r$\n}$\r$\n#end $JustISOName" $R0
@@ -282,9 +282,9 @@ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to 
 CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\live\initrd*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\live\*mlinu*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0
 !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\live\$Initrd"  ; likely 86_64
@@ -298,9 +298,9 @@ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to 
 CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\live\initrd*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\live\*mlinu*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0
 !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\live\$Initrd"  ; likely 86_64
@@ -318,9 +318,9 @@ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to 
 CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\initrd*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\vmlinuz*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0
 !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\$Initrd"  ; likely 86_64
@@ -334,9 +334,9 @@ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to 
 CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\*initrd*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\*mlinu*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0
 !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\$Initrd"  ; likely 86_64
@@ -350,9 +350,9 @@ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to 
 CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitr* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\*initr*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\*mlinu*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0
 !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\$Initrd"  ; likely 86_64
@@ -366,9 +366,9 @@ CopyFiles $ISOFile "$BootDir\multiboot\$JustISOName\$JustISO" ; Copy the ISO to 
 CopyFiles "$PLUGINSDIR\grubslug.cfg" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BootDir\multiboot\$JustISOName\" -y'
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\*initrd*"
-Call FindInitrd
+Call ஆரம்பசீவ_கண்டுபிடி
 FindFirst $0 $1 "$BootDir\multiboot\$JustISOName\*mlinu*"
-Call FindVmlinuz
+Call லினக்சுஉட்கரு_கண்டுபிடி
 ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /multiboot/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0
 !insertmacro ReplaceInFile "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BootDir\multiboot\$JustISOName\grub.cfg"
 ${If} ${FileExists} "$BootDir\multiboot\$JustISOName\$Initrd"  ; likely 86_64

@@ -85,7 +85,7 @@ Pop $CasperSlider
 
 SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
 SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value $RemainingSpace
-${NSD_OnNotify} $CasperSlider onNotify_CasperSlider
+${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்
 
 ; Drive Pre-Selection
 ${NSD_CreateLabel} 0 0 58% 15 "" ; was 58%
@@ -217,7 +217,7 @@ Pop $CasperSlider
 
 SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
 SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value $RemainingSpace
-${NSD_OnNotify} $CasperSlider onNotify_CasperSlider
+${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்
 
 ; Add Home Link
 ${NSD_CreateLink} 0 215 16% 15 "Home Page"
@@ -531,7 +531,7 @@ ${GetBaseName} "$JustISO" $JustISOName
 ${StrRep} '$JustISOName' '$JustISOName' ' ' '-'
 ${GetParent} "$TheISO" $JustISOPath
 StrCpy $LocalSelection "Yes"
-Call SetISOSize
+Call உதநிஅளவைஅமை
 Call SetSpace
 Call CheckSpace
 Call HaveSpacePre
@@ -1118,7 +1118,7 @@ FunctionEnd
 
 
 Function லினக்சுஉட்கரு_கண்டுபிடி ; find the path location of
-; FindFirst $0 $1 "$FindVmlinuzPath"
+; FindFirst $0 $1 "$லினக்சுஉட்கரு_கண்டுபிடிPath"
 loop:
 StrCmp $1 "" done
 ;DetailPrint கண்டறியப்பட்டது $1

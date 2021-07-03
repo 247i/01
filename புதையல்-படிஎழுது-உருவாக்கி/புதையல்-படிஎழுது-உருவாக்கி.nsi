@@ -130,7 +130,7 @@ Function SelectionsPage
 
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 256 ; Min Range Value 256
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value 4090
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider      
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்      
   
   nsDialogs::Show
 FunctionEnd
@@ -266,7 +266,7 @@ ${EndIf}
 FunctionEnd
 
 
-Function onNotify_CasperSlider
+Function புதையல்நிலைமாற்றிஅறிவிப்பதில்
 Pop $Casper
 SendMessage $CasperSlider ${TBM_GETPOS} 0 0 $Casper ; Get Trackbar position
 ${NSD_SetText} $SlideSpot "$Casper MB"

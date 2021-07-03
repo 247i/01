@@ -266,7 +266,7 @@ Function SelectionsPage
   Pop $CasperSlider
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider    
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்    
 
 ; Drive Pre-Selection  
   ${NSD_CreateLabel} 0 0 58% 15 ""
@@ -422,7 +422,7 @@ Function SelectionsPage
 
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider  
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்  
 
 ; Add Home Link
   ${NSD_CreateLink} 0 215 16% 15 "Home Page"
@@ -794,7 +794,7 @@ Function ISOBrowse
 ;MessageBox MB_OK $JustISOName 
  ${GetParent} "$TheISO" $JustISOPath
  StrCpy $LocalSelection "Yes"
-  Call SetISOSize
+  Call உதநிஅளவைஅமை
   Call SetSpace
   Call CheckSpace
   Call HaveSpacePre
@@ -1620,13 +1620,13 @@ StrCpy $R9 0 ; we start on page 0
   SetOutPath ""  
 FunctionEnd
 
-Function onNotify_CasperSlider
+Function புதையல்நிலைமாற்றிஅறிவிப்பதில்
  Pop $Casper
  SendMessage $CasperSlider ${TBM_GETPOS} 0 0 $Casper ; Get Trackbar position
  ${NSD_SetText} $SlideSpot "$Casper MB"
 FunctionEnd
 
-Function SetISOSize ; Get size of ISO
+Function உதநிஅளவைஅமை ; Get size of ISO
  System::Call 'kernel32::CreateFile(t "$TheISO", i 0x80000000, i 1, i 0, i 3, i 0, i 0) i .r0'
  System::Call "kernel32::GetFileSizeEx(i r0, *l .r1) i .r2"
  System::Alloc $1

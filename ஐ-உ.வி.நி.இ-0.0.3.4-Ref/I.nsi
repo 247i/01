@@ -259,7 +259,7 @@ Function SelectionsPage
 
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value $RemainingSpace
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider    
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்    
 
 ; Drive Pre-Selection  
   ${NSD_CreateLabel} 0 0 58% 15 "" ; was 58%
@@ -391,7 +391,7 @@ Function SelectionsPage
 
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value $RemainingSpace
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider    
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்    
 
 ; Add Home Link
   ${NSD_CreateLink} 0 215 16% 15 "Home Page"
@@ -755,7 +755,7 @@ Function ISOBrowse
  ${StrRep} '$JustISOName' '$JustISOName' ' ' '-'
  ${GetParent} "$TheISO" $JustISOPath
  StrCpy $LocalSelection "Yes"
-  Call SetISOSize
+  Call உதநிஅளவைஅமை
   Call SetSpace
   Call CheckSpace
   Call HaveSpacePre
@@ -1327,13 +1327,13 @@ StrCpy $R9 0 ; we start on page 0
   File /oname=$PLUGINSDIR\diskpartwipe2.txt "menu\diskpartwipe2.txt"    
 FunctionEnd
 
-Function onNotify_CasperSlider
+Function புதையல்நிலைமாற்றிஅறிவிப்பதில்
  Pop $Casper
  SendMessage $CasperSlider ${TBM_GETPOS} 0 0 $Casper ; Get Trackbar position
  ${NSD_SetText} $SlideSpot "$Casper MB"
 FunctionEnd
 
-Function SetISOSize ; Get size of ISO
+Function உதநிஅளவைஅமை ; Get size of ISO
  System::Call 'kernel32::CreateFile(t "$TheISO", i 0x80000000, i 1, i 0, i 3, i 0, i 0) i .r0'
  System::Call "kernel32::GetFileSizeEx(i r0, *l .r1) i .r2"
  System::Alloc $1
@@ -1344,7 +1344,7 @@ Function SetISOSize ; Get size of ISO
  System::Call 'kernel32::CloseHandle(i r0)'
 FunctionEnd
 
-Function FindInitrd
+Function ஆரம்பசீவ_கண்டுபிடி
 ; FindFirst $0 $1 "$FindInitPath"
  loop:
   StrCmp $1 "" done
@@ -1356,8 +1356,8 @@ Function FindInitrd
  FindClose $0
  FunctionEnd
  
- Function FindVmlinuz
-; FindFirst $0 $1 "$FindVmlinuzPath"
+ Function லினக்சுஉட்கரு_கண்டுபிடி
+; FindFirst $0 $1 "$லினக்சுஉட்கரு_கண்டுபிடிPath"
  loop:
   StrCmp $1 "" done
   ;DetailPrint Found $1

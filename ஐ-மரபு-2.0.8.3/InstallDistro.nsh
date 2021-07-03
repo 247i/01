@@ -770,7 +770,7 @@ FunctionEnd
 	 ${ElseIf} $DistroName == "Try Unlisted ISO (Virtual Hard Disk DD)"  
 	 CopyFiles "$PLUGINSDIR\dd-diskpart.txt" "$BootDir\multiboot\$JustISOName\dd-diskpart.txt" 
 	 CopyFiles "$PLUGINSDIR\diskpartdetach.txt" "$BootDir\multiboot\$JustISOName\diskpartdetach.txt"   
-	 Call SetISOSize
+	 Call உதநிஅளவைஅமை
 	 IntOp $VHDSize $SizeOfCasper + 100 ; add buffer space for vhd
 	 !insertmacro ReplaceInFile "DSK" "$BootDir\multiboot\$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\dd-diskpart.txt" 
 	 !insertmacro ReplaceInFile "SLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\dd-diskpart.txt" 
@@ -802,7 +802,7 @@ FunctionEnd
 	 !insertmacro ReplaceInFile "ISONAMESLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\autounattend.xml"  
 	 !insertmacro ReplaceInFile "ISONAMESLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\au.txt"  
 	 !insertmacro ReplaceInFile "BOOTDIRSLUG" "$BootDir" "all" "all" "$BootDir\multiboot\$JustISOName\au.txt" 
-	 Call SetISOSize
+	 Call உதநிஅளவைஅமை
 	 IntOp $VHDSize $SizeOfCasper + 100 ; add buffer space for vhd
 	 !insertmacro ReplaceInFile "DSK" "$BootDir\multiboot\$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\diskpart.txt" 
 	 !insertmacro ReplaceInFile "SLUG" "$JustISOName" "all" "all" "$BootDir\multiboot\$JustISOName\diskpart.txt" 

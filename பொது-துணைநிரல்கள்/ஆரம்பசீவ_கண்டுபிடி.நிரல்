@@ -1,0 +1,11 @@
+﻿Function ஆரம்பசீவ_கண்டுபிடி
+; FindFirst $0 $1 "$FindInitPath"
+ loop:
+  StrCmp $1 "" done
+  ;DetailPrint கண்டறியப்பட்டது $1
+  StrCpy $Initrd $1 
+  FindNext $0 $1
+  Goto loop
+ done:
+ FindClose $0
+FunctionEnd

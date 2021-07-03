@@ -83,7 +83,7 @@ Function தேர்வுகள்பக்கம்
 
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value $RemainingSpace
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider    
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்    
 
 ; Drive Pre-Selection  
   ${NSD_CreateLabel} 0 0 58% 15 "" ; was 58%
@@ -208,7 +208,7 @@ Function தேர்வுகள்பக்கம்
 
   SendMessage $CasperSlider ${TBM_SETRANGEMIN} 1 0 ; Min Range Value 0
   SendMessage $CasperSlider ${TBM_SETRANGEMAX} 1 $RemainingSpace ; Max Range Value $RemainingSpace
-  ${NSD_OnNotify} $CasperSlider onNotify_CasperSlider    
+  ${NSD_OnNotify} $CasperSlider புதையல்நிலைமாற்றிஅறிவிப்பதில்    
 
 ; Add Home Link
   ${NSD_CreateLink} 0 215 16% 15 "Home Page"
@@ -262,8 +262,6 @@ Function ListAllDrives ; Set to Display All Drives
   SendMessage $DestDriveTxt ${CB_RESETCONTENT} 0 0 
   ${GetDrives} "FDD+HDD" DrivesList
 FunctionEnd
-
-
 
 Function EnableNext ; Enable Install Button
   #${If} $Blocksize >= 4 
@@ -350,8 +348,6 @@ Function EnableNext ; Enable Install Button
   ${EndIf}    
 FunctionEnd
 
-; !include சரம்கொண்டுள்ளது.nsh ; Let's check if a * wildcard exists
- 
 ; On Selection of Linux Distro
 Function OnSelectDistro
   Pop $Distro
@@ -460,7 +456,7 @@ Function ISOBrowse
  ${StrRep} '$JustISOName' '$JustISOName' ' ' '-'
  ${GetParent} "$TheISO" $JustISOPath
  StrCpy $LocalSelection "Yes"
-  Call SetISOSize
+  Call உதநிஅளவைஅமை
   Call SetSpace
   Call CheckSpace
   Call HaveSpacePre
@@ -1022,46 +1018,9 @@ StrCpy $R9 0 ; உரிமை உரை தவிர், பக்கம் 0�
   File /oname=$PLUGINSDIR\diskpartwipe2.txt "menu\diskpartwipe2.txt"    
 FunctionEnd
 
-Function onNotify_CasperSlider
- Pop $Casper
- SendMessage $CasperSlider ${TBM_GETPOS} 0 0 $Casper ; Get Trackbar position
- ${NSD_SetText} $SlideSpot "$Casper MB"
-FunctionEnd
-
-Function SetISOSize ; Get size of ISO
- System::Call 'kernel32::CreateFile(t "$TheISO", i 0x80000000, i 1, i 0, i 3, i 0, i 0) i .r0'
- System::Call "kernel32::GetFileSizeEx(i r0, *l .r1) i .r2"
- System::Alloc $1
- System::Int64Op $1 / 1048576 ; convert to MB
- Pop $1
- StrCpy $SizeOfCasper "$1"
- # MessageBox MB_OK|MB_ICONINFORMATION "ISO Size: $SizeOfCasper"
- System::Call 'kernel32::CloseHandle(i r0)'
-FunctionEnd
-
-Function FindInitrd
-; FindFirst $0 $1 "$FindInitPath"
- loop:
-  StrCmp $1 "" done
-  ;DetailPrint Found $1
-  StrCpy $Initrd $1 
-  FindNext $0 $1
-  Goto loop
- done:
- FindClose $0
- FunctionEnd
- 
- Function FindVmlinuz
-; FindFirst $0 $1 "$FindVmlinuzPath"
- loop:
-  StrCmp $1 "" done
-  ;DetailPrint Found $1
-  StrCpy $Vmlinuz $1 
-  FindNext $0 $1
-  Goto loop
- done:
- FindClose $0
-FunctionEnd
+!include ..\பொது-துணைநிரல்கள்\புதையல்நிலை.நிரல்
+!include ..\பொது-துணைநிரல்கள்\ஆரம்பசீவ_கண்டுபிடி.நிரல்
+!include ..\பொது-துணைநிரல்கள்\லினக்சுஉட்கரு_கண்டுபிடி.நிரல்
 
 Function GetFSType
 System::Call 'Kernel32::GetVolumeInformation(t "$JustDrive",t,i ${NSIS_MAX_STRLEN},*i,*i,*i,t .r1" ,i ${NSIS_MAX_STRLEN}) i.r0'

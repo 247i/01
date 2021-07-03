@@ -1,0 +1,11 @@
+﻿Function லினக்சுஉட்கரு_கண்டுபிடி 
+; FindFirst $0 $1 "$லினக்சுஉட்கரு_கண்டுபிடிPath"
+ loop:
+  StrCmp $1 "" done
+  ;DetailPrint கண்டறியப்பட்டது $1
+  StrCpy $Vmlinuz $1
+  FindNext $0 $1
+  Goto loop
+ done:
+ FindClose $0
+FunctionEnd

@@ -217,9 +217,9 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
  FindFirst $0 $1 "$BDir\!\$JustISOName\isolinux\initrd*"
- Call FindInitrd
+ Call ஆரம்பசீவ_கண்டுபிடி
  FindFirst $0 $1 "$BDir\!\$JustISOName\isolinux\vmlinuz*"
- Call FindVmlinuz
+ Call லினக்சுஉட்கரு_கண்டுபிடி
  ;${StrRep} '$ISONameDotLess' '$JustISOName' '-x86_64-' '-'
  ${StrRep} '$ISONameDotLess' '$JustISOName' '.' '-'
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nloopback loop /!/$JustISOName/$JustISO$\r$\nlinux (loop)/isolinux/$Vmlinuz iso-scan/filename=/!/$JustISOName/$JustISO rootfstype=auto root=live:CDLABEL=$ISONameDotLess ro rd.live.image$\r$\necho $\"Loading - This may take several seconds...$\"$\r$\ninitrd (loop)/isolinux/$Initrd$\r$\n}$\r$\n#end $JustISOName" $R0  
@@ -316,9 +316,9 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
  FindFirst $0 $1 "$BDir\!\$JustISOName\live\initrd*" 
- Call FindInitrd
+ Call ஆரம்பசீவ_கண்டுபிடி
  FindFirst $0 $1 "$BDir\!\$JustISOName\live\*mlinu*"
- Call FindVmlinuz
+ Call லினக்சுஉட்கரு_கண்டுபிடி
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
  !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
@@ -336,9 +336,9 @@ FunctionEnd
   ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
   FindFirst $0 $1 "$BDir\!\$JustISOName\live\initrd*" 
-  Call FindInitrd
+  Call ஆரம்பசீவ_கண்டுபிடி
   FindFirst $0 $1 "$BDir\!\$JustISOName\live\*mlinu*"
-  Call FindVmlinuz
+  Call லினக்சுஉட்கரு_கண்டுபிடி
  
   ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
   !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
@@ -361,9 +361,9 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" x "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
  FindFirst $0 $1 "$BDir\!\$JustISOName\initrd*" 
- Call FindInitrd
+ Call ஆரம்பசீவ_கண்டுபிடி
  FindFirst $0 $1 "$BDir\!\$JustISOName\vmlinuz*"
- Call FindVmlinuz
+ Call லினக்சுஉட்கரு_கண்டுபிடி
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
  !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
@@ -381,9 +381,9 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
  FindFirst $0 $1 "$BDir\!\$JustISOName\*initrd*" 
- Call FindInitrd
+ Call ஆரம்பசீவ_கண்டுபிடி
  FindFirst $0 $1 "$BDir\!\$JustISOName\*mlinu*"
- Call FindVmlinuz
+ Call லினக்சுஉட்கரு_கண்டுபிடி
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
  !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
@@ -401,9 +401,9 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitr* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
  FindFirst $0 $1 "$BDir\!\$JustISOName\*initr*" 
- Call FindInitrd
+ Call ஆரம்பசீவ_கண்டுபிடி
  FindFirst $0 $1 "$BDir\!\$JustISOName\*mlinu*"
- Call FindVmlinuz
+ Call லினக்சுஉட்கரு_கண்டுபிடி
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
  !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   
@@ -421,9 +421,9 @@ FunctionEnd
  ExecWait '"$PLUGINSDIR\7zG.exe" e "$ISOFile" -ir!*nitrd* -ir!*mlinu* -o"$BDir\!\$JustISOName\" -y'  
  
  FindFirst $0 $1 "$BDir\!\$JustISOName\*initrd*" 
- Call FindInitrd
+ Call ஆரம்பசீவ_கண்டுபிடி
  FindFirst $0 $1 "$BDir\!\$JustISOName\*mlinu*"
- Call FindVmlinuz
+ Call லினக்சுஉட்கரு_கண்டுபிடி
  
  ${WriteToFile} "#start $JustISOName$\r$\nmenuentry $\"$JustISOName$\" {$\r$\nset gfxpayload=keep$\r$\nconfigfile /!/$JustISOName/grub.cfg$\r$\n}$\r$\n#end $JustISOName" $R0    
  !insertmacro கோப்பில்மாற்று "menuentry $\"BOOT$\"" "menuentry $\"$JustISOName$\"" "all" "all" "$BDir\!\$JustISOName\grub.cfg"   

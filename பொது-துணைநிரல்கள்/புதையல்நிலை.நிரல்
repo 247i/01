@@ -4,7 +4,7 @@
  ${NSD_SetText} $SlideSpot "$Casper MB"
 FunctionEnd
 
-Function உதநிஅளவைஅமை ; Get size of உதநி
+Function உதநிஅளவைஅமை ; Get அளவு of உதநி
  System::Call 'kernel32::CreateFile(t "$TheISO", i 0x80000000, i 1, i 0, i 3, i 0, i 0) i .r0'
  System::Call "kernel32::GetFileSizeEx(i r0, *l .r1) i .r2"
  System::Alloc $1
