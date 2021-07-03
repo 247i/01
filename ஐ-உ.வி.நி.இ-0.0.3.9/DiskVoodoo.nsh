@@ -9,7 +9,7 @@
 !define Write2mbrid "!insertmacro Write2mbrid"
 
 Function "MBRID" ; Let's Get the MBRID for OpenSUSE
- Call PhysDrive ; Get the Hard Disk Number from the Drive Letter
+ Call இயற்பியக்கி ; Get the Hard Disk Number from the Drive Letter
  nsexec::exectostack "wmic /NAMESPACE:\\root\CIMV2 path Win32_DiskDrive where name='\\\\.\\PHYSICALDRIVE$0' get Signature /VALUE" ; Use WMIC to get the PhysicalDrive Signature
  pop $0
  pop $1 ; Signature is stored here
@@ -21,10 +21,10 @@ Function "MBRID" ; Let's Get the MBRID for OpenSUSE
  ${Write2mbrid} "$OnlyVal" $R0
 FunctionEnd
 
- Function PhysDrive
+ Function இயற்பியக்கி
  StrCpy $1 "$JustDrive"
  Push $1
- Call HDDNumber  
+ Call வன்வட்டுஎண்  
  StrCpy $DiskNum $0
  FunctionEnd
 
@@ -41,37 +41,10 @@ Function Write2mbrid
  Pop $R0
 FunctionEnd
 
-; The following code was found here: http://forums.winamp.com/showthread.php?t=317579
-; File Access Modes
-!define GENERIC_READ         0x80000000
-!define GENERIC_WRITE        0x40000000
-
-; File Sharing Modes
-!define FILE_SHARE_READ      0x00000001
-!define FILE_SHARE_WRITE     0x00000002
-
-; File Creation Flags
-!define OPEN_EXISTING        3
-!define INVALID_HANDLE_VALUE -1
-
-; Maximum length of volume GUID (including terminating zero)
-!define MAXLEN_VOLUME_GUID   51
-
-; I/O control command
-!define IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS   0x00560000
-!define EXTENTS_BUFFER_SIZE  512
-; Dismount_Volume
-!define FSCTL_DISMOUNT_VOLUME 0x00090020
-
-; Lock_Volume
-!define FSCTL_LOCK_VOLUME 0x00090018
-
-; Unlock_Volume
-!define FSCTL_UNLOCK_VOLUME 0x0009001c										
 ; Get hard disk number from drive letter
 ; provided as a parameter to this function.
 ; The hard disk number is returned in $0.
-Function HDDNumber
+Function வன்வட்டுஎண்
   ; Save registers
   Exch $1
   Push $2

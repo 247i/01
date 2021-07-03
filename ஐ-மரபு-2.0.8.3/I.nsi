@@ -289,7 +289,7 @@ Function SelectionsPage
   StrCpy $DestDisk $DestDrive 2
   StrCpy $9 $JustDrive
   Call GetFSType
-  Call PhysDrive
+  Call இயற்பியக்கி
   SendMessage $Distro ${CB_RESETCONTENT} 0 0 ; was ${NSD_LB_Clear} $Distro "" ; Clear all distro entries because a new drive may have been chosen ; Enable for DropBox
   StrCpy $Checker "Yes"  
   Call InstallorRemove
@@ -925,7 +925,7 @@ Function OnSelectDrive
   
   StrCpy $9 $JustDrive
   Call GetFSType
-  Call PhysDrive
+  Call இயற்பியக்கி
   ${NSD_SetText} $LabelDrivePage "Step 1: You Selected $DestDisk on (Disk $DiskNum) as your USB Device"   
   ;MessageBox MB_ICONSTOP|MB_OK " $9 $FSType" 
   
@@ -995,7 +995,7 @@ FunctionEnd
 
 Function DrivesList
  StrCpy $JustDrive $9
- Call PhysDrive
+ Call இயற்பியக்கி
  Call GetDiskVolumeName
  Call DiskSpace
  Call GetFSType

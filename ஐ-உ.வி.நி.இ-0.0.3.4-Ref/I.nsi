@@ -125,8 +125,8 @@ Var PERCENT
 Var FSType
 Var DiskNum
 
-!include ReplaceInFile.nsh
-!include DiskVoodoo.nsh 
+!include நிரல்கள்\ReplaceInFile.nsh
+!include நிரல்கள்\DiskVoodoo.nsh 
 
 ; Interface settings
 !define MUI_FINISHPAGE_NOAUTOCLOSE
@@ -190,10 +190,10 @@ LangString Finish_Title ${LANG_ENGLISH} "Thanks for using ${NAME}"
 LangString Finish_Text ${LANG_ENGLISH} "Your Selections have been $InUnStalled on your USB drive.$\r$\n$\r$\nFeel Free to run this tool again to $InUnStall more Distros.$\r$\n$\r$\nYUMI will keep track of selections you have already $InUnStalled."
 LangString Finish_Link ${LANG_ENGLISH} "Visit the YUMI Home Page"
 
-!include FileManipulation.nsh ; Text File Manipulation
-!include FileNames.nsh ; Macro for FileNames
-!include DistroList.nsh ; List of Distributions
-!include சரம்கொண்டுள்ளது.nsh ; Let's check if a * wildcard exists
+!include நிரல்கள்\FileManipulation.nsh ; Text File Manipulation
+!include நிரல்கள்\FileNames.nsh ; Macro for FileNames
+!include நிரல்கள்\DistroList.nsh ; List of Distributions
+!include நிரல்கள்\சரம்கொண்டுள்ளது.nsh ; Let's check if a * wildcard exists
 !include "CasperScript.nsh" ; For creation of Persistent Casper-rw files
 
 Function License_PreFunction
@@ -849,7 +849,7 @@ Function OnSelectDrive
   StrCpy $BootDir $DestDrive 2 ;was -1 
   StrCpy $DestDisk $DestDrive 2 ;was -1
 
-  Call PhysDrive
+  Call இயற்பியக்கி
   Call GetFSType
    ${If} $FSType == "exFAT"
    ${OrIf} $FSType == "NTFS"
@@ -898,7 +898,7 @@ FunctionEnd
 
 Function DrivesList
  StrCpy $JustDrive $9
- Call PhysDrive
+ Call இயற்பியக்கி
  Call GetDiskVolumeName
  Call DiskSpace
  Call GetFSType

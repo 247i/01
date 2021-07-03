@@ -25,7 +25,7 @@
 !define Write2mbrid "!insertmacro Write2mbrid"
 
 Function "MBRID" ; Let's Get the MBRID for OpenSUSE
- Call PhysDrive ; Get the Hard Disk Number from the Drive Letter
+ Call இயற்பியக்கி ; Get the Hard Disk Number from the Drive Letter
  nsexec::exectostack "wmic /NAMESPACE:\\root\CIMV2 path Win32_DiskDrive where name='\\\\.\\PHYSICALDRIVE$0' get Signature /VALUE" ; Use WMIC to get the PhysicalDrive Signature
  pop $0
  pop $1 ; Signature is stored here
@@ -37,7 +37,7 @@ Function "MBRID" ; Let's Get the MBRID for OpenSUSE
  ${Write2mbrid} "$OnlyVal" $R0
 FunctionEnd
 
-Function PhysDrive
+Function இயற்பியக்கி
  StrCpy $1 "$JustDrive"
  Push $1
  Call HDDNumber  

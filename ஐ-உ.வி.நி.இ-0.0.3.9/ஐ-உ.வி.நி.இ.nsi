@@ -13,6 +13,7 @@
 ;!include TextFunc.nsh
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
+!include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை-மாறிலி.நிரல்
 !include DiskVoodoo.nsh ;துவக்கதட்டுஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\ஒழுங்கமை.நிரல்
 !include FileManipulation.nsh ; Text File Manipulation - கோப்புதிருத்தி.நிரல் 
@@ -545,7 +546,7 @@ Function OnSelectDrive
   StrCpy $BDir $DestDrive 2 ;was -1 
   StrCpy $DestDisk $DestDrive 2 ;was -1
 
-  Call PhysDrive
+  Call இயற்பியக்கி
   Call GetFSType
    ${If} $FSType == "exFAT"
    ${OrIf} $FSType == "NTFS"
@@ -594,7 +595,7 @@ FunctionEnd
 
 Function DrivesList
  StrCpy $JustDrive $9
- Call PhysDrive
+ Call இயற்பியக்கி
  Call GetDiskVolumeName
  Call DiskSpace
  Call GetFSType

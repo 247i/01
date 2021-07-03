@@ -1,0 +1,27 @@
+﻿; File Access Modes
+!define GENERIC_READ         0x80000000
+!define GENERIC_WRITE        0x40000000
+
+; File Sharing Modes
+!define FILE_SHARE_READ      0x00000001
+!define FILE_SHARE_WRITE     0x00000002
+
+; File Creation Flags
+!define OPEN_EXISTING        3
+!define INVALID_HANDLE_VALUE -1
+
+; Maximum length of volume GUID (including terminating zero)
+!define MAXLEN_VOLUME_GUID   51
+
+; I/O control command
+!define IOCTL_VOLUME_GET_VOLUME_DISK_EXTENTS   0x00560000
+!define EXTENTS_BUFFER_SIZE  512
+
+; Dismount_Volume
+!define FSCTL_DISMOUNT_VOLUME 0x00090020
+
+; Lock_Volume
+!define FSCTL_LOCK_VOLUME 0x00090018
+
+; Unlock_Volume
+!define FSCTL_UNLOCK_VOLUME 0x0009001c

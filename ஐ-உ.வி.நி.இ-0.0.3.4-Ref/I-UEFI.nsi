@@ -8,22 +8,22 @@
 !include ..\பொது-துணைநிரல்கள்\ஒருங்குறிஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\கோப்பில்மாற்று.நிரல்
 !include ..\பொது-துணைநிரல்கள்\உரைமுறைகள்.நிரல்
-!include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை.நிரல்
-!include I-UEFI\DiskVoodoo.nsh
+!include  நிரல்கள்\DiskVoodoo.nsh
+!include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை-மாறிலி.நிரல்
 !include ..\பொது-துணைநிரல்கள்\வட்டுபொதுஉரை.நிரல்
 !include ..\பொது-துணைநிரல்கள்\புதையல்பொதுஉரை.நிரல் ; For creation of Persistent Casper-rw files
 !include  ..\பொது-துணைநிரல்கள்\இணைப்பு.நிரல்
 
-!include I-UEFI\FileManipulation.nsh ; Text File Manipulation
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
+!include  நிரல்கள்\FileManipulation.nsh ; Text File Manipulation
+;!include நிரல்கள்\கோப்புதிருத்தி.நிரல் ; Text File Manipulation
 !include ..\பொது-துணைநிரல்கள்\சரம்மாற்று.நிரல்
 !include ..\பொது-துணைநிரல்கள்\தவமுன்னேற்றம்.நிரல் ; நிலைத்தன்மை கோப்பை உருவாக்குதல் முன்னேற்றம்
 
-!include I-UEFI\FileNames.nsh ; Macro for FileNames
-!include ஐ-உ.வி.நி.இ\நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
+!include  நிரல்கள்\FileNames.nsh ; Macro for FileNames
+!include நிரல்கள்\விநியோகபட்டியல்.நிரல் ; List of Distributions
 !include ..\பொது-துணைநிரல்கள்\சரம்கொண்டுள்ளது.நிரல் ; Let's check if a * wildcard exists
 
-!include I-UEFI\புதையல்உரை.நிரல் ; For creation of Persistent Casper-rw files
+!include  நிரல்கள்\புதையல்உரை.நிரல் ; For creation of Persistent Casper-rw files
 
 
 Function SelectionsPage
@@ -625,7 +625,7 @@ StrCpy $JustDrive $DestDrive 3
 StrCpy $BootDir $DestDrive 2 ;was -1
 StrCpy $DestDisk $DestDrive 2 ;was -1
 
-Call PhysDrive
+Call இயற்பியக்கி
 Call GetFSType
 ${If} $FSType == "exFAT"
 ${OrIf} $FSType == "NTFS"
@@ -674,7 +674,7 @@ FunctionEnd
 
 Function DrivesList
 StrCpy $JustDrive $9
-Call PhysDrive
+Call இயற்பியக்கி
 Call GetDiskVolumeName
 Call DiskSpace
 Call GetFSType
