@@ -30,3 +30,20 @@ end run:
 sudo update-initramfs -u
 _____________________________________________________
 
+Additional GRUB Options:
+
+to customize your GRUB2 settings, you’ll have to edit the /etc/default/grub file 
+and then run the sudo update-grub command. 
+"sudo gedit /etc/default/grub" 
+# in that file add/edit the following lines.
+# By default, GRUB_DEFAULT=0 (line number) uses the first entry as the default 
+GRUB_DEFAULT=0  
+# To change the timeout period, edit the below line and enter any number of seconds you like. 
+GRUB_TIMEOUT=10 
+# To change background
+GRUB_BACKGROUND="/usr/share/plymouth/themes/அணிகலன்/ஐ56-1.png"
+
+
+
+After saving and closing the file enter the following command in the terminal
+"sudo update-grub"
