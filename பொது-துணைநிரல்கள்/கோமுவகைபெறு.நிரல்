@@ -1,4 +1,0 @@
-﻿Function கோமுவகைபெறு ; கோப்பு முறைமை வகையை அறிய.
-System::Call 'Kernel32::GetVolumeInformation(t "$JustDrive",t,i ${NSIS_MAX_STRLEN},*i,*i,*i,t .r1" ,i ${NSIS_MAX_STRLEN}) i.r0'
-StrCpy $FSType "$1"
-FunctionEnd
