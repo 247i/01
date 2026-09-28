@@ -1,0 +1,9 @@
+run this command
+shell:::{bb06c0e4-d293-4f75-8a90-cb05b6477eee}
+
+How to Use Private Character Editor
+C:\Windows\System32\eudcedit.exe.
+
+Ref:https://www.howto-connect.com/windows-10-private-character-editor/
+
+
