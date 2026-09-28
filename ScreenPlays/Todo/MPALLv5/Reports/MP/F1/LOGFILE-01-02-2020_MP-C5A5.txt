@@ -1,0 +1,2 @@
+MP\F1\C5A5\
+MP_7f00_05.03.0a,1-2-2020 14:14:33s, Drive: D,R/W= 0%,Test Time:0, Time taken: 18.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=8, Firmware Version: 1.01.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x18,  [CS]:0xF340B40A

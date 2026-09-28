@@ -1,0 +1,4 @@
+custom\F1\9270\
+MP_7f00_05.03.0a,23-9-2019 22:43:38s, Drive: F,R/W= 0%,Test Time:0, Time taken:  9.6 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.14.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x11,  [CS]:0x285115F0
+MP_7f00_05.03.0a,23-9-2019 23:13:39s, Drive: F,R/W= 0%,Test Time:0, Time taken: 37.6 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (0041)   
+ 0x0041, ISP Mode: 0x18,  [CS]:0xB8C7ED9A

@@ -1,0 +1,28 @@
+@echo off
+Rem cd %cd%
+cd %~dp0
+call Launch.bat PAp "7-ZipPortable"
+call Launch.bat PAp "AIMPPortable"
+call Launch.bat PAp "ArthaPortable"
+call Launch.bat PAp "AutorunsPortable"
+call Launch.bat PAp "ccPortable"
+call Launch.bat PAp "CamStudioPortable"
+call Launch.bat PAp "ClamWinPortable"
+call Launch.bat PAp "DicomPortable"
+call Launch.bat PAp "DittoPortable"
+call Launch.bat PAp "DSynchronizePortable"
+call Launch.bat XPA "Everything" "-startup"
+call Launch.bat PAp "FastCopyPortable"
+call Launch.bat PAp "Mp3Tag"
+call Launch.bat PAp "Notepad++Portable"
+call Launch.bat PAp "PeerBlockPortable"
+call Launch.bat PAp "SumatraPDFPortable"
+call Launch.bat XPA "StrokesPlus" "" "Signed"
+call Launch.bat SAp "..\sysinternalsTools" "Autologon"
+call Launch.bat PAp "ThunderbirdPortable"
+call Launch.bat PAp "TyperTaskPortable"
+call Launch.bat PAp "VLCPortable"
+call Launch.bat PAp "VirtualMagnifyingGlassPortable"
+call Launch.bat PAp "WorkravePortable"
+call Launch.bat PAp "ZoomItPortable"
+exit

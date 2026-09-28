@@ -1,0 +1,7 @@
+[Date]
+Year=2020
+Month=1
+Day=26
+[Card Status]
+Good=0
+Bad=1

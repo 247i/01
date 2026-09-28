@@ -1,0 +1,7 @@
+[Date]
+Year=2016
+Month=6
+Day=7
+[Card Status]
+Good=0
+Bad=3

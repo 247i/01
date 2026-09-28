@@ -1,0 +1,24 @@
+MP\F1\9270\
+MP_7f00_05.03.0a,24-9-2019 21:21:34s, Drive: F,R/W= 0%,Test Time:0, Time taken: 239.9 seconds, Capacity:    0, Serial Number:   ,07087B16BB1DDF73, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 5.02.55, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0xFAAA3B96
+MP_7f00_05.03.0a,24-9-2019 21:28:02s, Drive: F,R/W= 0%,Test Time:0, Time taken: 243.4 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (1107)   program firmware fail 0x1107, ISP Mode: 0x18,  [CS]:0x8A494696
+MP_7f00_05.03.0a,24-9-2019 21:33:08s, Drive: F,R/W= 0%,Test Time:0, Time taken: 235.7 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x10FBE8EC
+MP_7f00_05.03.0a,24-9-2019 21:34:27s, Drive: G,R/W= 0%,Test Time:0, Time taken: 314.7 seconds, Capacity:    0, Serial Number:   ,070873DAB7549811, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 5.01.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x11,  [CS]:0x88546D7D
+MP_7f00_05.03.0a,24-9-2019 21:41:32s, Drive: F,R/W= 0%,Test Time:0, Time taken: 232.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x10D66894
+MP_7f00_05.03.0a,24-9-2019 21:42:52s, Drive: G,R/W= 0%,Test Time:0, Time taken: 312.4 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 1.01.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x11,  [CS]:0x23AE2742
+MP_7f00_05.03.0a,24-9-2019 22:05:48s, Drive: F,R/W= 0%,Test Time:0, Time taken: 233.6 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x110C88BC
+MP_7f00_05.03.0a,24-9-2019 22:29:20s, Drive: F,R/W= 0%,Test Time:0, Time taken: 232.9 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x10C98914
+MP_7f00_05.03.0a,24-9-2019 22:45:06s, Drive: F,R/W= 0%,Test Time:0, Time taken: 157.8 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x18,  [CS]:0x298174DD
+MP_7f00_05.03.0a,24-9-2019 22:49:35s, Drive: F,R/W= 0%,Test Time:0, Time taken: 233.2 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x10F6883C
+MP_7f00_05.03.0a,24-9-2019 22:57:17s, Drive: F,R/W= 0%,Test Time:0, Time taken: 230.3 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x10FD0844
+MP_7f00_05.03.0a,24-9-2019 22:58:39s, Drive: G,R/W= 0%,Test Time:0, Time taken: 312.3 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=12, Firmware Version: 1.01.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x11,  [CS]:0x03AE65E2
+MP_7f00_05.03.0a,24-9-2019 23:03:48s, Drive: F,R/W= 0%,Test Time:0, Time taken: 179.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (0040)   
+ 0x0040, ISP Mode: 0x18,  [CS]:0x510610B5
+MP_7f00_05.03.0a,24-9-2019 23:08:50s, Drive: F,R/W= 0%,Test Time:0, Time taken: 239.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (110D)   
+ 0x110D, ISP Mode: 0x18,  [CS]:0x10D3A8CC

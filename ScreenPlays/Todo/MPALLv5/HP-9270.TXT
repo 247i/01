@@ -1,0 +1,3 @@
+[Customize Info]
+Serial Number1=0x2
+Serial Number=2

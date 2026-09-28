@@ -1,0 +1,2 @@
+customm\F1\C5A5\
+MP_7f00_05.03.0a,10-2-2020 19:16:50s, Drive: D,R/W= 0%,Test Time:0, Time taken: 19.9 seconds, Capacity:    0, Serial Number:   ,900099639B927000, Flash Number: 0,UIDeviceIndex=12, Firmware Version: 1.12.10, Status: Fail (8001)   Load files fail, please check setting file content 0x8001, ISP Mode: 0x11,  [CS]:0x1B9A4520

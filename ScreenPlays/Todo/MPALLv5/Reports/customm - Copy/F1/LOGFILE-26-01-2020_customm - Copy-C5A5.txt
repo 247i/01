@@ -1,0 +1,2 @@
+customm - Copy\F1\C5A5\
+MP_7f00_05.03.0a,26-1-2020 23:08:01s, Drive: D,R/W= 0%,Test Time:0, Time taken:  8.3 seconds, Capacity: 65536, Serial Number:   ,07087B01DCBD1238, Flash Number: 4,UIDeviceIndex=8, Firmware Version: 5.02.55, Status: Fail (6022)   Read InfoBlock  0x6022 [CS]:0x5DDE76FE

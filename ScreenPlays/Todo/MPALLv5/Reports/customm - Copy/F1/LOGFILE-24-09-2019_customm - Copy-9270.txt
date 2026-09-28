@@ -1,0 +1,3 @@
+customm - Copy\F1\9270\
+MP_7f00_05.03.0a,24-9-2019 23:11:11s, Drive: F,R/W= 0%,Test Time:0, Time taken:  3.9 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=1, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xCCA134D0
+MP_7f00_05.03.0a,24-9-2019 23:11:30s, Drive: G,R/W= 0%,Test Time:0, Time taken:  3.8 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xD790CA2E

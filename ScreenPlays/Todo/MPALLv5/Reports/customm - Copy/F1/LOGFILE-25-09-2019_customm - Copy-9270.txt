@@ -1,0 +1,14 @@
+customm - Copy\F1\9270\
+MP_7f00_05.03.0a,25-9-2019 19:13:43s, Drive: F,R/W= 0%,Test Time:0, Time taken:  4.8 seconds, Capacity: 65536, Serial Number:   ,07085A9EB87D2719, Flash Number: 4,UIDeviceIndex=5, Firmware Version: 5.01.10, Status: Fail (1049)   
+ 0x1049 [CS]:0x23982904
+MP_7f00_05.03.0a,25-9-2019 19:15:25s, Drive: F,R/W= 0%,Test Time:-131011, Time taken: 75.1 seconds, Capacity: 65536, Serial Number: 7F009993CF927000,07085A9DB51C4C13, Flash Number: 4,UIDeviceIndex=11, Firmware Version: 5.01.10, Status: PASS [CS]:0x0A3A45F7
+MP_7f00_05.03.0a,25-9-2019 19:16:57s, Drive: F,R/W= 0%,Test Time:0, Time taken:  4.3 seconds, Capacity: 65536, Serial Number:   ,07085A9EB87D2719, Flash Number: 4,UIDeviceIndex=0, Firmware Version: 5.01.10, Status: Fail (1049)   
+ 0x1049 [CS]:0x28781EB4
+MP_7f00_05.03.0a,25-9-2019 19:17:23s, Drive: F,R/W= 0%,Test Time:0, Time taken:  4.9 seconds, Capacity: 8192, Serial Number:   ,0708471550196640, Flash Number: 1,UIDeviceIndex=11, Firmware Version: 1.11.10, Status: Fail (8019)   Incorrent firmware version 0x8019 [CS]:0x6E0222AA
+MP_7f00_05.03.0a,25-9-2019 19:18:15s, Drive: F,R/W= 0%,Test Time:0, Time taken:  8.6 seconds, Capacity: 8192, Serial Number:   ,7F00823D84740731, Flash Number: 1,UIDeviceIndex=11, Firmware Version: 5.03.55, Status: Fail (6018)   Read OnlyPage  0x6018 [CS]:0x5AE477C3
+MP_7f00_05.03.0a,25-9-2019 19:20:30s, Drive: F,R/W= 0%,Test Time:-131012, Time taken: 78.2 seconds, Capacity: 65536, Serial Number: 7F009993D4927001,07085A9EB87D2719, Flash Number: 4,UIDeviceIndex=11, Firmware Version: 5.01.10, Status: PASS [CS]:0xB1581E02
+MP_7f00_05.03.0a,25-9-2019 19:22:26s, Drive: G,R/W= 0%,Test Time:0, Time taken:  4.9 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xD8498A9E
+MP_7f00_05.03.0a,25-9-2019 19:22:41s, Drive: G,R/W= 0%,Test Time:0, Time taken:  3.8 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xD7C98A4E
+MP_7f00_05.03.0a,25-9-2019 19:40:30s, Drive: G,R/W= 0%,Test Time:0, Time taken:  4.6 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xD79589DE
+MP_7f00_05.03.0a,25-9-2019 19:46:46s, Drive: G,R/W= 0%,Test Time:0, Time taken:  4.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=11, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xD87D899E
+MP_7f00_05.03.0a,25-9-2019 19:56:40s, Drive: F,R/W= 0%,Test Time:0, Time taken:  4.0 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=12, Firmware Version: 1.01.10, Status: Fail (6019)   Read OnlyPage Data 0x6019 [CS]:0xD7CF885D

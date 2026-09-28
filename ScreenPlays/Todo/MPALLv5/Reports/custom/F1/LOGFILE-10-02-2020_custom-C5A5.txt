@@ -1,0 +1,3 @@
+custom\F1\C5A5\
+MP_7f00_05.03.0a,10-2-2020 19:07:54s, Drive: D,R/W= 0%,Test Time:0, Time taken:  8.4 seconds, Capacity: 65536, Serial Number:   ,900099639B927000, Flash Number: 8,UIDeviceIndex=12, Firmware Version: 1.12.10, Status: Fail (1049)   
+ 0x1049 [CS]:0xE90B2DEE

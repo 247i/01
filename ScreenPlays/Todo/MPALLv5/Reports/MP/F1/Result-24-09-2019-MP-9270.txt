@@ -1,0 +1,5 @@
+[Date]
+Day=24
+[Card Status]
+Good=0
+Bad=14

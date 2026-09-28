@@ -1,0 +1,15 @@
+Html Form input types
+<input type= “text”>
+<input type= “password”>
+<input type= “number”>
+<input type= “image”>
+<input type= “range”>
+<input type= “date”>
+<input type= “button”>
+<input type= “checkbox”>
+<input type= “radio”>
+<input type= “file”>
+<input type= “color”>
+<input type= “text”>
+<input type= “text”>
+<input type= “text”>

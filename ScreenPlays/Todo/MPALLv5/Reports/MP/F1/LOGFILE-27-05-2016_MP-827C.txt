@@ -1,0 +1,2 @@
+MP\F1\827C\
+MP_7f00_05.03.0a,27-5-2016 18:09:44s, Drive: H,R/W= 0%,Test Time:-130845, Time taken: 231.2 seconds, Capacity: 65536, Serial Number: 7F0065B2C9827C00,070D62B2EF029643, Flash Number: 1,UIDeviceIndex=3, Firmware Version: 5.02.53, Status: PASS, ISP Mode: 0x18,  [CS]:0xE68937DD

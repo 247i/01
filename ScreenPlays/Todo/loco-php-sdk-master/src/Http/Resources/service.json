@@ -1,0 +1,3123 @@
+{
+    "name": "Loco",
+    "apiVersion": "1.0.19",
+    "baseUri": "https:\/\/localise.biz\/",
+    "description": "Loco REST API",
+    "operations": {
+        "authVerify": {
+            "summary": "Verify an API project key",
+            "responseNotes": "<p>Loco API keys authenticate your user account for accessing a specific project.<br \/>This endpoint verifies an API key and returns the authenticated user, account and project.<\/p>\n<p>If you want to verify whether the key has write access, just send this endpoint a POST request instead. A read-only key will give 403 for any POST request.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/auth\/verify",
+            "name": "authVerify",
+            "responseModel": "Credentials",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/auth\/authverify",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "exportAll": {
+            "summary": "Export your whole project to a multi-locale language pack",
+            "responseNotes": "<p>Export all translations from your project to a multi-locale language pack.<\/p>\n<p>Note that not all formats support multiple locales in the same file. See <code>\/api\/export\/archive<\/code> for exporting separate files,\nand <code>\/api\/export\/locale<\/code> for exporting one language at a time.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/all.{ext}",
+            "name": "exportAll",
+            "responseModel": "exportAll",
+            "parameters": {
+                "ext": {
+                    "name": "ext",
+                    "type": "string",
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "enum": [
+                        "json",
+                        "csv",
+                        "html",
+                        "sql",
+                        "tmx",
+                        "xlf",
+                        "yml"
+                    ],
+                    "location": "uri",
+                    "default": "json"
+                },
+                "filter": {
+                    "name": "filter",
+                    "type": "string",
+                    "required": false,
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
+                    "location": "query"
+                },
+                "index": {
+                    "name": "index",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override default lookup key for the file format: \"id\", \"text\" or a custom alias",
+                    "location": "query"
+                },
+                "source": {
+                    "name": "source",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify alternative source locale instead of project default",
+                    "location": "query"
+                },
+                "fallback": {
+                    "name": "fallback",
+                    "type": "string",
+                    "required": false,
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "location": "query"
+                },
+                "order": {
+                    "name": "order",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations according to asset order",
+                    "enum": [
+                        "created",
+                        "id"
+                    ],
+                    "location": "query"
+                },
+                "printf": {
+                    "name": "printf",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
+                    ],
+                    "location": "query"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportall",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "exportArchive": {
+            "summary": "Export all locales to a zip archive",
+            "responseNotes": "Export all translations from your project to an archive of individual locale files. You can also specify .tar instead of .zip.<br \/>If you're exporting to a format that supports multiple locales per file, you can use the <code>\/export\/all<\/code> method instead.",
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/archive\/{ext}.zip",
+            "name": "exportArchive",
+            "responseModel": "exportArchive",
+            "parameters": {
+                "ext": {
+                    "name": "ext",
+                    "type": "string",
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "ini",
+                        "js",
+                        "json",
+                        "mo",
+                        "php",
+                        "po",
+                        "pot",
+                        "plist",
+                        "bplist",
+                        "resx",
+                        "sql",
+                        "strings",
+                        "stringsdict",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xliff",
+                        "xml",
+                        "yml"
+                    ],
+                    "location": "uri",
+                    "default": "json"
+                },
+                "format": {
+                    "name": "format",
+                    "type": "string",
+                    "required": false,
+                    "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
+                    "enum": [
+                        "symfony",
+                        "zend",
+                        "codeigniter",
+                        "constants",
+                        "chrome",
+                        "nested",
+                        "rails",
+                        "java",
+                        "tizen",
+                        "jed",
+                        "gettext",
+                        "ng-gettext",
+                        "xcode",
+                        "script"
+                    ],
+                    "location": "query"
+                },
+                "filter": {
+                    "name": "filter",
+                    "type": "string",
+                    "required": false,
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
+                    "location": "query"
+                },
+                "index": {
+                    "name": "index",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override default lookup key for the file format: \"id\", \"text\" or a custom alias",
+                    "location": "query"
+                },
+                "source": {
+                    "name": "source",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify alternative source locale instead of project default",
+                    "location": "query"
+                },
+                "namespace": {
+                    "name": "namespace",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the project name for some language packs that use it as a key prefix",
+                    "location": "query"
+                },
+                "fallback": {
+                    "name": "fallback",
+                    "type": "string",
+                    "required": false,
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "location": "query"
+                },
+                "order": {
+                    "name": "order",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations according to asset order",
+                    "enum": [
+                        "created",
+                        "id"
+                    ],
+                    "location": "query"
+                },
+                "status": {
+                    "name": "status",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
+                    "location": "query"
+                },
+                "path": {
+                    "name": "path",
+                    "type": "string",
+                    "required": false,
+                    "description": "Custom pattern for file paths. <a href=\"https:\/\/localise.biz\/help\/developers\/locales\/export-paths\">See syntax<\/a>",
+                    "location": "query"
+                },
+                "printf": {
+                    "name": "printf",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
+                    ],
+                    "location": "query"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportarchive",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "exportLocale": {
+            "summary": "Export a single locale to a language pack.",
+            "responseNotes": "<p>Export translations from your project to a locale-specific language pack.<\/p>\n<p>Various export file types are supported with format variations for some types.\n<a href=\"https:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/locale\/{locale}.{ext}",
+            "name": "exportLocale",
+            "responseModel": "exportLocale",
+            "parameters": {
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale to export, specified as short code or language tag. e.g. `en` or `en_GB`",
+                    "location": "uri"
+                },
+                "ext": {
+                    "name": "ext",
+                    "type": "string",
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "ini",
+                        "js",
+                        "json",
+                        "mo",
+                        "php",
+                        "po",
+                        "pot",
+                        "plist",
+                        "bplist",
+                        "resx",
+                        "sql",
+                        "strings",
+                        "stringsdict",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xliff",
+                        "xml",
+                        "yml"
+                    ],
+                    "location": "uri",
+                    "default": "json"
+                },
+                "format": {
+                    "name": "format",
+                    "type": "string",
+                    "required": false,
+                    "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
+                    "enum": [
+                        "symfony",
+                        "zend",
+                        "codeigniter",
+                        "constants",
+                        "chrome",
+                        "nested",
+                        "rails",
+                        "java",
+                        "tizen",
+                        "jed",
+                        "gettext",
+                        "ng-gettext",
+                        "xcode",
+                        "script"
+                    ],
+                    "location": "query"
+                },
+                "filter": {
+                    "name": "filter",
+                    "type": "string",
+                    "required": false,
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
+                    "location": "query"
+                },
+                "index": {
+                    "name": "index",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override default lookup key for the file format: \"id\", \"text\" or a custom alias",
+                    "location": "query"
+                },
+                "source": {
+                    "name": "source",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify alternative source locale instead of project default",
+                    "location": "query"
+                },
+                "namespace": {
+                    "name": "namespace",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the project name for some language packs that use it as a key prefix",
+                    "location": "query"
+                },
+                "fallback": {
+                    "name": "fallback",
+                    "type": "string",
+                    "required": false,
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "location": "query"
+                },
+                "order": {
+                    "name": "order",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations according to asset order",
+                    "enum": [
+                        "created",
+                        "id"
+                    ],
+                    "location": "query"
+                },
+                "status": {
+                    "name": "status",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
+                    "location": "query"
+                },
+                "printf": {
+                    "name": "printf",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
+                    ],
+                    "location": "query"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exportlocale",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "exportTemplate": {
+            "summary": "Export a template containing only source keys",
+            "responseNotes": "<p>Export only the source keys from your project to a language pack.<\/p>\n<p>This is different to exporting just your source language translations, because it only exports the left hand side of each mapping.<\/p>\n<p><a href=\"https:\/\/localise.biz\/api#formats\">See the full list of supported export formats<\/a>.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/export\/template.{ext}",
+            "name": "exportTemplate",
+            "responseModel": "exportTemplate",
+            "parameters": {
+                "ext": {
+                    "name": "ext",
+                    "type": "string",
+                    "required": true,
+                    "description": "Target file type specified as a file extension",
+                    "enum": [
+                        "csv",
+                        "html",
+                        "ini",
+                        "js",
+                        "json",
+                        "mo",
+                        "php",
+                        "po",
+                        "pot",
+                        "plist",
+                        "bplist",
+                        "resx",
+                        "sql",
+                        "strings",
+                        "stringsdict",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xliff",
+                        "xml",
+                        "yml"
+                    ],
+                    "location": "uri",
+                    "default": "json"
+                },
+                "format": {
+                    "name": "format",
+                    "type": "string",
+                    "required": false,
+                    "description": "More specific format of file type. e.g. <code>symfony<\/code> applies to <code>php<\/code>, <code>xlf<\/code> &amp; <code>yml<\/code>",
+                    "enum": [
+                        "symfony",
+                        "zend",
+                        "codeigniter",
+                        "constants",
+                        "chrome",
+                        "nested",
+                        "rails",
+                        "java",
+                        "tizen",
+                        "jed",
+                        "gettext",
+                        "ng-gettext",
+                        "xcode",
+                        "script"
+                    ],
+                    "location": "query"
+                },
+                "filter": {
+                    "name": "filter",
+                    "type": "string",
+                    "required": false,
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
+                    "location": "query"
+                },
+                "index": {
+                    "name": "index",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override default lookup key for the file format: \"id\", \"text\" or a custom alias",
+                    "location": "query"
+                },
+                "source": {
+                    "name": "source",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify alternative source locale instead of project default",
+                    "location": "query"
+                },
+                "namespace": {
+                    "name": "namespace",
+                    "type": "string",
+                    "required": false,
+                    "description": "Override the project name for some language packs that use it as a key prefix",
+                    "location": "query"
+                },
+                "fallback": {
+                    "name": "fallback",
+                    "type": "string",
+                    "required": false,
+                    "description": "Fallback locale for untranslated assets, specified as short code. e.g. `en` or `en_GB`",
+                    "location": "query"
+                },
+                "order": {
+                    "name": "order",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations according to asset order",
+                    "enum": [
+                        "created",
+                        "id"
+                    ],
+                    "location": "query"
+                },
+                "status": {
+                    "name": "status",
+                    "type": "string",
+                    "required": false,
+                    "description": "Export translations with a specific status or flag. Negate values by prefixing with `!`. e.g. \"translated\", or \"!fuzzy\".",
+                    "location": "query"
+                },
+                "printf": {
+                    "name": "printf",
+                    "type": "string",
+                    "required": false,
+                    "description": "Force alternative \"printf\" style. <a href=\"https:\/\/localise.biz\/help\/developers\/printf\">See string formatting<\/a>",
+                    "enum": [
+                        "php",
+                        "java",
+                        "objc"
+                    ],
+                    "location": "query"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/export\/exporttemplate",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "importProgress": {
+            "summary": "Check the progress of an asynchronous import",
+            "responseNotes": "<p>If you specified <code>async=1<\/code> in your original import API request, you can check on its progress with this endpoint.<\/p>\n<p>The full URL including job identifier will have been provided in the Location header of your original import response<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/import\/progress\/{id}",
+            "name": "importProgress",
+            "responseModel": "AsyncProgress",
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Job identifier from original import action",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 422,
+                    "phrase": "Empty job id"
+                },
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/import\/importprogress",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "import": {
+            "summary": "Import assets and translations from a language pack file",
+            "responseNotes": "<p>The import API loads translations from various language pack formats into the currently authenticated project.<\/p>\n<p>Take note of how the <code>index<\/code> and <code>locale<\/code> parameters are used to describe how your file will be imported. \nBy leaving these fields empty Loco will try to guess your intentions, but it's advisable to specify all parameters if in any doubt.\n<a href=\"https:\/\/localise.biz\/api#imports\">See examples<\/a>.<\/p>\n<p>It's recommended that you set <code>async=1<\/code> for large files. This will cause the import to run in the background.\nWhen running asynchronously you will receive a 201 code (instead of 200) and the <code>Location<\/code> header will contain a URI for checking progress.<\/p>\n<p>When running synchronously the response object will include a list of all new assets add to the project. \nAdditionally all responses will include the state of each locale referenced by the import (source and target).<\/p>\n<p>See <a href=\"https:\/\/localise.biz\/help\/formats\/importing\/settings\">Import settings<\/a> for full details on all these options.<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/import\/{ext}",
+            "name": "import",
+            "responseModel": "ImportResult",
+            "parameters": {
+                "ext": {
+                    "name": "ext",
+                    "type": "string",
+                    "required": true,
+                    "description": "File extension for the type of file data you're importing",
+                    "enum": [
+                        "json",
+                        "ini",
+                        "mo",
+                        "php",
+                        "po",
+                        "pot",
+                        "plist",
+                        "bplist",
+                        "properties",
+                        "resx",
+                        "strings",
+                        "tmx",
+                        "ts",
+                        "xlf",
+                        "xml",
+                        "yml"
+                    ],
+                    "location": "uri"
+                },
+                "src": {
+                    "name": "src",
+                    "type": "string",
+                    "required": true,
+                    "description": "Raw source of file being imported",
+                    "location": "body",
+                    "default": "{}"
+                },
+                "index": {
+                    "name": "index",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify whether translations in your file are indexed by generic IDs or human-readable source text",
+                    "enum": [
+                        "id",
+                        "text"
+                    ],
+                    "location": "query"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": false,
+                    "description": "Specify target locale if importing translations",
+                    "location": "query"
+                },
+                "async": {
+                    "name": "async",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Specify that import should be done asynchronously (recommended)",
+                    "location": "query"
+                },
+                "ignore-new": {
+                    "name": "ignore-new",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Specify that new assets will NOT be added to the project",
+                    "location": "query"
+                },
+                "ignore-existing": {
+                    "name": "ignore-existing",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Specify that existing assets encountered in the file will NOT be updated",
+                    "location": "query"
+                },
+                "tag-new": {
+                    "name": "tag-new",
+                    "type": "string",
+                    "required": false,
+                    "description": "Tag any NEW assets added during the import with the given tags (comma separated)",
+                    "location": "query"
+                },
+                "tag-all": {
+                    "name": "tag-all",
+                    "type": "string",
+                    "required": false,
+                    "description": "Tag ALL assets in the file with the given tags (comma separated)",
+                    "location": "query"
+                },
+                "untag-all": {
+                    "name": "untag-all",
+                    "type": "string",
+                    "required": false,
+                    "description": "Remove existing tags from any assets matched in the imported file (comma separated)",
+                    "location": "query"
+                },
+                "tag-updated": {
+                    "name": "tag-updated",
+                    "type": "string",
+                    "required": false,
+                    "description": "Tag existing assets that are MODIFIED by this import",
+                    "location": "query"
+                },
+                "untag-updated": {
+                    "name": "untag-updated",
+                    "type": "string",
+                    "required": false,
+                    "description": "Remove existing tags from assets that are MODIFIED during import",
+                    "location": "query"
+                },
+                "tag-absent": {
+                    "name": "tag-absent",
+                    "type": "string",
+                    "required": false,
+                    "description": "Tag existing assets in the project that are NOT found in the imported file",
+                    "location": "query"
+                },
+                "untag-absent": {
+                    "name": "untag-absent",
+                    "type": "string",
+                    "required": false,
+                    "description": "Remove existing tags from assets NOT found in the imported file",
+                    "location": "query"
+                },
+                "delete-absent": {
+                    "name": "delete-absent",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "Permanently DELETES project assets NOT found in the file (use with extreme caution) ",
+                    "location": "query"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 422,
+                    "phrase": "Empty or invalid source data"
+                },
+                {
+                    "code": 201,
+                    "phrase": "Asynchronous import job created"
+                },
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/import\/import",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getTags": {
+            "summary": "Get project tags",
+            "responseNotes": "Lists all tags in currently authenticated project",
+            "httpMethod": "GET",
+            "uri": "\/api\/tags.json",
+            "name": "getTags",
+            "responseModel": "TagList",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/gettags",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "createTag": {
+            "summary": "Create a new tag",
+            "responseNotes": "Adds a new tag to the currently authenticated project",
+            "httpMethod": "POST",
+            "uri": "\/api\/tags.json",
+            "name": "createTag",
+            "responseModel": "Success",
+            "parameters": {
+                "name": {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "description": "Name of new tag",
+                    "location": "formParam"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/createtag",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "patchTag": {
+            "summary": "Modify a single tag",
+            "responseNotes": "Renames an existing tag in the currently authenticated project",
+            "httpMethod": "PATCH",
+            "uri": "\/api\/tags\/{tag}.json",
+            "name": "patchTag",
+            "responseModel": "Success",
+            "parameters": {
+                "name": {
+                    "description": "Display name of tag",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "tag": {
+                    "name": "tag",
+                    "type": "string",
+                    "required": false,
+                    "description": "Name of a single asset tag.",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/patchtag",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "deleteTag": {
+            "summary": "Delete an existing tag",
+            "responseNotes": "Deletes an existing tag in the currently authenticated project",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/tags\/{tag}.json",
+            "name": "deleteTag",
+            "responseModel": "Success",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "tag": {
+                    "name": "tag",
+                    "type": "string",
+                    "required": false,
+                    "description": "Name of a single asset tag.",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Tag not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/tags\/deletetag",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getAssets": {
+            "summary": "List all translatable assets in your project",
+            "responseNotes": "",
+            "httpMethod": "GET",
+            "uri": "\/api\/assets",
+            "name": "getAssets",
+            "responseModel": "AssetList",
+            "parameters": {
+                "filter": {
+                    "name": "filter",
+                    "type": "string",
+                    "required": false,
+                    "description": "Filter assets by comma-separated tag names. Match any tag with `*` and negate tags by prefixing with `!`",
+                    "location": "query"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getassets",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "createAsset": {
+            "summary": "Add a new translatable asset",
+            "responseNotes": "<p>Adds a new asset to the currently authenticated project. When created successfully the response will be 201 (created).<\/p>\n<p>Specifying <code>{text}<\/code> also creates an initial source language translation (unless you also specify <code>default=untranslated<\/code>).\nNote that the <code>{text}<\/code> parameter was previously called \"name\". For legacy compatibility the old parameter will continue to work.<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/assets",
+            "name": "createAsset",
+            "responseModel": "Asset",
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": false,
+                    "description": "Unique asset ID up to 999 bytes (leave blank to auto-generate)",
+                    "maximum": 999,
+                    "location": "formParam"
+                },
+                "text": {
+                    "name": "text",
+                    "type": "string",
+                    "required": false,
+                    "description": "Initial source language translation (required if <code>{id}<\/code> is empty)",
+                    "location": "formParam"
+                },
+                "type": {
+                    "name": "type",
+                    "type": "string",
+                    "required": false,
+                    "description": "Content type for all translations of the new asset",
+                    "enum": [
+                        "text",
+                        "html",
+                        "xml"
+                    ],
+                    "location": "formParam",
+                    "default": "text"
+                },
+                "context": {
+                    "name": "context",
+                    "type": "string",
+                    "required": false,
+                    "description": "Optional context descriptor",
+                    "location": "formParam"
+                },
+                "notes": {
+                    "name": "notes",
+                    "type": "string",
+                    "required": false,
+                    "description": "Optional notes for translators",
+                    "location": "formParam"
+                },
+                "default": {
+                    "name": "default",
+                    "type": "string",
+                    "required": false,
+                    "description": "Status of the source language translation specified in <code>{text}<\/code>",
+                    "location": "formParam",
+                    "default": "translated"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 201,
+                    "phrase": "Asset created"
+                },
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/createasset",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getAsset": {
+            "summary": "Get a project asset",
+            "responseNotes": "Gets a single asset in currently authenticated project",
+            "httpMethod": "GET",
+            "uri": "\/api\/assets\/{id}.json",
+            "name": "getAsset",
+            "responseModel": "Asset",
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getasset",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "patchAsset": {
+            "summary": "Modify a single asset",
+            "responseNotes": "<p>Modifies the properties of an asset in the currently authenticated project and returns the full, modified object.<\/p>\n<p>To modify tags, see the <a href=\"https:\/\/localise.biz\/api\/docs\/assets#tagasset\">tagging endpoints<\/a>.\nTo modify plural forms, see the <a href=\"https:\/\/localise.biz\/api\/docs\/assets#getassetplurals\">plural endpoints<\/a><\/p>",
+            "httpMethod": "PATCH",
+            "uri": "\/api\/assets\/{id}.json",
+            "name": "patchAsset",
+            "responseModel": "Asset",
+            "parameters": {
+                "id_json": {
+                    "description": "Unique asset identifier",
+                    "type": "string",
+                    "name": "id_json",
+                    "location": "json",
+                    "sentAs": "id"
+                },
+                "type": {
+                    "description": "Broad content type to set",
+                    "type": "string",
+                    "enum": [
+                        "text",
+                        "html",
+                        "xml"
+                    ],
+                    "name": "type",
+                    "location": "json"
+                },
+                "context": {
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "name": "context",
+                    "location": "json"
+                },
+                "notes": {
+                    "description": "Optional notes for translators",
+                    "type": "string",
+                    "name": "notes",
+                    "location": "json"
+                },
+                "aliases": {
+                    "description": "Generic object",
+                    "properties": [],
+                    "name": "stdClass",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "name": {
+                    "description": "DEPRECATED: patch `aliases.name` instead",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/patchasset",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "deleteAsset": {
+            "summary": "Delete an asset permanently",
+            "responseNotes": "<p>Deletes an asset from the currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: This will permanently delete all translations made of this asset across all locales<\/p>",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/assets\/{id}.json",
+            "name": "deleteAsset",
+            "responseModel": "Success",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/deleteasset",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getAssetPlurals": {
+            "summary": "Get plural forms of an asset",
+            "responseNotes": "<p>Lists all assets that are a plural form of the current asset.<\/p>\n<p>This list does <strong>not<\/strong> include the singular form itself.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/assets\/{id}\/plurals",
+            "name": "getAssetPlurals",
+            "responseModel": "AssetList",
+            "parameters": {
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/getassetplurals",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "createPlural": {
+            "summary": "Add a new plural form of an existing asset",
+            "responseNotes": "<p>Creates a translatable asset that's a plural form of an existing asset.<\/p>\n<p>The singular form asset specified as <code>{id}<\/code> must already exist, but the plural form will created as a new asset.<\/p>\n<p>You can bind an existing asset as the new plural by specifying <code>{pid}<\/code> in which case <code>{text}<\/code> will be ignored.<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/assets\/{id}\/plurals",
+            "name": "createPlural",
+            "responseModel": "Asset",
+            "parameters": {
+                "text": {
+                    "name": "text",
+                    "type": "string",
+                    "required": false,
+                    "description": "Initial source language translation of new asset (ignored when linking existing asset)",
+                    "location": "formParam"
+                },
+                "pid": {
+                    "name": "pid",
+                    "type": "string",
+                    "required": false,
+                    "description": "Unique asset ID for new or existing plural form (up to 999 bytes)",
+                    "location": "formParam"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/createplural",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "unlinkPlural": {
+            "summary": "Unlinks a plural form of an existing asset",
+            "responseNotes": "<p>Reverts an asset from being a plural form to being a singular asset on its own.<\/p>\n<p>This action does <strong>not<\/strong> delete any assets.<\/p>",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/assets\/{id}\/plurals\/{pid}.json",
+            "name": "unlinkPlural",
+            "responseModel": "Success",
+            "parameters": {
+                "pid": {
+                    "name": "pid",
+                    "type": "string",
+                    "required": true,
+                    "description": "ID of asset to unlink",
+                    "location": "uri"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/unlinkplural",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "tagAsset": {
+            "summary": "Tag an asset",
+            "responseNotes": "<p>Tags an asset with a new or existing term. If the tag doesn't exist it will be created.<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/assets\/{id}\/tags",
+            "name": "tagAsset",
+            "responseModel": "Asset",
+            "parameters": {
+                "name": {
+                    "name": "name",
+                    "type": "string",
+                    "required": true,
+                    "description": "Name of new or existing tag",
+                    "location": "formParam"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/tagasset",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "untagAsset": {
+            "summary": "Untag an asset",
+            "responseNotes": "<p>Removes a single tag from the given asset.<\/p>",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/assets\/{id}\/tags\/{tag}.json",
+            "name": "untagAsset",
+            "responseModel": "Success",
+            "parameters": {
+                "tag": {
+                    "name": "tag",
+                    "type": "string",
+                    "required": true,
+                    "description": "Term to remove from asset's tags",
+                    "location": "uri"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/assets\/untagasset",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getLocales": {
+            "summary": "List all locales in your project",
+            "responseNotes": "Lists all locales in currently authenticated project. Your native\/source language will always be the first in the list",
+            "httpMethod": "GET",
+            "uri": "\/api\/locales",
+            "name": "getLocales",
+            "responseModel": "LocaleList",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocales",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "createLocale": {
+            "summary": "Add a new project locale",
+            "responseNotes": "<p>Adds a new locale to the currently authenticated project.<\/p>\n<p>If the locale is created successfully the response will be 201 (created).<\/p>\n<p>If the locale already exists the response will be 409 (conflict).<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/locales",
+            "name": "createLocale",
+            "responseModel": "Locale",
+            "parameters": {
+                "code": {
+                    "name": "code",
+                    "type": "string",
+                    "required": true,
+                    "description": "Short code, or language tag for new locale",
+                    "location": "formParam"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 409,
+                    "phrase": "Locale already exists"
+                },
+                {
+                    "code": 201,
+                    "phrase": "Locale created"
+                },
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/createlocale",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getLocale": {
+            "summary": "Get a project locale",
+            "responseNotes": "Gets a single locale in currently authenticated project",
+            "httpMethod": "GET",
+            "uri": "\/api\/locales\/{locale}",
+            "name": "getLocale",
+            "responseModel": "Locale",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/getlocale",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "patchLocale": {
+            "summary": "Modify a project locale",
+            "responseNotes": "<p>Modifies the properties of a locale in the currently authenticated project.<\/p>\n<p>The full, modified locale object is returned.<\/p>",
+            "httpMethod": "PATCH",
+            "uri": "\/api\/locales\/{locale}",
+            "name": "patchLocale",
+            "responseModel": "Locale",
+            "parameters": {
+                "code": {
+                    "description": "Locale short code",
+                    "type": "string",
+                    "name": "code",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Friendly display name",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/patchlocale",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "deleteLocale": {
+            "summary": "Delete a project locale",
+            "responseNotes": "<p>Delete a locale from currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: This will permanently delete any translations made in the specified locale across your project<\/p>\n<p>Note that you cannot delete your native\/source locale.<\/p>",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/locales\/{locale}",
+            "name": "deleteLocale",
+            "responseModel": "Success",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                },
+                {
+                    "code": 403,
+                    "phrase": "Insufficient privileges"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/locales\/deletelocale",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getTranslations": {
+            "summary": "Get all translations of an asset",
+            "responseNotes": "<p>Gets all translations of an asset across the currently authenticated project's locales.<\/p>\n<p>Locales not yet translated are included, but their <code>translated<\/code> field will be set to <code>false<\/code>.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/translations\/{id}.json",
+            "name": "getTranslations",
+            "responseModel": "TranslationList",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/gettranslations",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "getTranslation": {
+            "summary": "Get a single translation",
+            "responseNotes": "<p>Gets a single translation in currently authenticated project.<\/p>\n<p>Translations implicitly exist as long as the asset and locale are in your project.<\/p>\n<p>Translations marked as complete have the <code>translated<\/code> field set to <code>true<\/code>.<\/p>",
+            "httpMethod": "GET",
+            "uri": "\/api\/translations\/{id}\/{locale}",
+            "name": "getTranslation",
+            "responseModel": "Translation",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Locale not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/gettranslation",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "translate": {
+            "summary": "Add a new translation in a given locale",
+            "responseNotes": "<p>Translates a single asset in a single locale in the currently authenticated project.<\/p>\n<p>If the asset is already translated, a new revision will be added and the <code>revision<\/code> field incremented.<\/p>\n<p>If the asset is untranslated the locale must have already been added to the project.<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/translations\/{id}\/{locale}",
+            "name": "translate",
+            "responseModel": "Translation",
+            "parameters": {
+                "translation": {
+                    "name": "translation",
+                    "type": "string",
+                    "required": false,
+                    "description": "Raw value of new translation. Leaving empty puts a blank translation.",
+                    "location": "body"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/translate",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "untranslate": {
+            "summary": "Erase translation data in a single locale",
+            "responseNotes": "<p>Erases translation data of a localized asset in the currently authenticated project.<\/p>\n<p><strong>Warning<\/strong>: Erasing is not the same as setting an empty translation. \nThis operation clears the asset's translation history and user comments for the given locale.<\/p>",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/translations\/{id}\/{locale}",
+            "name": "untranslate",
+            "responseModel": "Success",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not translated in this locale"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/untranslate",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "flagTranslation": {
+            "summary": "Flag a translation in a given locale",
+            "responseNotes": "<p>Flag a single translation or set its status in a given locale.<\/p>\n<p>The <code>flag<\/code> parameter can be any flag (e.g. fuzzy) a status (e.g. translated) or a redundant state (e.g. blank translation).\n<a href=\"https:\/\/localise.biz\/help\/glossary\/flag\">See translation states<\/a>.<\/p>",
+            "httpMethod": "POST",
+            "uri": "\/api\/translations\/{id}\/{locale}\/flag",
+            "name": "flagTranslation",
+            "responseModel": "Success",
+            "parameters": {
+                "flag": {
+                    "name": "flag",
+                    "type": "string",
+                    "required": true,
+                    "description": "Flag or status to set, e.g. \"fuzzy\"",
+                    "location": "formParam",
+                    "default": "fuzzy"
+                },
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/flagtranslation",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "unflagTranslation": {
+            "summary": "Clear flag from a translation",
+            "responseNotes": "<p>Removes current flag from a translation marked as incomplete or in error.<\/p>\n<p>It's not necessary to specify which flag to remove, because there can be only one.<\/p>",
+            "httpMethod": "DELETE",
+            "uri": "\/api\/translations\/{id}\/{locale}\/flag",
+            "name": "unflagTranslation",
+            "responseModel": "Success",
+            "parameters": {
+                "key": {
+                    "name": "key",
+                    "type": "string",
+                    "required": false,
+                    "description": "API key - required if not sent in Authorization header",
+                    "location": "query"
+                },
+                "id": {
+                    "name": "id",
+                    "type": "string",
+                    "required": true,
+                    "description": "Asset ID",
+                    "location": "uri"
+                },
+                "locale": {
+                    "name": "locale",
+                    "type": "string",
+                    "required": true,
+                    "description": "Locale short code, or language tag",
+                    "location": "uri"
+                }
+            },
+            "errorResponses": [
+                {
+                    "code": 401,
+                    "phrase": "Invalid API key"
+                },
+                {
+                    "code": 404,
+                    "phrase": "Asset not in project"
+                }
+            ],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/translations\/unflagtranslation",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "ping": {
+            "summary": "Check the API is up",
+            "responseNotes": "",
+            "httpMethod": "GET",
+            "uri": "\/api\/ping",
+            "name": "ping",
+            "responseModel": "PingResponse",
+            "parameters": [],
+            "errorResponses": [],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/ping\/ping",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        },
+        "ping404": {
+            "summary": "Get a test 404 response",
+            "responseNotes": "",
+            "httpMethod": "GET",
+            "uri": "\/api\/ping\/not-found",
+            "name": "ping404",
+            "responseModel": "Error",
+            "parameters": [],
+            "errorResponses": [],
+            "notes": "",
+            "documentationUrl": "https:\/\/localise.biz\/api\/docs\/ping\/ping404",
+            "deprecated": false,
+            "data": [],
+            "additionalParameters": null
+        }
+    },
+    "models": {
+        "User": {
+            "properties": {
+                "id": {
+                    "description": "User id",
+                    "type": "integer",
+                    "name": "id",
+                    "required": true,
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Full user name",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "email": {
+                    "description": "Contact email address if you have permission to see it",
+                    "type": "string",
+                    "name": "email",
+                    "location": "json"
+                }
+            },
+            "name": "User",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Group": {
+            "properties": {
+                "id": {
+                    "description": "Loco account id",
+                    "type": "integer",
+                    "name": "id",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Loco account name",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                }
+            },
+            "name": "Group",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Project": {
+            "properties": {
+                "id": {
+                    "description": "Project id",
+                    "type": "integer",
+                    "name": "id",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Project name",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                },
+                "url": {
+                    "description": "Project dashboard URL",
+                    "type": "string",
+                    "name": "url",
+                    "location": "json"
+                }
+            },
+            "name": "Project",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Credentials": {
+            "properties": {
+                "user": {
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "name": "id",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "name": "email",
+                            "location": "json"
+                        }
+                    },
+                    "name": "User",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "group": {
+                    "properties": {
+                        "id": {
+                            "description": "Loco account id",
+                            "type": "integer",
+                            "name": "id",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Loco account name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        }
+                    },
+                    "name": "Group",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "project": {
+                    "properties": {
+                        "id": {
+                            "description": "Project id",
+                            "type": "integer",
+                            "name": "id",
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Project name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "url": {
+                            "description": "Project dashboard URL",
+                            "type": "string",
+                            "name": "url",
+                            "location": "json"
+                        }
+                    },
+                    "name": "Project",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Credentials",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "exportAll": {
+            "type": "class",
+            "name": "exportAll",
+            "class": "Loco\\Http\\Result\\RawResult"
+        },
+        "exportArchive": {
+            "type": "class",
+            "name": "exportArchive",
+            "class": "Loco\\Http\\Result\\ZipResult"
+        },
+        "exportLocale": {
+            "type": "class",
+            "name": "exportLocale",
+            "class": "Loco\\Http\\Result\\RawResult"
+        },
+        "exportTemplate": {
+            "type": "class",
+            "name": "exportTemplate",
+            "class": "Loco\\Http\\Result\\RawResult"
+        },
+        "PluralRules": {
+            "properties": {
+                "length": {
+                    "description": "Number of forms including singular",
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 6,
+                    "name": "length",
+                    "default": 2,
+                    "required": true,
+                    "location": "json"
+                },
+                "equation": {
+                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                    "type": "string",
+                    "name": "equation",
+                    "default": "n != 1",
+                    "required": true,
+                    "location": "json"
+                },
+                "forms": {
+                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "enum": [
+                        "zero",
+                        "one",
+                        "two",
+                        "few",
+                        "many",
+                        "other"
+                    ],
+                    "name": "forms",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "PluralRules",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "LocaleProgress": {
+            "description": "Statistical summary of translation progress for an individual locale",
+            "properties": {
+                "translated": {
+                    "description": "Number of assets for which a translation exists (including those flagged)",
+                    "type": "integer",
+                    "name": "translated",
+                    "required": true,
+                    "location": "json"
+                },
+                "untranslated": {
+                    "description": "Number of assets that are not yet translated to this language",
+                    "type": "integer",
+                    "name": "untranslated",
+                    "required": true,
+                    "location": "json"
+                },
+                "flagged": {
+                    "description": "Number of translations that are flagged as requiring attention",
+                    "type": "integer",
+                    "name": "flagged",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "LocaleProgress",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "stdClass": {
+            "description": "Generic object",
+            "properties": [],
+            "name": "stdClass",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "AssetProgress": {
+            "description": "Statistical summary of translation progress for an individual locale",
+            "properties": {
+                "translated": {
+                    "description": "Number of locales for which a translation exists (including those flagged)",
+                    "type": "integer",
+                    "name": "translated",
+                    "required": true,
+                    "location": "json"
+                },
+                "untranslated": {
+                    "description": "Number of locales that do not yet have a translation of this asset",
+                    "type": "integer",
+                    "name": "untranslated",
+                    "required": true,
+                    "location": "json"
+                },
+                "flagged": {
+                    "description": "Number of locales whose translations are flagged as requiring attention",
+                    "type": "integer",
+                    "name": "flagged",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "AssetProgress",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "AsyncProgress": {
+            "description": "Job progress for checking asynchronous operations",
+            "properties": {
+                "progress": {
+                    "description": "Percentage progress through asynchronous operation",
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100,
+                    "name": "progress",
+                    "required": true,
+                    "location": "json"
+                },
+                "success": {
+                    "description": "Message populated after successful completion",
+                    "type": "string",
+                    "name": "success",
+                    "location": "json"
+                },
+                "error": {
+                    "description": "Description of any error that prevented the operation from finishing",
+                    "type": "string",
+                    "name": "error",
+                    "location": "json"
+                }
+            },
+            "name": "AsyncProgress",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Locale": {
+            "properties": {
+                "code": {
+                    "description": "Locale short code, or language tag",
+                    "type": "string",
+                    "name": "code",
+                    "required": true,
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Friendly display name",
+                    "type": "string",
+                    "name": "name",
+                    "required": true,
+                    "location": "json"
+                },
+                "native": {
+                    "description": "Whether the source locale of project",
+                    "type": "boolean",
+                    "name": "native",
+                    "required": true,
+                    "location": "json"
+                },
+                "plurals": {
+                    "properties": {
+                        "length": {
+                            "description": "Number of forms including singular",
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 6,
+                            "name": "length",
+                            "default": 2,
+                            "required": true,
+                            "location": "json"
+                        },
+                        "equation": {
+                            "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                            "type": "string",
+                            "name": "equation",
+                            "default": "n != 1",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "forms": {
+                            "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "enum": [
+                                "zero",
+                                "one",
+                                "two",
+                                "few",
+                                "many",
+                                "other"
+                            ],
+                            "name": "forms",
+                            "required": true,
+                            "location": "json"
+                        }
+                    },
+                    "name": "PluralRules",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "progress": {
+                    "description": "Statistical summary of translation progress for an individual locale",
+                    "properties": {
+                        "translated": {
+                            "description": "Number of assets for which a translation exists (including those flagged)",
+                            "type": "integer",
+                            "name": "translated",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "untranslated": {
+                            "description": "Number of assets that are not yet translated to this language",
+                            "type": "integer",
+                            "name": "untranslated",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "flagged": {
+                            "description": "Number of translations that are flagged as requiring attention",
+                            "type": "integer",
+                            "name": "flagged",
+                            "required": true,
+                            "location": "json"
+                        }
+                    },
+                    "name": "LocaleProgress",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Locale",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Asset": {
+            "properties": {
+                "id": {
+                    "description": "Unique asset identifier",
+                    "type": "string",
+                    "name": "id",
+                    "required": true,
+                    "location": "json"
+                },
+                "type": {
+                    "description": "Content type for translations",
+                    "type": "string",
+                    "enum": [
+                        "text",
+                        "html",
+                        "xml"
+                    ],
+                    "name": "type",
+                    "default": "text",
+                    "required": true,
+                    "location": "json"
+                },
+                "context": {
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "name": "context",
+                    "required": true,
+                    "location": "json"
+                },
+                "notes": {
+                    "description": "Optional notes for translators",
+                    "type": "string",
+                    "name": "notes",
+                    "required": true,
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC",
+                    "type": "string",
+                    "format": "date-time",
+                    "name": "modified",
+                    "required": true,
+                    "location": "json"
+                },
+                "plurals": {
+                    "description": "Number of associated plural forms",
+                    "type": "integer",
+                    "name": "plurals",
+                    "required": true,
+                    "location": "json"
+                },
+                "tags": {
+                    "description": "Array of terms asset is tagged with",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "name": "tags",
+                    "required": true,
+                    "location": "json"
+                },
+                "aliases": {
+                    "description": "Generic object",
+                    "properties": [],
+                    "name": "stdClass",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "progress": {
+                    "description": "Statistical summary of translation progress for an individual locale",
+                    "properties": {
+                        "translated": {
+                            "description": "Number of locales for which a translation exists (including those flagged)",
+                            "type": "integer",
+                            "name": "translated",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "untranslated": {
+                            "description": "Number of locales that do not yet have a translation of this asset",
+                            "type": "integer",
+                            "name": "untranslated",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "flagged": {
+                            "description": "Number of locales whose translations are flagged as requiring attention",
+                            "type": "integer",
+                            "name": "flagged",
+                            "required": true,
+                            "location": "json"
+                        }
+                    },
+                    "name": "AssetProgress",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "name": {
+                    "description": "DEPRECATED: access `aliases.name` instead",
+                    "type": "string",
+                    "name": "name",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Asset",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "ImportResult": {
+            "properties": {
+                "status": {
+                    "description": "Whether import was synchronous (200) or asynchronous (201)",
+                    "type": "integer",
+                    "enum": [
+                        200,
+                        201
+                    ],
+                    "name": "status",
+                    "default": 200,
+                    "required": true,
+                    "location": "json"
+                },
+                "message": {
+                    "description": "Summary of import result",
+                    "type": "string",
+                    "name": "message",
+                    "required": true,
+                    "location": "json"
+                },
+                "locales": {
+                    "description": "Locales identified according to `index` and `locale` parameters",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Locale"
+                    },
+                    "name": "locales",
+                    "required": true,
+                    "location": "json"
+                },
+                "assets": {
+                    "description": "New assets added to project (always empty when async=1)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "Asset"
+                    },
+                    "name": "assets",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "ImportResult",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Success": {
+            "properties": {
+                "status": {
+                    "description": "HTTP status 2xx code",
+                    "type": "integer",
+                    "name": "status",
+                    "required": true,
+                    "location": "json"
+                },
+                "message": {
+                    "description": "Descriptive success message",
+                    "type": "string",
+                    "name": "message",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Success",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "TagPatch": {
+            "description": "Patch structure for modifying tags",
+            "properties": {
+                "name": {
+                    "description": "Display name of tag",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                }
+            },
+            "name": "TagPatch",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "TagList": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "location": "json"
+        },
+        "AssetPatch": {
+            "description": "Patch structure for modifying assets",
+            "properties": {
+                "id": {
+                    "description": "Unique asset identifier",
+                    "type": "string",
+                    "name": "id",
+                    "location": "json"
+                },
+                "type": {
+                    "description": "Broad content type to set",
+                    "type": "string",
+                    "enum": [
+                        "text",
+                        "html",
+                        "xml"
+                    ],
+                    "name": "type",
+                    "location": "json"
+                },
+                "context": {
+                    "description": "Optional context descriptor",
+                    "type": "string",
+                    "name": "context",
+                    "location": "json"
+                },
+                "notes": {
+                    "description": "Optional notes for translators",
+                    "type": "string",
+                    "name": "notes",
+                    "location": "json"
+                },
+                "aliases": {
+                    "description": "Generic object",
+                    "properties": [],
+                    "name": "stdClass",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "name": {
+                    "description": "DEPRECATED: patch `aliases.name` instead",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                }
+            },
+            "name": "AssetPatch",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "AssetList": {
+            "type": "array",
+            "items": {
+                "$ref": "Asset"
+            },
+            "location": "json"
+        },
+        "LocalePatch": {
+            "description": "Patch structure for modifying locales",
+            "properties": {
+                "code": {
+                    "description": "Locale short code",
+                    "type": "string",
+                    "name": "code",
+                    "location": "json"
+                },
+                "name": {
+                    "description": "Friendly display name",
+                    "type": "string",
+                    "name": "name",
+                    "location": "json"
+                }
+            },
+            "name": "LocalePatch",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "LocaleList": {
+            "type": "array",
+            "items": {
+                "$ref": "Locale"
+            },
+            "location": "json"
+        },
+        "PluralTranslation": {
+            "description": "Base class containing subset of the fields of LocoApiTranslationModel Doesn't need $plurals or $locale",
+            "properties": {
+                "id": {
+                    "description": "Asset ID",
+                    "type": "string",
+                    "name": "id",
+                    "required": true,
+                    "location": "json"
+                },
+                "status": {
+                    "description": "Status of translation as string compatible with export status parameter",
+                    "type": "string",
+                    "name": "status",
+                    "location": "json"
+                },
+                "flagged": {
+                    "description": "Whether translation is flagged as requiring attention",
+                    "type": "boolean",
+                    "name": "flagged",
+                    "default": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "translated": {
+                    "description": "Whether asset is translated and contributing to project completion",
+                    "type": "boolean",
+                    "name": "translated",
+                    "default": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "translation": {
+                    "description": "Translated text in specified locale",
+                    "type": "string",
+                    "name": "translation",
+                    "required": true,
+                    "location": "json"
+                },
+                "revision": {
+                    "description": "Number of edits made, zero if never translated",
+                    "type": "integer",
+                    "name": "revision",
+                    "default": 0,
+                    "required": true,
+                    "location": "json"
+                },
+                "comments": {
+                    "description": "Number of comments available",
+                    "type": "integer",
+                    "name": "comments",
+                    "required": true,
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC, null if translation doesn't exist",
+                    "type": "string",
+                    "format": "date-time",
+                    "name": "modified",
+                    "location": "json"
+                },
+                "author": {
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "name": "id",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "name": "email",
+                            "location": "json"
+                        }
+                    },
+                    "name": "User",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "flagger": {
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "name": "id",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "name": "email",
+                            "location": "json"
+                        }
+                    },
+                    "name": "User",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                }
+            },
+            "name": "PluralTranslation",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Translation": {
+            "properties": {
+                "id": {
+                    "description": "Unique asset ID for which this is a translation",
+                    "type": "string",
+                    "name": "id",
+                    "required": true,
+                    "location": "json"
+                },
+                "status": {
+                    "description": "Status of translation as string compatible with export status parameter",
+                    "type": "string",
+                    "name": "status",
+                    "location": "json"
+                },
+                "flagged": {
+                    "description": "Whether translation is flagged as requiring attention",
+                    "type": "boolean",
+                    "name": "flagged",
+                    "default": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "translated": {
+                    "description": "Whether the translation exists (even if flagged)",
+                    "type": "boolean",
+                    "name": "translated",
+                    "default": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "translation": {
+                    "description": "Translated text in specified locale",
+                    "type": "string",
+                    "name": "translation",
+                    "required": true,
+                    "location": "json"
+                },
+                "revision": {
+                    "description": "Number of edits made, zero if never translated",
+                    "type": "integer",
+                    "name": "revision",
+                    "default": 0,
+                    "required": true,
+                    "location": "json"
+                },
+                "comments": {
+                    "description": "Number of comments available",
+                    "type": "integer",
+                    "name": "comments",
+                    "required": true,
+                    "location": "json"
+                },
+                "modified": {
+                    "description": "Time last modified in UTC, null if translation doesn't exist",
+                    "type": "string",
+                    "format": "date-time",
+                    "name": "modified",
+                    "location": "json"
+                },
+                "author": {
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "name": "id",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "name": "email",
+                            "location": "json"
+                        }
+                    },
+                    "name": "User",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "flagger": {
+                    "properties": {
+                        "id": {
+                            "description": "User id",
+                            "type": "integer",
+                            "name": "id",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Full user name",
+                            "type": "string",
+                            "name": "name",
+                            "location": "json"
+                        },
+                        "email": {
+                            "description": "Contact email address if you have permission to see it",
+                            "type": "string",
+                            "name": "email",
+                            "location": "json"
+                        }
+                    },
+                    "name": "User",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "location": "json"
+                },
+                "locale": {
+                    "properties": {
+                        "code": {
+                            "description": "Locale short code, or language tag",
+                            "type": "string",
+                            "name": "code",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "name": {
+                            "description": "Friendly display name",
+                            "type": "string",
+                            "name": "name",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "native": {
+                            "description": "Whether the source locale of project",
+                            "type": "boolean",
+                            "name": "native",
+                            "required": true,
+                            "location": "json"
+                        },
+                        "plurals": {
+                            "properties": {
+                                "length": {
+                                    "description": "Number of forms including singular",
+                                    "type": "integer",
+                                    "minimum": 1,
+                                    "maximum": 6,
+                                    "name": "length",
+                                    "default": 2,
+                                    "required": true,
+                                    "location": "json"
+                                },
+                                "equation": {
+                                    "description": "Equation for calculating offset in forms. The formula takes a multiplier <code>(n)<\/code> to yield a plural form offset. <code>( 0 <= offset < length )<\/code>.",
+                                    "type": "string",
+                                    "name": "equation",
+                                    "default": "n != 1",
+                                    "required": true,
+                                    "location": "json"
+                                },
+                                "forms": {
+                                    "description": "Plural form names. See <a href=\"http:\/\/unicode.org\/reports\/tr35\/tr35-numbers.html#Language_Plural_Rules\">Unicode tr35<\/a>.",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "enum": [
+                                        "zero",
+                                        "one",
+                                        "two",
+                                        "few",
+                                        "many",
+                                        "other"
+                                    ],
+                                    "name": "forms",
+                                    "required": true,
+                                    "location": "json"
+                                }
+                            },
+                            "name": "PluralRules",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": true,
+                            "location": "json"
+                        },
+                        "progress": {
+                            "description": "Statistical summary of translation progress for an individual locale",
+                            "properties": {
+                                "translated": {
+                                    "description": "Number of assets for which a translation exists (including those flagged)",
+                                    "type": "integer",
+                                    "name": "translated",
+                                    "required": true,
+                                    "location": "json"
+                                },
+                                "untranslated": {
+                                    "description": "Number of assets that are not yet translated to this language",
+                                    "type": "integer",
+                                    "name": "untranslated",
+                                    "required": true,
+                                    "location": "json"
+                                },
+                                "flagged": {
+                                    "description": "Number of translations that are flagged as requiring attention",
+                                    "type": "integer",
+                                    "name": "flagged",
+                                    "required": true,
+                                    "location": "json"
+                                }
+                            },
+                            "name": "LocaleProgress",
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": true,
+                            "location": "json"
+                        }
+                    },
+                    "name": "Locale",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": true,
+                    "location": "json"
+                },
+                "plurals": {
+                    "description": "Plural forms of this translation",
+                    "type": "array",
+                    "items": {
+                        "$ref": "PluralTranslation"
+                    },
+                    "name": "plurals",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Translation",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "TranslationList": {
+            "type": "array",
+            "items": {
+                "$ref": "Translation"
+            },
+            "location": "json"
+        },
+        "PingResponse": {
+            "properties": {
+                "version": {
+                    "description": "Current API version",
+                    "type": "string",
+                    "name": "version",
+                    "required": true,
+                    "location": "json"
+                },
+                "build": {
+                    "description": "Current build identifer",
+                    "type": "string",
+                    "name": "build",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "PingResponse",
+            "type": "object",
+            "additionalProperties": false
+        },
+        "Error": {
+            "properties": {
+                "status": {
+                    "description": "HTTP status code",
+                    "type": "integer",
+                    "name": "status",
+                    "required": true,
+                    "location": "json"
+                },
+                "error": {
+                    "description": "Description of error",
+                    "type": "string",
+                    "name": "error",
+                    "required": true,
+                    "location": "json"
+                }
+            },
+            "name": "Error",
+            "type": "object",
+            "additionalProperties": false
+        }
+    }
+}

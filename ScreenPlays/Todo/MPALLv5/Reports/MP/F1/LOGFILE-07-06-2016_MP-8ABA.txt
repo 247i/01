@@ -1,0 +1,4 @@
+MP\F1\8ABA\
+MP_7f00_05.03.0a,7-6-2016 17:26:24s, Drive: H,R/W= 0%,Test Time:0, Time taken: 80.6 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=7, Firmware Version: 1.02.10, Status: Fail (1109)   Verify 1'st Firmware Fail 0x1109, ISP Mode: 0x18,  [CS]:0xAFC91190
+MP_7f00_05.03.0a,7-6-2016 17:29:23s, Drive: H,R/W= 0%,Test Time:0, Time taken: 81.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=7, Firmware Version: 1.02.10, Status: Fail (1109)   Verify 1'st Firmware Fail 0x1109, ISP Mode: 0x18,  [CS]:0x9BC8E190
+MP_7f00_05.03.0a,7-6-2016 17:50:24s, Drive: H,R/W= 0%,Test Time:0, Time taken: 85.5 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=7, Firmware Version: 5.02.41, Status: Fail (1109)   Verify 1'st Firmware Fail 0x1109, ISP Mode: 0x18,  [CS]:0x9E6D2190

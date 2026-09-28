@@ -1,0 +1,2 @@
+MP\F1\AFD6\
+MP_7f00_05.03.0a,17-5-2016 15:33:42s, Drive: G,R/W= 0%,Test Time:-130851, Time taken: 225.5 seconds, Capacity: 65536, Serial Number: 7F00651FA1AFD600,7F00651F84AFD601, Flash Number: 1,UIDeviceIndex=3, Firmware Version: 5.02.53, Status: PASS, ISP Mode: 0x18,  [CS]:0x791F2CA1

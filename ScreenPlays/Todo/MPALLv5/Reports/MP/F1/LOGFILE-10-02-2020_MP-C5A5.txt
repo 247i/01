@@ -1,0 +1,4 @@
+MP\F1\C5A5\
+MP_7f00_05.03.0a,10-2-2020 19:00:21s, Drive: D,R/W= 0%,Test Time:0, Time taken: 20.6 seconds, Capacity:    0, Serial Number:   ,900099639B927000, Flash Number: 0,UIDeviceIndex=8, Firmware Version: 1.12.10, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x18,  [CS]:0x7AB8AEA3
+MP_7f00_05.03.0a,10-2-2020 19:39:54s, Drive: D,R/W= 0%,Test Time:0, Time taken:  5.4 seconds, Capacity: 32768, Serial Number:   ,N/A, Flash Number: 2,UIDeviceIndex=8, Firmware Version: 5.02.55, Status: Fail (5014)   Preformat status error 0x5014 [CS]:0x8AA36CF4
+MP_7f00_05.03.0a,10-2-2020 19:55:24s, Drive: D,R/W= 0%,Test Time:0, Time taken: 10.4 seconds, Capacity:    0, Serial Number:   ,N/A, Flash Number: 0,UIDeviceIndex=8, Firmware Version: 5.02.55, Status: Fail (1102)   ISP fail! 0x1102, ISP Mode: 0x11,  [CS]:0xAE50CC53
