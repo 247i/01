@@ -1,0 +1,44 @@
+﻿#Https://Tamilneram.github.IO
+insmod png
+insmod part_msdos
+insmod fat
+insmod ntfs
+insmod ext2
+
+insmod exfat
+insmod part_gpt
+insmod regexp
+insmod version
+
+if [ "$grub_platform" = "efi" ]; then  
+export grub_normal_menu_title="ஐ-உ.வி.நி.இ [Grub ${grub_version}]"
+else
+export grub_normal_menu_title="ஐ-பயாசு [Grub ${grub_version}]"
+fi
+
+
+
+set root --label TA --hint hd0,msdos1
+set timeout=8
+if loadfont /அகர/முதல/எழுத்தெல்லாம்.ஆதி ; then
+	set gfxmode=1280x720
+	insmod efi_gop
+	insmod efi_uga
+	insmod vbe
+	insmod vga
+	insmod gfxterm
+	terminal_output gfxterm
+fi
+if background_image /அகர/அணிகலன்/ஐ56-1.png ; then
+	set color_normal=white/black
+	set color_highlight=blue/black
+	set menu_color_highlight=blue/black
+	set menu_color_normal=white/black
+else
+  set menu_color_normal=white/black
+  set menu_color_highlight=blue/black
+fi
+
+set default=2
+menuentry "௰" {halt}
+menuentry "ஃ" {reboot}

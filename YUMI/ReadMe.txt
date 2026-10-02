@@ -1,3 +1,0 @@
-   - உஉபநி exFAT supports exFAT format & 4GB+ files. BIOS and UEFI USB boot.
-   - உஉபநி Legacy (archived) supports NTFS or Fat32 format. BIOS USB boot only.
-   - உஉபநி UEFI (archived) Fat32 only. BIOS and UEFI USB booting (distro dependent).
